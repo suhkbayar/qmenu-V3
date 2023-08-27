@@ -64,7 +64,7 @@ const Index = () => {
             .map((record) => {
               let isActive = false;
 
-              const { image, value, description, color } = JSON.parse(record.value);
+              const { image, value, description, color, index } = JSON.parse(record.value);
 
               if (Number(promotion.amount) < Number(value)) {
                 if (isFirstIteration) {
@@ -75,6 +75,8 @@ const Index = () => {
 
               return (
                 <RankingCard
+                  isrounded={true}
+                  index={index}
                   key={record.id}
                   name={record.name}
                   progress={promotion.progress}
