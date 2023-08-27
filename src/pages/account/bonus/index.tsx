@@ -64,7 +64,7 @@ const Index = () => {
             .map((record) => {
               let isActive = false;
 
-              const { image, value, description } = JSON.parse(record.value);
+              const { image, value, description, color } = JSON.parse(record.value);
 
               if (Number(promotion.amount) < Number(value)) {
                 if (isFirstIteration) {
@@ -80,6 +80,7 @@ const Index = () => {
                   progress={promotion.progress}
                   image={image}
                   price={value}
+                  color={color}
                   description={description}
                   amount={promotion.amount}
                   isActive={isActive}
