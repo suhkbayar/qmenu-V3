@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import check from '../../assets/images/Check.png';
-import unCheck from './images/unCheck.png';
+import unCheck from './images/UnCheck.png';
 import dining from './images/dinnig.svg';
 
 type Props = {
