@@ -32,6 +32,13 @@ const Index = () => {
   });
 
   const promotion = data?.getLoyaltyRecords.find((val) => val.type === 'G');
+  const configs = promotion?.loyalty.configs
+    .filter((config) => config.name !== 'TYPE_G')
+    .sort((a, b) => {
+      const aIndex = JSON.parse(a.value).index;
+      const bIndex = JSON.parse(b.value).index;
+      return aIndex - bIndex;
+    });
 
   const [selectedSubCategoryId, setSelectedSubCategoryId] = useState<string>(() => {
     const category = participant.menu.categories.find((c) => c.id === selectedCategoryId);
@@ -131,8 +138,9 @@ const Index = () => {
                   }
 
                   return (
-                    <div className="w-48 " key={record.id}>
+                    <div className="w-36 " key={record.id}>
                       <RankingCard
+                        configs={configs}
                         isrounded={false}
                         index={index}
                         color={color}
