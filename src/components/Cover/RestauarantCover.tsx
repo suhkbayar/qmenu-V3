@@ -6,10 +6,35 @@ import { GET_ORDER_REVIEWS } from '../../graphql/query/order';
 import { IOrderReview } from '../../types/order.review';
 import { BiLike } from 'react-icons/bi';
 import moment from 'moment';
+import { GET_LOYALTIES_RECORDS } from '../../graphql/query';
 
 const Index = () => {
+  const { data } = useQuery(GET_LOYALTIES_RECORDS, { onCompleted(data) {} });
   const { participant } = useCallStore();
   const { t } = useTranslation('language');
+  let currentAmount = data?.getLoyaltyRecords?.find((e) => e?.type === 'G')?.amount;
+  const mileStones = data?.getLoyaltyRecords
+    ?.find((e) => e?.type === 'G')
+    ?.loyalty?.configs?.filter((e) => e.name?.startsWith('MILESTONE'))
+    ?.map((e) => {
+      return JSON.parse(e?.value);
+    });
+
+  const getCurrentBadge = (userAmount: number, milestones: any[]) => {
+    if (userAmount === undefined) return '';
+    const sortedMilestones = milestones?.sort((a, b) => a.value - b.value);
+
+    for (let i = 0; i < sortedMilestones?.length; i++) {
+      if (userAmount <= sortedMilestones[i]?.value) {
+        return sortedMilestones[i].image;
+      }
+    }
+
+    return null;
+  };
+  // console.log(mileStones);
+  // console.log(currentAmount);
+  console.log(data?.getLoyaltyRecords);
 
   var curr = new Date();
   const dateTime = moment(curr).format('dddd');
@@ -88,9 +113,11 @@ const Index = () => {
     let count = orderReviews.filter((x: any) => x.liked === 1).length;
     let percentage = (count / orderReviews.length) * 100;
     if (percentage === 0) return '';
+    if (isNaN(percentage)) return '';
     return (
-      <span>
-        {Math.floor(percentage) + '%'} ({orderReviews.length})
+      <span className="flex align-center">
+        <p>{t('mainPage.Review')}</p>
+        {Math.floor(1) + '%'} ({orderReviews.length}) <BiLike />
       </span>
     );
   }
@@ -100,15 +127,23 @@ const Index = () => {
       <div className="absolute w-full top-20  flex  place-items-center  ">
         <img alt="logo" className="w-24 ml-5 md:w-32 lg:w-32 rounded-lg" src={participant.branch.logo} />
         <div className="ml-3">
-          <span className=" text-white text-base">{participant.branch.name}</span>
-          <span>
-            {orderReviews && (
-              <div className=" text-white text-sm flex items-center">
-                <p>{t('mainPage.Review')}</p>
-                <BiLike />
-                {reviewPrecentage()}
-              </div>
+          <span className=" flex  align-center   text-white text-base">
+            {participant.branch.name}{' '}
+            {data?.getLoyaltyRecords.length > 1 ? (
+              // eslint-disable-next-line jsx-a11y/alt-text
+              <img
+                width={40}
+                height={40}
+                src={getCurrentBadge(currentAmount, mileStones)}
+                className=" text-white text-base"
+              />
+            ) : (
+              <></>
             )}
+          </span>
+
+          <span>
+            {orderReviews && <div className=" text-white text-sm flex items-center">{reviewPrecentage()}</div>}
           </span>
           <span className="text-white text-sm "> {convertWeeks(dateTime)}</span>
         </div>

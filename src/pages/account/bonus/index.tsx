@@ -18,7 +18,6 @@ const Index = () => {
   const promotion = data?.getLoyaltyRecords.find((val) => val.type === 'G');
 
   let isFirstIteration = true;
-
   const loyalties = bonus?.map((e) => {
     return { ...e.loyalty };
   });
@@ -101,8 +100,9 @@ const Index = () => {
           </div>
         </div>
         <div className="flex overflow-x-scroll hide-scroll-bar p-2">
-          <div className="flex flex-nowrap gap-2">
+          <div className="flex gap-2">
             {loyalties?.map((loyalty, index) => {
+              console.log(loyalty);
               return <PromotionCard key={index} products={products} loyaltyId={loyalty.id} configs={loyalty.configs} />;
             })}
           </div>

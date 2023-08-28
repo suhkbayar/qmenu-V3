@@ -14,10 +14,7 @@ type Props = {
   color: string;
 };
 
-const Index = ({ index, name, isrounded, amount, image, price, description, isActive, color }: Props) => {
-  useEffect(() => {
-    if (index === 1) isrounded = true;
-  }, []);
+const Index = ({ index, name, isrounded, progress, amount, image, price, description, isActive, color }: Props) => {
   return (
     <div className="w-full pt-8 pb-1 ">
       <div className="flex place-content-between">
@@ -25,9 +22,10 @@ const Index = ({ index, name, isrounded, amount, image, price, description, isAc
           {/* {!isActive && <>{numberFormat.format(amount)} ₮</>} */}
         </span>
 
-        <span className="text-xs mr-16 font-normal  text-current">{numberFormat.format(price)} ₮</span>
+        <span style={{ color: color }} className="text-xs mr-16 font-normal  text-current">
+          {numberFormat.format(price)} ₮
+        </span>
       </div>
-
       <div className="w-full bg-gray-100 relative  dark:bg-gray-700">
         <div style={isrounded ? { left: '-12px' } : {}} className="relative">
           <div style={{ borderBottomColor: color }} className="drop-shape">
@@ -36,7 +34,6 @@ const Index = ({ index, name, isrounded, amount, image, price, description, isAc
             </div>
           </div>
         </div>
-
         {amount > price ? (
           <div
             className="rounded-l-md"
@@ -56,7 +53,7 @@ const Index = ({ index, name, isrounded, amount, image, price, description, isAc
         ) : (
           <>
             <div
-              className={isrounded && `rounded-l-md`}
+              className={isrounded ? `rounded-l-md` : ''}
               style={{
                 border: `1px solid ${color}`,
                 borderRight: `${index !== 3 && 'none'}`,
@@ -69,20 +66,25 @@ const Index = ({ index, name, isrounded, amount, image, price, description, isAc
                     : 'text-xs font-medium  text-center p-2 leading-none '
                 }
                 style={{
-                  backgroundColor: !isActive && `${color}`,
-                  width: isActive ? '0%' : `${Math.min(100, (Number(amount) / Number(price)) * 100)}%`,
+                  backgroundColor: !isActive ? `${color}` : isrounded && `${color}`,
+                  width: isrounded ? '100%' : `${Math.min(100, (Number(amount) / Number(price)) * 100)}%`,
                 }}
               ></div>
             </div>
           </>
         )}
       </div>
+      {isrounded && <span className="text-xs mr-16 font-normal">{description}</span>}
       <div
         className="relative whitespace-nowrap text-end"
         style={{ width: `${Math.min(100, (Number(amount) / Number(price)) * 100)}%` }}
       >
-        <span className={`text-xs font-semibold text-current`}>
-          {!isActive && <>{numberFormat.format(amount)} ₮</>}
+        <span style={{ color: color }} className={`text-xs font-semibold `}>
+          {!isActive && (
+            <>
+              {!isrounded && numberFormat.format(amount)} {!isrounded && '₮'}
+            </>
+          )}
         </span>
       </div>
     </div>

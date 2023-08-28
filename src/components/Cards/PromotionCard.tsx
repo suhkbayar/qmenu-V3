@@ -12,7 +12,6 @@ type Props = {
 
 const Index = ({ configs, loyaltyId, products }: Props) => {
   const router = useRouter();
-
   const producId = configs?.find((val) => val.name === 'PRODUCT')?.value.replace(/"/g, '');
   const product = products?.find((product) => product.productId === producId);
 
