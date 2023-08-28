@@ -302,6 +302,15 @@
     "Point": "Оноо",
     "SpendPoint": "Зарцуулах оноо",
     "Notification": "Мэдэгдэл",
-    "NoNotificationFound": "Мэдэгдэл олдсонгүй"
+    "NoNotificationFound": "Мэдэгдэл олдсонгүй",
+    "JobApplication":"Ажлын анкет",
+    "Компани": "company",
+    "Сонирхож буй ажлын байр": "position",
+    "Хүйс": "gender",
+    "Утас":"phone",
+    "Нэр": "first_name"
+
+
+   
   }
 }

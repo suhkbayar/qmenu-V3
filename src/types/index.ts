@@ -7,3 +7,4 @@ export * from './payment';
 export * from './time-table';
 export * from './transaction';
 export * from './loyalty';
+export * from './form';

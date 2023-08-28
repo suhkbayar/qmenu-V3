@@ -8,3 +8,4 @@ export * from './transaction';
 export * from './loyalty';
 export * from './notification.action';
 export * from './notification';
+export * from './form';

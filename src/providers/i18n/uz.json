@@ -298,6 +298,8 @@
     "Use": "Foydalanish",
     "EnterPinCode": "PIN kodingizni kiriting.",
     "Point": "Nuqta",
-    "SpendPoint": "Sarflash uchun ballar"
+    "SpendPoint": "Sarflash uchun ballar",
+    "JobApplication":"JobApplication"
+
   }
 }

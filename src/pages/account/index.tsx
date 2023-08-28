@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from '@apollo/client';
 import { ME } from '../../graphql/query/user';
 import userInfo from '../../assets/user/userInfo.png';
+import formImage from '../../assets/user/userInfo.png';
 import heart from '../../assets/user/heart.png';
 import discount from '../../assets/user/Discount.svg';
 import Calories from '../../assets/user/Calories.svg';
@@ -84,8 +85,18 @@ const Index = () => {
               className="flex cursor-pointer hover:bg-gainsboro dark:hover:bg-gray1 items-center rounded-lg  place-content-between p-2"
             >
               <div className="flex place-content-between">
-                <img src={userInfo.src} className="h-7 w-7 text-gray-400 mr-2" />
+                <img src={userInfo.src} alt={userInfo.src} className="h-7 w-7 text-gray-400 mr-2" />
                 <span className="text-gray-700 dark:text-white">{t('mainPage.CustomerInformation')}</span>
+              </div>
+              <FiChevronRight className="text-gray-500 text-xl dark:text-white" />
+            </div>
+            <div
+              onClick={() => router.push('/account/form')}
+              className="flex cursor-pointer hover:bg-gainsboro dark:hover:bg-gray1 items-center rounded-lg  place-content-between p-2"
+            >
+              <div className="flex place-content-between">
+                <img src={formImage.src} alt={formImage.src} className="h-7 rounded-full w-7 text-gray-400 mr-2" />
+                <span className="text-gray-700 dark:text-white">{t('mainPage.JobApplication')}</span>
               </div>
               <FiChevronRight className="text-gray-500 text-xl dark:text-white" />
             </div>

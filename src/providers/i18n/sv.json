@@ -299,6 +299,8 @@
     "Use": "Använda sig av",
     "EnterPinCode": "Vänligen ange din pinkod.",
     "Point": "Punkt",
-    "SpendPoint": "Poäng att spendera"
+    "SpendPoint": "Poäng att spendera",
+    "JobApplication":"JobApplication"
+
   }
 }

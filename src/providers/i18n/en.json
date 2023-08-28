@@ -300,6 +300,7 @@
     "Use": "Use",
     "EnterPinCode": "Please enter your pin code.",
     "Point": "Point",
-    "SpendPoint": "Point to spend"
+    "SpendPoint": "Point to spend",
+    "JobApplication": "Job application"
   }
 }
