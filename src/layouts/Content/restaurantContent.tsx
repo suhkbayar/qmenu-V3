@@ -141,7 +141,7 @@ const Index = () => {
                     <div className="w-36 " key={record.id}>
                       <RankingCard
                         configs={configs}
-                        isrounded={false}
+                        isRounded={false}
                         index={index}
                         color={color}
                         key={record.id}

@@ -5,7 +5,7 @@ import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 import { getToken } from './auth';
 import { RetryLink } from '@apollo/client/link/retry';
 
-const url = 'https://dev.qrms.mn/graphql';
+const url = 'https://prod.qrms.mn/graphql';
 
 const region = 'ap-east-1';
 
