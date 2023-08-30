@@ -17,6 +17,14 @@ const Index = () => {
 
   const promotion = data?.getLoyaltyRecords.find((val) => val.type === 'G');
 
+  const configs = promotion?.loyalty.configs
+    .filter((config) => config.name !== 'TYPE_G')
+    .sort((a, b) => {
+      const aIndex = JSON.parse(a.value).index;
+      const bIndex = JSON.parse(b.value).index;
+      return aIndex - bIndex;
+    });
+
   let isFirstIteration = true;
   const loyalties = bonus?.map((e) => {
     return { ...e.loyalty };
@@ -74,10 +82,11 @@ const Index = () => {
 
               return (
                 <RankingCard
-                  isrounded={true}
+                  isRounded={true}
                   index={index}
                   key={record.id}
                   name={record.name}
+                  configs={configs}
                   progress={promotion.progress}
                   image={image}
                   price={value}
