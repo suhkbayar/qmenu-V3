@@ -15,7 +15,7 @@ const OrderHistory = () => {
   const router = useRouter();
   const { participant } = useCallStore();
   const { t } = useTranslation('language');
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
 
   const { loading, data, error } = useQuery(GET_ORDERS);
 

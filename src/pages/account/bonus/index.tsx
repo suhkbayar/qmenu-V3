@@ -7,15 +7,12 @@ import { useCallStore } from '../../../contexts/call.store';
 import { GET_LOYALTIES_RECORDS } from '../../../graphql/query';
 import coupon from '../../../assets/user/coupon.svg';
 import voucher from '../../../assets/user/voucher.svg';
-import { getPayload } from '../../../providers/auth';
 
 const Index = () => {
   const router = useRouter();
   const { participant } = useCallStore();
-  const { role } = getPayload();
 
   const { data } = useQuery(GET_LOYALTIES_RECORDS, {
-    skip: role !== 'customer',
     fetchPolicy: 'network-only',
   });
   const bonus = data?.getLoyaltyRecords.filter((val) => val.type === 'P');
