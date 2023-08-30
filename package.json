@@ -54,6 +54,9 @@
     "eslint": "8.39.0",
     "eslint-config-next": "^13.4.0",
     "eslint-config-react-app": "^7.0.1",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "sst": "^2.24.20",
+    "aws-cdk-lib": "2.91.0",
+    "constructs": "10.2.69"
   }
 }
