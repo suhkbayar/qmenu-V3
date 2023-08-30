@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { useMutation } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import { SIGN_IN } from '../../graphql/mutation/sign';
 import { AuthContext } from '../../providers/auth';
 import { PATTERN_PHONE } from '../../constants/pattern';
@@ -31,17 +31,23 @@ const Index = ({ goBack }: Props) => {
     formState: { errors },
   } = useForm<FormData>();
 
+  const [getLoyaltiesRecords] = useLazyQuery(GET_LOYALTIES_RECORDS);
+
+  const onSuccess = async () => {
+    await getLoyaltiesRecords();
+    showNotification(NotificationType.SUCCESS, t('mainPage.LoginSuccess'));
+    goBack();
+  };
+
   const [signIn, { loading }] = useMutation(SIGN_IN, {
     onCompleted: (data) => {
       authenticate(data.signIn.token, () => {
-        goBack();
-        showNotification(NotificationType.SUCCESS, t('mainPage.LoginSuccess'));
+        onSuccess();
       });
     },
     onError(err) {
       showNotification(NotificationType.WARNING, err.message);
     },
-    refetchQueries: [{ query: GET_LOYALTIES_RECORDS }],
   });
 
   const onSubmit = (data: FormData) => {

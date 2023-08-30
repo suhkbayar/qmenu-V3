@@ -82,7 +82,7 @@ export const NotificationProvider = ({ children }: any) => {
   const [getNotifications, { loading: loadingGetNotifications }] = useLazyQuery<{
     getNotifications: { notifications: INotification[]; nextToken: string };
   }>(GET_NOTIFICATIONS, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'network-only',
     variables: {
       limit: 10,
       nextToken: notificationState.nextToken,

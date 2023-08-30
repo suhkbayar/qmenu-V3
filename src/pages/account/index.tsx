@@ -5,7 +5,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import { FiChevronRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { ME } from '../../graphql/query/user';
 import userInfo from '../../assets/user/userInfo.png';
 import heart from '../../assets/user/heart.png';
@@ -19,6 +19,7 @@ import { AuthContext } from '../../providers/auth';
 import Loader from '../../components/Loader/Loader';
 import ToggleButton from '../../components/Button/ToggleButton';
 import bonus from '../../assets/user/bonus.svg';
+import { GET_LOYALTIES_RECORDS } from '../../graphql/query';
 
 const Index = () => {
   const { participant, setUser } = useCallStore();
@@ -29,9 +30,16 @@ const Index = () => {
     },
   });
 
+  const [getLoyaltiesRecords] = useLazyQuery(GET_LOYALTIES_RECORDS);
+
+  const onSuccess = async (id) => {
+    await getLoyaltiesRecords();
+    router.push(`restaurant?id=${id}`);
+  };
+
   const [getCurrentToken, { loading }] = useMutation(CURRENT_TOKEN, {
     onCompleted: (data) => {
-      authenticate(data.getToken.token, () => router.push(`restaurant?id=${data.getToken.id}`));
+      authenticate(data.getToken.token, () => onSuccess(data.getToken.id));
     },
     onError(err) {
       router.push('/notfound');
