@@ -17,7 +17,6 @@ type Props = {
 
 const Index = ({ index, isRounded, amount, image, price, configs, description, isActive, color, name }: Props) => {
   const [visible, setVisible] = useState(false);
-
   const onShow = () => {
     setVisible(true);
   };
@@ -25,18 +24,29 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
   return (
     <div className="w-full pt-8 pb-1 ">
       <div className="flex place-content-between text-center">
-        <span style={{ color: color }} className="text-xs  font-semibold  w-full text-current">
+        <span style={{ color: color }} className="text-xs relative font-semibold  w-full text-current">
           {numberFormat.format(price)} ₮
-        </span>
-      </div>
-      <div className="w-full   relative  dark:bg-gray-700">
-        <div style={isRounded ? { left: '-12px' } : {}} className="relative">
-          <div style={{ borderBottomColor: color }} onClick={() => onShow()} className="drop-shape">
-            <div style={{ backgroundColor: color }} onClick={() => onShow()} className="circle">
-              <img className="bagde" src={image} />
+          <div style={isRounded ? { left: '-12px' } : {}} className="w-full flex place-content-end">
+            <div className="absolute top-[-5px] right-[-12px]">
+              <div
+                style={{ borderBottomColor: color, right: `${isRounded && '-3.2%'}` }}
+                onClick={() => onShow()}
+                className="drop-shape"
+              >
+                <div
+                  style={{ border: `1px solid ${color}` }}
+                  onClick={() => onShow()}
+                  className="circle flex place-content-center"
+                >
+                  <img className="rotate-180 w-5" src={image} />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </span>
+      </div>
+
+      <div className="w-full   relative  dark:bg-gray-700">
         {amount > price ? (
           <div
             className={`${index === 1 ? 'rounded-l-md' : ''}`}
@@ -72,7 +82,7 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
                 }
                 style={{
                   backgroundColor: !isActive ? `${color}` : isRounded && `${color}`,
-                  width: isRounded ? '100%' : `${Math.min(100, (Number(amount) / Number(price)) * 100)}%`,
+                  width: `${Math.min(100, (Number(amount) / Number(price)) * 100)}%`,
                 }}
               ></div>
             </div>
@@ -84,7 +94,7 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
         className="relative whitespace-nowrap text-end"
         style={{ width: `${Math.min(100, (Number(amount) / Number(price)) * 100) + 10}%` }}
       >
-        <span style={{ color: color }} className={`text-xs font-semibold `}>
+        <span style={{ color: color }} className={`text-xs font-semibold relative `}>
           {!isActive && (
             <>
               {!isRounded && numberFormat.format(amount)} {!isRounded && '₮'}

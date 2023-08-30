@@ -115,9 +115,10 @@ const Index = () => {
           setSelectedCategoryId={setSelectedCategoryId}
           setSelectedSubCategoryId={setSelectedSubCategoryId}
         />
-        <div className="flex overflow-x-scroll hide-scroll-bar p-2">
-          <div className="flex flex-nowrap gap-2">
-            <div className="bg-white flex rounded-xl w-full cursor-pointer place-content-between drop-shadow-lg  dark:bg-gray-700 px-4 ">
+
+        <div className="flex  p-2">
+          <div className="flex flex-nowrap gap-2 w-full">
+            <div className="bg-white flex rounded-xl w-full  drop-shadow-lg pr-6 pt-1 dark:bg-gray-700 px-4 ">
               {promotion?.loyalty.configs
                 .filter((config) => config.name !== 'TYPE_G')
                 .sort((a, b) => {
@@ -125,10 +126,10 @@ const Index = () => {
                   const bIndex = JSON.parse(b.value).index;
                   return aIndex - bIndex;
                 })
-                .map((record) => {
+                .map((record, index) => {
                   let isActive = true;
 
-                  const { image, value, description, color, index } = JSON.parse(record.value);
+                  const { image, value, description, color } = JSON.parse(record.value);
 
                   if (Number(promotion.amount) < Number(value)) {
                     if (isFirstIteration) {
@@ -138,11 +139,11 @@ const Index = () => {
                   }
 
                   return (
-                    <div className="w-36 " key={record.id}>
+                    <div className="w-full " key={record.id}>
                       <RankingCard
                         configs={configs}
                         isRounded={false}
-                        index={index}
+                        index={index + 1}
                         color={color}
                         key={record.id}
                         name={record.name}

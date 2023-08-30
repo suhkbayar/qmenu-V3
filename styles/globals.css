@@ -23,20 +23,30 @@
 .drop-shape {
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 18px solid;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 21px solid;
+  /* position: absolute; */
+  bottom: 0px;
+  /* right: -8%; */
+  rotate: 180deg;
+}
+
+.circle-logo {
+  border-bottom: 21px solid;
   position: absolute;
-  bottom: 2px;
-  right: -4%;
+  bottom: 0px;
+  right: 0%;
   rotate: 180deg;
 }
 .circle {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 48%;
   position: absolute;
   top: 14px;
+  background: white;
+  padding: 2px;
   transform: translateX(-50%);
 }
 .bagde {

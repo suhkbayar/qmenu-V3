@@ -136,12 +136,12 @@ const Index = () => {
 
             {data?.getLoyaltyRecords.length > 1 ? (
               <div>
-                <div className="absolute w-10 h-10 top-[-10px]">
+                <div className="absolute grid items-center w-10 h-10 top-[-10px]">
                   <img
-                    width={40}
-                    height={40}
+                    width={24}
+                    height={24}
                     src={getCurrentBadge(currentAmount, mileStones)}
-                    className=" text-white text-base"
+                    className=" text-white text-base mt-2 ml-1"
                   />
                 </div>
               </div>
