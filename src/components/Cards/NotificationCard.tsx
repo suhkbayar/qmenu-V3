@@ -21,7 +21,6 @@ const Index = ({ notification: item }: Props) => {
         item.actions,
       );
     } catch (error) {
-      console.log(error.message);
       showCustomNotification(item.title, item.data);
     }
     if (!item.isRead) markAsRead(item);
@@ -32,7 +31,6 @@ const Index = ({ notification: item }: Props) => {
       const data = JSON.parse(item.data);
       return data?.message?.statusMessage;
     } catch (error) {
-      console.log(error.message);
       return item.data || '';
     }
   };
@@ -42,7 +40,6 @@ const Index = ({ notification: item }: Props) => {
       const data = JSON.parse(item.data);
       return data?.branch?.image;
     } catch (error) {
-      console.log(error.message);
       return null;
     }
   };

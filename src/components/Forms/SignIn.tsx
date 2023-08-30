@@ -9,6 +9,7 @@ import { PATTERN_PHONE } from '../../constants/pattern';
 import { Button } from '..';
 import { NotificationType } from '../../constants/constant';
 import { useNotificationContext } from '../../providers/notification';
+import { GET_LOYALTIES_RECORDS } from '../../graphql/query';
 
 type FormData = {
   phoneNumber: string;
@@ -40,6 +41,7 @@ const Index = ({ goBack }: Props) => {
     onError(err) {
       showNotification(NotificationType.WARNING, err.message);
     },
+    refetchQueries: [{ query: GET_LOYALTIES_RECORDS }],
   });
 
   const onSubmit = (data: FormData) => {

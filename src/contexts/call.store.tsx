@@ -105,7 +105,6 @@ export const useCallStore = create<ICallStore>(
             },
           }));
         } else {
-          console.log('Order item not found.');
         }
         get().calculate();
       },

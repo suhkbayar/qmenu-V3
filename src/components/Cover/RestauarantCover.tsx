@@ -32,9 +32,6 @@ const Index = () => {
 
     return null;
   };
-  // console.log(mileStones);
-  // console.log(currentAmount);
-  console.log(data?.getLoyaltyRecords);
 
   var curr = new Date();
   const dateTime = moment(curr).format('dddd');
