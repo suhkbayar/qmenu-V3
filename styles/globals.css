@@ -27,11 +27,11 @@
   border-right: 8px solid transparent;
   border-bottom: 18px solid;
   position: absolute;
-  bottom: 2px; 
+  bottom: 2px;
   right: -4%;
   rotate: 180deg;
 }
-.circle{
+.circle {
   width: 20px;
   height: 20px;
   border-radius: 48%;
@@ -39,7 +39,7 @@
   top: 14px;
   transform: translateX(-50%);
 }
-.bagde{
+.bagde {
   rotate: 180deg;
 }
 .c-card:hover img {
