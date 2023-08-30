@@ -115,51 +115,53 @@ const Index = () => {
           setSelectedCategoryId={setSelectedCategoryId}
           setSelectedSubCategoryId={setSelectedSubCategoryId}
         />
+        {promotion && (
+          <div className="flex  p-2">
+            <div className="flex flex-nowrap gap-2 w-full">
+              <div className="bg-white flex rounded-xl w-full  drop-shadow-lg pr-6 pt-1 dark:bg-gray-700 px-4 ">
+                {promotion?.loyalty.configs
+                  .filter((config) => config.name !== 'TYPE_G')
+                  .sort((a, b) => {
+                    const aIndex = JSON.parse(a.value).index;
+                    const bIndex = JSON.parse(b.value).index;
+                    return aIndex - bIndex;
+                  })
+                  .map((record, index) => {
+                    let isActive = true;
 
-        <div className="flex  p-2">
-          <div className="flex flex-nowrap gap-2 w-full">
-            <div className="bg-white flex rounded-xl w-full  drop-shadow-lg pr-6 pt-1 dark:bg-gray-700 px-4 ">
-              {promotion?.loyalty.configs
-                .filter((config) => config.name !== 'TYPE_G')
-                .sort((a, b) => {
-                  const aIndex = JSON.parse(a.value).index;
-                  const bIndex = JSON.parse(b.value).index;
-                  return aIndex - bIndex;
-                })
-                .map((record, index) => {
-                  let isActive = true;
+                    const { image, value, description, color } = JSON.parse(record.value);
 
-                  const { image, value, description, color } = JSON.parse(record.value);
-
-                  if (Number(promotion.amount) < Number(value)) {
-                    if (isFirstIteration) {
-                      isActive = false;
-                      isFirstIteration = false;
+                    if (Number(promotion.amount) < Number(value)) {
+                      if (isFirstIteration) {
+                        isActive = false;
+                        isFirstIteration = false;
+                      }
                     }
-                  }
 
-                  return (
-                    <div className="w-full " key={record.id}>
-                      <RankingCard
-                        configs={configs}
-                        isRounded={false}
-                        index={index + 1}
-                        color={color}
-                        key={record.id}
-                        name={record.name}
-                        progress={promotion.progress}
-                        image={image}
-                        price={value}
-                        description={description}
-                        amount={promotion.amount}
-                        isActive={isActive}
-                      />
-                    </div>
-                  );
-                })}
+                    return (
+                      <div className="w-full " key={record.id}>
+                        <RankingCard
+                          configs={configs}
+                          isRounded={false}
+                          index={index + 1}
+                          color={color}
+                          key={record.id}
+                          name={record.name}
+                          progress={promotion.progress}
+                          image={image}
+                          price={value}
+                          description={description}
+                          amount={promotion.amount}
+                          isActive={isActive}
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
         <Products products={getSelectedProducts(participant, selectedCategoryId, selectedSubCategoryId)} />
       </div>
     </>
