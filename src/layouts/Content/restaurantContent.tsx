@@ -32,6 +32,13 @@ const Index = () => {
   });
 
   const promotion = data?.getLoyaltyRecords.find((val) => val.type === 'G');
+  const configs = promotion?.loyalty.configs
+    .filter((config) => config.name !== 'TYPE_G')
+    .sort((a, b) => {
+      const aIndex = JSON.parse(a.value).index;
+      const bIndex = JSON.parse(b.value).index;
+      return aIndex - bIndex;
+    });
 
   const [selectedSubCategoryId, setSelectedSubCategoryId] = useState<string>(() => {
     const category = participant.menu.categories.find((c) => c.id === selectedCategoryId);
@@ -108,49 +115,54 @@ const Index = () => {
           setSelectedCategoryId={setSelectedCategoryId}
           setSelectedSubCategoryId={setSelectedSubCategoryId}
         />
-        <div className="flex overflow-x-scroll hide-scroll-bar p-2">
-          <div className="flex flex-nowrap gap-2">
-            <div className="bg-white flex rounded-xl w-full cursor-pointer place-content-between drop-shadow-lg  dark:bg-gray-700 px-4 ">
-              {promotion?.loyalty.configs
-                .filter((config) => config.name !== 'TYPE_G')
-                .sort((a, b) => {
-                  const aIndex = JSON.parse(a.value).index;
-                  const bIndex = JSON.parse(b.value).index;
-                  return aIndex - bIndex;
-                })
-                .map((record) => {
-                  let isActive = true;
 
-                  const { image, value, description, color, index } = JSON.parse(record.value);
+        {promotion && (
+          <div className="flex  p-2">
+            <div className="flex flex-nowrap gap-2 w-full">
+              <div className="bg-white flex rounded-xl w-full  drop-shadow-lg pr-6 pt-1 dark:bg-gray-700 px-4 ">
+                {promotion?.loyalty.configs
+                  .filter((config) => config.name !== 'TYPE_G')
+                  .sort((a, b) => {
+                    const aIndex = JSON.parse(a.value).index;
+                    const bIndex = JSON.parse(b.value).index;
+                    return aIndex - bIndex;
+                  })
+                  .map((record, index) => {
+                    let isActive = true;
 
-                  if (Number(promotion.amount) < Number(value)) {
-                    if (isFirstIteration) {
-                      isActive = false;
-                      isFirstIteration = false;
+                    const { image, value, description, color } = JSON.parse(record.value);
+
+                    if (Number(promotion.amount) < Number(value)) {
+                      if (isFirstIteration) {
+                        isActive = false;
+                        isFirstIteration = false;
+                      }
                     }
-                  }
 
-                  return (
-                    <div className="w-48 " key={record.id}>
-                      <RankingCard
-                        isrounded={false}
-                        index={index}
-                        color={color}
-                        key={record.id}
-                        name={record.name}
-                        progress={promotion.progress}
-                        image={image}
-                        price={value}
-                        description={description}
-                        amount={promotion.amount}
-                        isActive={isActive}
-                      />
-                    </div>
-                  );
-                })}
+                    return (
+                      <div className="w-full " key={record.id}>
+                        <RankingCard
+                          configs={configs}
+                          isRounded={false}
+                          index={index + 1}
+                          color={color}
+                          key={record.id}
+                          name={record.name}
+                          progress={promotion.progress}
+                          image={image}
+                          price={value}
+                          description={description}
+                          amount={promotion.amount}
+                          isActive={isActive}
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
         <Products products={getSelectedProducts(participant, selectedCategoryId, selectedSubCategoryId)} />
       </div>
     </>

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { useSubscription } from '@apollo/client';
+import { useSubscription, useLazyQuery } from '@apollo/client';
 import { ON_TRACK_ORDER } from '../graphql/subscription/order';
 import { IOrder } from '../types';
-import { GET_ORDERS } from '../graphql/query';
+import { GET_LOYALTIES_RECORDS, GET_ORDERS } from '../graphql/query';
 import { AuthContext, getPayload } from './auth';
 import { ON_UPDATED_CUSTOMER_NOTIFICATION } from '../graphql/subscription';
 import { useNotificationContext } from './notification';
@@ -10,6 +10,7 @@ import { INotification } from '../types/notification';
 
 const SubscriptionProvider = ({ children }) => {
   const { isAuthenticated } = useContext(AuthContext);
+  const [getLoyaltiesRecords, { refetch }] = useLazyQuery(GET_LOYALTIES_RECORDS);
 
   const { showLoyaltyNotification, setNotificationState, notificationState, showOrderNotification } =
     useNotificationContext();
@@ -36,6 +37,7 @@ const SubscriptionProvider = ({ children }) => {
       if (subscriptionOrder.state === 'PREPARED' || subscriptionOrder.state === 'COMPLETED') {
         if (subscriptionOrder.type === 'Dining') {
           showOrderNotification(subscriptionOrder.id);
+          setTimeout(refetch, 3000);
         }
       }
 

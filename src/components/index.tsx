@@ -126,6 +126,8 @@ export const RankingCard = dynamic(() => import('./Cards/RankingCard'), {
   loading: () => <RankingSkelton />,
 });
 
+export const RankingMdoal = dynamic(() => import('../components/Modal/RankingModal'));
+
 export const PromotionCard = dynamic(() => import('./Cards/PromotionCard'), {
   loading: () => <PromotionCardSkelton />,
 });

@@ -36,12 +36,14 @@ const Index = ({ id, watch, onSelect, onSeletId }: Props) => {
     onSelect(PAYMENT_TYPE.VCR, code);
   };
 
+  if (!id) return null;
+
   return (
     <>
       {data && (
         <div
           className={`w-full bg-white rounded-lg p-2 mt-4  border ${
-            paymentId === id ? 'border-current' : ' border-white'
+            paymentId && paymentId === id ? 'border-current' : ' border-white'
           } `}
         >
           <div className="flex place-items-center place-content-between p-1" onClick={() => onExpand()}>
