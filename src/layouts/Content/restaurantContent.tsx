@@ -115,6 +115,7 @@ const Index = () => {
           setSelectedCategoryId={setSelectedCategoryId}
           setSelectedSubCategoryId={setSelectedSubCategoryId}
         />
+
         {promotion && (
           <div className="flex  p-2">
             <div className="flex flex-nowrap gap-2 w-full">

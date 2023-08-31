@@ -19,7 +19,7 @@ import { AuthContext } from '../../providers/auth';
 import Loader from '../../components/Loader/Loader';
 import ToggleButton from '../../components/Button/ToggleButton';
 import bonus from '../../assets/user/bonus.svg';
-import { GET_LOYALTIES_RECORDS } from '../../graphql/query';
+import { GET_LOYALTIES_RECORDS, GET_ORDERS } from '../../graphql/query';
 
 const Index = () => {
   const { participant, setUser } = useCallStore();
@@ -31,9 +31,11 @@ const Index = () => {
   });
 
   const [getLoyaltiesRecords] = useLazyQuery(GET_LOYALTIES_RECORDS);
+  const [getOrder, { refetch }] = useLazyQuery(GET_ORDERS);
 
   const onSuccess = async (id) => {
     await getLoyaltiesRecords();
+    await refetch();
     router.push(`restaurant?id=${id}`);
   };
 

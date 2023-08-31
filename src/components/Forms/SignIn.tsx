@@ -9,7 +9,7 @@ import { PATTERN_PHONE } from '../../constants/pattern';
 import { Button } from '..';
 import { NotificationType } from '../../constants/constant';
 import { useNotificationContext } from '../../providers/notification';
-import { GET_LOYALTIES_RECORDS } from '../../graphql/query';
+import { GET_LOYALTIES_RECORDS, GET_ORDERS } from '../../graphql/query';
 
 type FormData = {
   phoneNumber: string;
@@ -32,9 +32,11 @@ const Index = ({ goBack }: Props) => {
   } = useForm<FormData>();
 
   const [getLoyaltiesRecords] = useLazyQuery(GET_LOYALTIES_RECORDS);
+  const [getOrder, { refetch }] = useLazyQuery(GET_ORDERS);
 
   const onSuccess = async () => {
     await getLoyaltiesRecords();
+    await refetch();
     showNotification(NotificationType.SUCCESS, t('mainPage.LoginSuccess'));
     goBack();
   };
