@@ -20,7 +20,7 @@ const BottomNavigation = () => {
   const { t } = useTranslation('language');
   const { participant, setUser } = useCallStore();
 
-  const { role } = getPayload();
+  const { role, features } = getPayload();
 
   const { data: userData } = useQuery(ME, {
     skip: role !== 'customer',
@@ -86,15 +86,19 @@ const BottomNavigation = () => {
                   <TbSearch className="inline-block mb-1 w-6 h-6 " />
                   <span className="tab tab-kategori block text-xs">{t('mainPage.SearchForFoodShort')}</span>
                 </div>
-                <div
-                  className={`w-full ${
-                    router.pathname === '/karaoke' ? 'text-current ' : 'text-gray-500 dark:text-white'
-                  }  focus:text-current  hover:text-current justify-center inline-block grid content-between place-items-center text-center pt-2 pb-1`}
-                  onClick={() => goKaraoke()}
-                >
-                  <GiMicrophone className="inline-block mb-1 w-6 h-6 " />
-                  <span className="tab tab-explore block text-xs">{t('mainPage.Karaoke')}</span>
-                </div>
+
+                {!isEmpty(features?.filter((feature) => feature === 'KRK')) && (
+                  <div
+                    className={`w-full ${
+                      router.pathname === '/karaoke' ? 'text-current ' : 'text-gray-500 dark:text-white'
+                    }  focus:text-current  hover:text-current justify-center inline-block grid content-between place-items-center text-center pt-2 pb-1`}
+                    onClick={() => goKaraoke()}
+                  >
+                    <GiMicrophone className="inline-block mb-1 w-6 h-6 " />
+                    <span className="tab tab-explore block text-xs">{t('mainPage.Karaoke')}</span>
+                  </div>
+                )}
+
                 <div
                   className={`w-full ${
                     router.pathname === '/history' ? 'text-current ' : 'text-gray-500 dark:text-white'

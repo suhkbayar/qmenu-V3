@@ -26,6 +26,8 @@ const Index = ({ register, errors }: Props) => {
       throw new Error('Invalid day');
     }
 
+    if (!participant?.branch.timetable) return { isOpen: false };
+
     return {
       isOpen: participant?.branch.timetable[dayKey],
     };

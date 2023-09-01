@@ -11,6 +11,7 @@ export interface Payload {
   role: string;
   currency: string;
   languages: string[];
+  features: any[];
 }
 
 const getAccessToken = () => {
