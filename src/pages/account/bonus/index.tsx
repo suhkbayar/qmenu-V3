@@ -62,7 +62,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="grid gap-2">
+        <div className="grid gap-2 pr-2">
           {promotion?.loyalty.configs
             .filter((config) => config.name !== 'TYPE_G')
             .sort((a, b) => {
