@@ -24,18 +24,19 @@ import { GET_LOYALTIES_RECORDS, GET_ORDERS } from '../../graphql/query';
 const Index = () => {
   const { participant, setUser } = useCallStore();
   const { authenticate } = useContext(AuthContext);
-  const { data } = useQuery(ME, {
+  const { data, refetch: refetchMe } = useQuery(ME, {
     onCompleted: (data) => {
       setUser(data.me);
     },
   });
 
-  const [getLoyaltiesRecords] = useLazyQuery(GET_LOYALTIES_RECORDS);
+  const [getLoyaltiesRecords, { refetch: refetchLoyalties }] = useLazyQuery(GET_LOYALTIES_RECORDS);
   const [getOrder, { refetch }] = useLazyQuery(GET_ORDERS);
 
   const onSuccess = async (id) => {
-    await getLoyaltiesRecords();
+    await refetchLoyalties();
     await refetch();
+    await refetchMe();
     router.push(`restaurant?id=${id}`);
   };
 

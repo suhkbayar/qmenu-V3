@@ -9,7 +9,8 @@ import { PATTERN_PHONE } from '../../constants/pattern';
 import { Button } from '..';
 import { NotificationType } from '../../constants/constant';
 import { useNotificationContext } from '../../providers/notification';
-import { GET_LOYALTIES_RECORDS, GET_ORDERS } from '../../graphql/query';
+import { GET_LOYALTIES_RECORDS, GET_ORDERS, ME } from '../../graphql/query';
+import { useCallStore } from '../../contexts/call.store';
 
 type FormData = {
   phoneNumber: string;
@@ -25,18 +26,25 @@ const Index = ({ goBack }: Props) => {
   const router = useRouter();
   const { showNotification } = useNotificationContext();
   const { authenticate } = useContext(AuthContext);
+  const { setUser } = useCallStore();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
 
-  const [getLoyaltiesRecords] = useLazyQuery(GET_LOYALTIES_RECORDS);
+  const [getLoyaltiesRecords, { refetch: refetchLoyalties }] = useLazyQuery(GET_LOYALTIES_RECORDS);
+  const [getMe, { data, refetch: refetchMe }] = useLazyQuery(ME, {
+    onCompleted: (data) => {
+      setUser(data.me);
+    },
+  });
   const [getOrder, { refetch }] = useLazyQuery(GET_ORDERS);
 
   const onSuccess = async () => {
-    await getLoyaltiesRecords();
+    await refetchLoyalties();
     await refetch();
+    await refetchMe();
     showNotification(NotificationType.SUCCESS, t('mainPage.LoginSuccess'));
     goBack();
   };
