@@ -15,13 +15,14 @@ import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { BiRefresh } from 'react-icons/bi';
 import { VALIDATE_TRANSACTION } from '../../graphql/mutation/order';
 import { useNotificationContext } from '../../providers/notification';
+import { useCallStore } from '../../contexts/call.store';
 
 export const OrderModal = ({ orderId, orderVisible, onClose }) => {
   const router = useRouter();
   const { t } = useTranslation('language');
   const [transactionId, setTransactionId] = useState<string>('');
   const { showCustomNotification } = useNotificationContext();
-
+  const { participant } = useCallStore();
   const { loading, data } = useQuery(GET_ORDER, {
     skip: !orderId,
     variables: { id: orderId },
@@ -166,27 +167,33 @@ export const OrderModal = ({ orderId, orderVisible, onClose }) => {
           </Modal.Body>
 
           {data.getOrder?.paymentState !== 'PAID' && (
-            <Modal.Footer className="place-content-center">
-              <div className="grid gap-2 place-items-center w-full">
-                <button
-                  onClick={() => goPayment()}
-                  type="submit"
-                  className="w-full flex place-content-between place-items-center border rounded-lg px-4 py-3 
+            <>
+              {participant?.orderable && (
+                <>
+                  <Modal.Footer className="place-content-center">
+                    <div className="grid gap-2 place-items-center w-full">
+                      <button
+                        onClick={() => goPayment()}
+                        type="submit"
+                        className="w-full flex place-content-between place-items-center border rounded-lg px-4 py-3 
               bg-current   hover:bg-current  text-white
             duration-300"
-                >
-                  {loading && <CgSpinner className="text-lg text-white mr-1 animate-spin" />}
-                  <span>{t('mainPage.Payment')}</span>
-                  <span
-                    className="p-1 rounded-lg text-sm
+                      >
+                        {loading && <CgSpinner className="text-lg text-white mr-1 animate-spin" />}
+                        <span>{t('mainPage.Payment')}</span>
+                        <span
+                          className="p-1 rounded-lg text-sm
                 bg-coral text-white
                  font-semibold"
-                  >
-                    {numberFormat.format(data.getOrder.grandTotal)} {CURRENCY}
-                  </span>
-                </button>
-              </div>
-            </Modal.Footer>
+                        >
+                          {numberFormat.format(data.getOrder.grandTotal)} {CURRENCY}
+                        </span>
+                      </button>
+                    </div>
+                  </Modal.Footer>
+                </>
+              )}
+            </>
           )}
         </>
       )}

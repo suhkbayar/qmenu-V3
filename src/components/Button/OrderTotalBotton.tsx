@@ -48,13 +48,17 @@ const Index = () => {
             </div>
             {participant.channel === 'Q' && (
               <>
-                <div className="absolute top-1  right-[7.333333%] -mr-1 -mt-1 w-10 h-10 rounded-full bg-current animate-ping"></div>
-                <div
-                  onClick={() => showWaiterCall()}
-                  className="absolute top-1 right-[7.333333%] z-10 -mr-1 -mt-1 w-10 h-10 rounded-full bg-current "
-                >
-                  <img src={waiter.src} />
-                </div>
+                {participant.waiter && (
+                  <>
+                    <div className="absolute top-1  right-[7.333333%] -mr-1 -mt-1 w-10 h-10 rounded-full bg-current animate-ping"></div>
+                    <div
+                      onClick={() => showWaiterCall()}
+                      className="absolute top-1 right-[7.333333%] z-10 -mr-1 -mt-1 w-10 h-10 rounded-full bg-current "
+                    >
+                      <img src={waiter.src} />
+                    </div>
+                  </>
+                )}
               </>
             )}
           </div>

@@ -91,48 +91,52 @@ const Index = ({ product, orderItem }: Props) => {
           </div>
           {participant?.channel !== 'W' && (
             <>
-              {isConfigurable(product) ? (
-                <div className="pb-2 ml-2 mr-2">
-                  <div className="border-b my-2"></div>
-                  <button
-                    onClick={() => setVisible(true)}
-                    className="flex font-semibold cursor-pointer place-content-center items-center rounded border border-current w-full text-current  text-sm p-1"
-                  >
-                    <FiShoppingCart className="text-current mr-2" />
-                    {t('mainPage.Enter')}
-                  </button>
-                </div>
-              ) : (
+              {participant?.orderable && (
                 <>
-                  {orderItem ? (
-                    <>
-                      <div className="border-b my-2 mb-0"></div>
-                      <div className="flex items-center place-content-center py-1">
-                        <CiSquareMinus
-                          onClick={() => onRemove(product)}
-                          className="cursor-pointer text-current w-10 h-10"
-                        />
-                        <p className={`mx-2 text-current ${showAnimation ? 'animate-quantity-change' : ''} `}>
-                          {orderItem.quantity}
-                        </p>
-                        <CiSquarePlus
-                          onClick={() => onSelect(product.productId)}
-                          className="cursor-pointer text-current w-10 h-10"
-                        />
-                      </div>
-                    </>
+                  {isConfigurable(product) ? (
+                    <div className="pb-2 ml-2 mr-2">
+                      <div className="border-b my-2"></div>
+                      <button
+                        onClick={() => setVisible(true)}
+                        className="flex font-semibold cursor-pointer place-content-center items-center rounded border border-current w-full text-current  text-sm p-1"
+                      >
+                        <FiShoppingCart className="text-current mr-2" />
+                        {t('mainPage.Enter')}
+                      </button>
+                    </div>
                   ) : (
                     <>
-                      <div className="pb-2 ml-2 mr-2">
-                        <div className="border-b my-2"></div>
-                        <button
-                          onClick={() => onSelect(product.productId)}
-                          className="flex font-semibold cursor-pointer place-content-center items-center rounded border border-current w-full text-current  text-sm p-1"
-                        >
-                          <FiShoppingCart className="text-current mr-2" />
-                          {t('mainPage.Order')}
-                        </button>
-                      </div>
+                      {orderItem ? (
+                        <>
+                          <div className="border-b my-2 mb-0"></div>
+                          <div className="flex items-center place-content-center py-1">
+                            <CiSquareMinus
+                              onClick={() => onRemove(product)}
+                              className="cursor-pointer text-current w-10 h-10"
+                            />
+                            <p className={`mx-2 text-current ${showAnimation ? 'animate-quantity-change' : ''} `}>
+                              {orderItem.quantity}
+                            </p>
+                            <CiSquarePlus
+                              onClick={() => onSelect(product.productId)}
+                              className="cursor-pointer text-current w-10 h-10"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="pb-2 ml-2 mr-2">
+                            <div className="border-b my-2"></div>
+                            <button
+                              onClick={() => onSelect(product.productId)}
+                              className="flex font-semibold cursor-pointer place-content-center items-center rounded border border-current w-full text-current  text-sm p-1"
+                            >
+                              <FiShoppingCart className="text-current mr-2" />
+                              {t('mainPage.Order')}
+                            </button>
+                          </div>
+                        </>
+                      )}
                     </>
                   )}
                 </>
