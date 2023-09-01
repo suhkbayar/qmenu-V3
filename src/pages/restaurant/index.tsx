@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useLazyQuery } from '@apollo/client';
-import { isValidToken } from '../../providers/auth';
+import { useLazyQuery, useMutation } from '@apollo/client';
+import { isValidToken, setAccessToken } from '../../providers/auth';
 import { useCallStore } from '../../contexts/call.store';
 import { GET_BRANCH } from '../../graphql/query/branch';
 import Loader from '../../components/Loader/Loader';
@@ -14,6 +14,7 @@ import Footer from '../../layouts/footer';
 import { isEmpty } from 'lodash';
 import { Translator } from 'react-auto-translate';
 import { emptyOrder } from '../../mock';
+import { CURRENT_TOKEN } from '../../graphql/mutation/token';
 
 const Index = () => {
   const router = useRouter();
@@ -22,6 +23,16 @@ const Index = () => {
 
   const { setParticipant, participant, order, load } = useCallStore();
   const { i18n } = useTranslation('language');
+
+  const [currentToken] = useMutation(CURRENT_TOKEN, {
+    onCompleted(data) {
+      setAccessToken(data.getToken.token);
+      router.reload();
+    },
+    onError: (err) => {
+      router.push('/notfound');
+    },
+  });
 
   const [getBranch, { loading, data }] = useLazyQuery(GET_BRANCH, {
     onCompleted(data) {
@@ -33,6 +44,8 @@ const Index = () => {
     onError(err) {
       if (isValid) {
         router.push('/notfound');
+      } else {
+        currentToken({ variables: { code: '', type: 'W' } });
       }
     },
   });
