@@ -8,6 +8,7 @@ import { useCallStore } from '../../contexts/call.store';
 import { AboutUsSidebar } from '../../components';
 import notificationIcon from '../../assets/icons/notifcations.png';
 import { useNotificationContext } from '../../providers/notification';
+import { isEmpty } from 'lodash';
 
 type Props = {
   isBacked?: boolean;
@@ -44,7 +45,11 @@ const Index = ({ isBacked }: Props) => {
 
   return (
     <>
-      <div className="absolute top-0 w-full z-10 bg-transparent py-2 md:py-4 dark:bg-transparent  ">
+      <div
+        className={`absolute top-0 w-full z-10 ${
+          isEmpty(participant?.branch.banner) ? 'bg-gray-400' : 'bg-transparent'
+        } py-2 md:py-4 dark:bg-transparent`}
+      >
         <div className="container px-4 mx-auto md:flex md:items-center">
           <div className="flex justify-between items-center">
             <p>
