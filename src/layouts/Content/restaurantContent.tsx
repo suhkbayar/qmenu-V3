@@ -116,13 +116,15 @@ const Index = () => {
             setSelectedSubCategoryId={setSelectedSubCategoryId}
           />
         </div>
-        <div className="col-span-5  w-full ">
+        <div className={`  ${participant.channel === 'W' ? 'col-span-8 pr-6 ' : 'col-span-5 '}  w-full`}>
           <SearchProducts setSearchField={setSearchField} placeHolder="Рестораны нэр, хоолны нэр хайх..." />
           <Products products={getSelectedProducts(participant, selectedCategoryId, selectedSubCategoryId)} />
         </div>
-        <div className=" col-span-3 w-full  mt-4 ">
-          <DraftOrder />
-        </div>
+        {participant.channel !== 'W' && (
+          <div className=" col-span-3 w-full  mt-4 ">
+            <DraftOrder />
+          </div>
+        )}
       </div>
       <div className="block xl:hidden">
         <Categories
