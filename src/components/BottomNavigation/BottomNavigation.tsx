@@ -29,7 +29,7 @@ const BottomNavigation = () => {
     },
   });
 
-  const { data } = useQuery(GET_ORDERS);
+  const { data } = useQuery(GET_ORDERS, { skip: participant?.channel === 'W' });
 
   const example = () => {
     router.push(`history`);

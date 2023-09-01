@@ -9,13 +9,16 @@ import delivery from '../../assets/services/Delivery.png';
 import moment from 'moment';
 import { DayOfWeek } from '../../constants/constant';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 
 type Props = {
   branches: IBranch[];
+  participants: any[];
 };
 
-const RestaurantsCard = ({ branches }: Props) => {
+const RestaurantsCard = ({ branches, participants }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
   const [cardsPerPage] = useState(12);
   const { t } = useTranslation('language');
 
@@ -50,6 +53,11 @@ const RestaurantsCard = ({ branches }: Props) => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const onDetail = (id: string) => {
+    const participant = participants.find((participant) => participant.branch.id === id);
+    router.push(`restaurant?id=${participant.id}`);
+  };
+
   return (
     <>
       <div className="antialiased  bg-gray-200 dark:bg-gray-800  text-gray-900 font-sans p-6">
@@ -69,7 +77,11 @@ const RestaurantsCard = ({ branches }: Props) => {
               const text = isOpen ? t('mainPage.Open') : t('mainPage.Closed');
 
               return (
-                <div key={branch.id} className="w-1/2 sm:w-1/2 md:w-1/3 xl:w-1/4 p-2">
+                <div
+                  key={branch.id}
+                  onClick={() => onDetail(branch.id)}
+                  className="w-1/2 sm:w-1/2 md:w-1/3 xl:w-1/4 p-2 cursor-pointer "
+                >
                   <div
                     key={branch.id}
                     className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden"

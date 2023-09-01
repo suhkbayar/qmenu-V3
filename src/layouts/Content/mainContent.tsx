@@ -21,7 +21,10 @@ const Content = () => {
           <div className="hidden md:flex">
             <Sidebars branches={data.getParticipants.flatMap((item) => item.branch)} />
           </div>
-          <RestaurantsCard branches={data.getParticipants.flatMap((item) => item.branch)} />
+          <RestaurantsCard
+            participants={data.getParticipants}
+            branches={data.getParticipants.flatMap((item) => item.branch).sort((a: any, b: any) => 0.5 - Math.random())}
+          />
         </div>
       )}
     </>

@@ -44,6 +44,7 @@ const Index = () => {
   const [orderReviews, setOrderReviews] = useState<IOrderReview[]>([]);
 
   const { loading } = useQuery(GET_ORDER_REVIEWS, {
+    skip: participant?.channel === 'W',
     onCompleted: (data: any) => {
       setOrderReviews(data.getOrderReviewsByLimit);
     },

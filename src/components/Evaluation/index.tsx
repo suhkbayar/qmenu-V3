@@ -7,11 +7,13 @@ import ListSkelton from '../Skelton/ListSkelton';
 import { isEmpty } from 'lodash';
 import { AiOutlineLike, AiOutlineDislike } from 'react-icons/ai';
 import { timeAgo } from '../../tools/calcTimeTable';
+import { useCallStore } from '../../contexts/call.store';
 
 const Index = () => {
   const { t } = useTranslation('language');
+  const { participant } = useCallStore();
 
-  const { data, loading } = useQuery(GET_ORDER_REVIEWS);
+  const { data, loading } = useQuery(GET_ORDER_REVIEWS, { skip: participant?.channel === 'W' });
 
   if (loading) return <ListSkelton />;
 

@@ -21,8 +21,10 @@ const Index = ({ isBacked }: Props) => {
   const { notificationState, getNotifications } = useNotificationContext();
 
   useEffect(() => {
-    getNotifications({ variables: { limit: 10, nextToken: null } });
-  }, []);
+    if (participant?.channel !== 'W') {
+      getNotifications({ variables: { limit: 10, nextToken: null } });
+    }
+  }, [participant]);
 
   const goBack = () => {
     router.push(`restaurant?id=${participant.id}`);
@@ -36,23 +38,33 @@ const Index = ({ isBacked }: Props) => {
     router.push(`notification`);
   };
 
+  const goHome = () => {
+    router.push('/');
+  };
+
   return (
     <>
       <div className="absolute top-0 w-full z-10 bg-transparent py-2 md:py-4 dark:bg-transparent  ">
         <div className="container px-4 mx-auto md:flex md:items-center">
           <div className="flex justify-between items-center">
-            <p>{isBacked && <BiArrowBack className="text-white text-xl" onClick={() => goBack()} />}</p>
+            <p>
+              {isBacked && <BiArrowBack className="text-white text-xl" onClick={() => goBack()} />}
+              {participant.channel === 'W' && <BiArrowBack className="text-white text-xl" onClick={() => goHome()} />}
+            </p>
+
             <div className="flex gap-3 text-xl md:hidden text-white">
               <BiSearchAlt2 onClick={() => goSearchProducts()} />
               <BiInfoCircle onClick={() => setSidebarVisible(true)} />
-              <div className="relative">
-                <img src={notificationIcon.src} onClick={() => goNotifications()} />
-                {(notificationState.notifications.filter((e) => !e.isRead)?.length || 0) > 0 && (
-                  <span className="absolute bg-[#f43f5e] top-0 right-0 inline-flex items-center py-0.2 px-0.5 rounded-full text-xs font-medium transform -translate-y-1/2 translate-x-1/2  text-white">
-                    {notificationState.notifications.filter((e) => !e.isRead)?.length || 0}
-                  </span>
-                )}
-              </div>
+              {participant.channel !== 'W' && (
+                <div className="relative">
+                  <img src={notificationIcon.src} onClick={() => goNotifications()} />
+                  {(notificationState.notifications.filter((e) => !e.isRead)?.length || 0) > 0 && (
+                    <span className="absolute bg-[#f43f5e] top-0 right-0 inline-flex items-center py-0.2 px-0.5 rounded-full text-xs font-medium transform -translate-y-1/2 translate-x-1/2  text-white">
+                      {notificationState.notifications.filter((e) => !e.isRead)?.length || 0}
+                    </span>
+                  )}
+                </div>
+              )}
               <ToggleLanguage />
             </div>
           </div>

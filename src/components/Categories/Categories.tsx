@@ -18,7 +18,7 @@ const Index = ({
 }: Props) => {
   const handleCategoryClick = (categoryId: string) => {
     setSelectedCategoryId(categoryId);
-    setSelectedSubCategoryId(categories.find((category) => category.id === categoryId)!.children[0]?.id);
+    setSelectedSubCategoryId(categories.find((category) => category.id === categoryId)?.children[0]?.id);
   };
 
   const handleSubCategoryClick = (subCategoryId: string) => {
@@ -63,8 +63,8 @@ const Index = ({
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
           {categories
-            .find((category) => category.id === selectedCategoryId)!
-            .children.map((subCategory) => (
+            .find((category) => category.id === selectedCategoryId)
+            ?.children?.map((subCategory) => (
               <div
                 key={subCategory.id}
                 className="rounded-lg"

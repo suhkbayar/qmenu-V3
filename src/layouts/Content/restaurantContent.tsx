@@ -1,5 +1,5 @@
 import MiniSearch from 'minisearch';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCallStore } from '../../contexts/call.store';
 import { isEmpty } from 'lodash';
 import { toLatinConvert } from '../../tools/toLatin';
@@ -27,6 +27,13 @@ const Index = () => {
     return firstCategory ? firstCategory.id : '';
   });
 
+  useEffect(() => {
+    if (participant.menu.categories.length > 0) {
+      const firstCategory = participant.menu.categories[0];
+      setSelectedCategoryId(firstCategory.id);
+    }
+  }, [participant]);
+
   const { data } = useQuery(GET_LOYALTIES_RECORDS, {
     skip: role !== 'customer',
   });
@@ -45,6 +52,16 @@ const Index = () => {
     const firstSubCategory = category?.children[0];
     return firstSubCategory ? firstSubCategory.id : '';
   });
+
+  useEffect(() => {
+    if (selectedCategoryId) {
+      const category = participant.menu.categories.find((c) => c.id === selectedCategoryId);
+      if (category?.children.length > 0) {
+        const firstSubCategory = category.children[0];
+        setSelectedSubCategoryId(firstSubCategory.id);
+      }
+    }
+  }, [selectedCategoryId, participant]);
 
   const products = participant.menu.categories.flatMap((category) => {
     const mainCategoryProducts = category.products;

@@ -130,7 +130,7 @@ const Index = ({ visible, onClose }: Props) => {
             <span className="text-lg">{t('mainPage.MyOrder')}</span>
           </Modal.Header>
           <Modal.Body className="p-1">
-            {order.items.map((item) => (
+            {order?.items?.map((item) => (
               <DraftItemCard
                 item={item}
                 key={item.id}

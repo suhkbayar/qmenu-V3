@@ -1,7 +1,7 @@
 import React from 'react';
 import { IMenuProduct } from '../../types/menu';
 import { isEmpty } from 'lodash';
-import { ProductCard } from '..';
+import { Empty, ProductCard } from '..';
 import { useCallStore } from '../../contexts/call.store';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 const Index = ({ products }: Props) => {
   const { order } = useCallStore();
-  if (isEmpty(products)) return <p> empty products </p>;
+  if (isEmpty(products)) return <Empty />;
 
   return (
     <>

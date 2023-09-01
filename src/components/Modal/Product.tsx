@@ -21,7 +21,7 @@ type Props = {
 };
 
 const Index = ({ onClose, product, visible }: Props) => {
-  const { addOrderItem, addOrderItemOptional } = useCallStore();
+  const { addOrderItem, addOrderItemOptional, participant } = useCallStore();
   const { t } = useTranslation('language');
   const [selectedItem, setSelectedItem] = useState<IOrderItem>();
   const [visibleValues, setVisibleValues] = useState(false);
@@ -147,55 +147,68 @@ const Index = ({ onClose, product, visible }: Props) => {
                 </div>
               </div>
               <div className="text-start text-gray1 mt-3" dangerouslySetInnerHTML={{ __html: product.specification }} />
-              <div className="text-start  ml-2 mt-3">
-                <span> {t('mainPage.Variants')}</span>
-              </div>
 
-              <div className="flex overflow-x-auto snap-x-mandatory mt-3 " style={{ scrollSnapType: 'x mandatory' }}>
-                {product.variants.map((variant) => (
-                  <VariantCard
-                    onSelect={onSelect}
-                    key={variant.id}
-                    variant={variant}
-                    onRemove={onRemove}
-                    selectedItem={selectedItem}
-                  />
-                ))}
-              </div>
-              <div className="mt-3  lg:grid lg:place-items-center">
-                {selectedItem &&
-                  product.variants
-                    .find((variant) => variant.id === selectedItem.id)
-                    ?.options?.map((option) => (
-                      <OptionCard
-                        setVisibleValues={setVisibleValues}
-                        visibleValues={visibleValues}
-                        onSelect={onSelectOption}
-                        isSelected={selectedItem.options.some((selectedOption) => selectedOption.id === option.id)}
-                        key={option.id}
-                        value={selectedItem.options.find((selectedOption) => selectedOption.id === option.id)?.value}
-                        option={option}
+              {participant?.channel !== 'W' && (
+                <>
+                  <div className="text-start  ml-2 mt-3">
+                    <span> {t('mainPage.Variants')}</span>
+                  </div>
+
+                  <div
+                    className="flex overflow-x-auto snap-x-mandatory mt-3 "
+                    style={{ scrollSnapType: 'x mandatory' }}
+                  >
+                    {product.variants.map((variant) => (
+                      <VariantCard
+                        onSelect={onSelect}
+                        key={variant.id}
+                        variant={variant}
+                        onRemove={onRemove}
+                        selectedItem={selectedItem}
                       />
                     ))}
-              </div>
+                  </div>
+                  <div className="mt-3  lg:grid lg:place-items-center">
+                    {selectedItem &&
+                      product.variants
+                        .find((variant) => variant.id === selectedItem.id)
+                        ?.options?.map((option) => (
+                          <OptionCard
+                            setVisibleValues={setVisibleValues}
+                            visibleValues={visibleValues}
+                            onSelect={onSelectOption}
+                            isSelected={selectedItem.options.some((selectedOption) => selectedOption.id === option.id)}
+                            key={option.id}
+                            value={
+                              selectedItem.options.find((selectedOption) => selectedOption.id === option.id)?.value
+                            }
+                            option={option}
+                          />
+                        ))}
+                  </div>
+                </>
+              )}
             </div>
           </Modal.Body>
         </div>
-
-        <Modal.Footer>
-          <div className="w-full   flex  justify-between text-sm place-items-center">
-            <span className="block text-current font-semibold ">
-              {calculateOrderItem(selectedItem).toLocaleString()} {CURRENCY}
-            </span>
-            <button
-              onClick={() => addItem()}
-              className="flex font-semibold cursor-pointer place-content-center items-center rounded border border-current h-10 w-32 text-current  text-sm "
-            >
-              <FiShoppingCart className="text-current mr-2" />
-              {t('mainPage.Order')}
-            </button>
-          </div>
-        </Modal.Footer>
+        {participant?.channel !== 'W' && (
+          <>
+            <Modal.Footer>
+              <div className="w-full   flex  justify-between text-sm place-items-center">
+                <span className="block text-current font-semibold ">
+                  {calculateOrderItem(selectedItem).toLocaleString()} {CURRENCY}
+                </span>
+                <button
+                  onClick={() => addItem()}
+                  className="flex font-semibold cursor-pointer place-content-center items-center rounded border border-current h-10 w-32 text-current  text-sm "
+                >
+                  <FiShoppingCart className="text-current mr-2" />
+                  {t('mainPage.Order')}
+                </button>
+              </div>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
     </>
   );
