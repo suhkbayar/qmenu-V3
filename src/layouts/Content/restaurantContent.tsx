@@ -140,7 +140,7 @@ const Index = () => {
             {promotion && (
               <div className="flex  p-2">
                 <div className="flex flex-nowrap gap-2 w-full">
-                  <div className="bg-white flex rounded-xl w-full  drop-shadow-lg pr-6 pt-1 dark:bg-gray-700 px-4 ">
+                  <div className="bg-white grid grid-cols-9 rounded-xl w-full  drop-shadow-lg pr-6 pt-1 dark:bg-gray-700 px-4 ">
                     {promotion?.loyalty.configs
                       .filter((config) => config.name !== 'TYPE_G')
                       .sort((a, b) => {
@@ -159,9 +159,8 @@ const Index = () => {
                             isFirstIteration = false;
                           }
                         }
-
                         return (
-                          <div className="w-full" key={record.id}>
+                          <div className={` ${index === 3 ? 'col-span-3' : 'col-span-2'} `} key={record.id}>
                             <RankingCard
                               configs={configs}
                               isRounded={false}

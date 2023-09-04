@@ -2,7 +2,6 @@ export const checkIfOpen = (props: any) => {
   const weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const currentDay = new Date().getDay();
   const currentWeekday = weekdays[currentDay];
-
   const openingHours = weekdays.map((day) => ({
     day,
     open: props[`${day}Open`],

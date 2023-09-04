@@ -19,6 +19,8 @@ const daysOfWeek = [
 
 const Index = ({ timeTable }: Props) => {
   const { t } = useTranslation('language');
+
+  if (!timeTable) return null;
   return (
     <>
       <div className="p-4 w-full ">

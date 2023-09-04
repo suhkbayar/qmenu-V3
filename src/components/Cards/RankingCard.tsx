@@ -25,7 +25,7 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
     <div className={`w-full pt-8 pb-1`}>
       <div className="flex place-content-between text-center">
         <span style={{ color: color }} className="text-xs relative font-semibold  w-full text-current">
-          {numberFormat.format(price)} ₮
+          <p className="text-xs">{numberFormat.format(price)}₮</p>
           <div style={isRounded ? { left: '-12px' } : {}} className="w-full flex place-content-end">
             <div className={` absolute top-[-5px]  ${index === 4 ? ' right-[0px] ' : 'right-[-1px] '}`}>
               <div
@@ -56,7 +56,7 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
             }}
           >
             <div
-              className={`bg-success text-xs font-medium text-blue-100 text-center p-2  ${
+              className={`bg-success text-xs font-medium text-blue-100 text-center p-1.5  ${
                 index === 1 ? 'rounded-l' : ''
               } leading-none`}
               style={{
@@ -77,11 +77,11 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
               <div
                 className={
                   isRounded
-                    ? `text-xs font-medium  text-center p-2 leading-none  ${index === 1 ? 'rounded-l' : ''} `
-                    : `text-xs font-medium  text-center p-2 leading-none ${index === 1 ? 'rounded-l' : ''}`
+                    ? `text-xs font-medium  text-center p-1.5 leading-none  ${index === 1 ? 'rounded-l' : ''} `
+                    : `text-xs font-medium  text-center p-1.5 leading-none ${index === 1 ? 'rounded-l' : ''}`
                 }
                 style={{
-                  backgroundColor: !isActive ? `${color}` : isRounded && `${color}`,
+                  backgroundColor: !isActive ? `#87D068` : isRounded ? (isActive ? `#87D068` : `  ${color}`) : 'none',
                   width: `${Math.min(100, (Number(amount) / Number(price)) * 100)}%`,
                 }}
               ></div>
