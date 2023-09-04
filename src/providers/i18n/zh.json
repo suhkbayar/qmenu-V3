@@ -299,6 +299,8 @@
     "Use": "使用",
     "EnterPinCode": "请输入您的密码。",
     "Point": "观点",
-    "SpendPoint": "消费积分"
+    "SpendPoint": "消费积分",
+    "JobApplication":"JobApplication"
+
   }
 }

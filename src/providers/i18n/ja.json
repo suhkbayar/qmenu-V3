@@ -299,6 +299,8 @@
     "Use": "使用",
     "EnterPinCode": "PIN コードを入力してください。",
     "Point": "ポイント",
-    "SpendPoint": "使えるポイント"
+    "SpendPoint": "使えるポイント",
+    "JobApplication":"JobApplication"
+
   }
 }

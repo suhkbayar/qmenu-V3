@@ -276,6 +276,8 @@
     "Use": "Использовать",
     "EnterPinCode": "Пожалуйста, введите свой пин-код.",
     "Point": "Точка",
-    "SpendPoint": "Баллы, которые можно потратить"
+    "SpendPoint": "Баллы, которые можно потратить",
+    "JobApplication":"JobApplication"
+
   }
 }

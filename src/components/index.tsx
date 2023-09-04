@@ -136,3 +136,7 @@ export const BonusCard = dynamic(() => import('./Cards/BonusCard'));
 export const VoucherCard = dynamic(() => import('./Cards/VoucherCard'), {
   loading: () => <DraftCardSkelton />,
 });
+
+export const JobApplication = dynamic(() => import('./Forms/JobApplication'), {
+  loading: () => <DraftCardSkelton />,
+});
