@@ -299,6 +299,8 @@
     "Use": "Verwenden",
     "EnterPinCode": "Bitte geben Sie Ihren PIN-Code ein.",
     "Point": "Punkt",
-    "SpendPoint": "Punkte zum Ausgeben"
+    "SpendPoint": "Punkte zum Ausgeben",
+    "JobApplication": "Job application"
+
   }
 }

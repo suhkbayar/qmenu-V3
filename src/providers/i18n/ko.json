@@ -299,6 +299,8 @@
     "Use": "사용",
     "EnterPinCode": "핀 코드를 입력하세요.",
     "Point": "가리키다",
-    "SpendPoint": "사용 포인트"
+    "SpendPoint": "사용 포인트",
+    "JobApplication":"JobApplication"
+
   }
 }
