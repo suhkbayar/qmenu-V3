@@ -57,12 +57,16 @@ const Index = () => {
           </div>
           <div className="flex w-full place-items-center place-content-center">
             <a className=" text-gray1 p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">
-              {t('mainPage.CustomerInformation')}
+              Ажлын анкет
             </a>
           </div>
         </div>
       </div>
-      {structure && <JobApplication onSubmit={(values) => onFinish(values)} structure={structure} />}
+      {structure ? (
+        <JobApplication onSubmit={(values) => onFinish(values)} structure={structure} />
+      ) : (
+        <div className="w-full flex align-center justify-center ">Одоогоор анкет байхгүй байна</div>
+      )}
     </>
   );
 };
