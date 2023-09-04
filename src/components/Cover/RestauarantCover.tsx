@@ -6,37 +6,11 @@ import { GET_ORDER_REVIEWS } from '../../graphql/query/order';
 import { IOrderReview } from '../../types/order.review';
 import { BiLike } from 'react-icons/bi';
 import moment from 'moment';
-import { GET_LOYALTIES_RECORDS } from '../../graphql/query';
 import { getPayload } from '../../providers/auth';
 
 const Index = () => {
-  const { role } = getPayload();
-
-  const { data } = useQuery(GET_LOYALTIES_RECORDS, {
-    skip: role !== 'customer',
-  });
   const { participant } = useCallStore();
   const { t } = useTranslation('language');
-  let currentAmount = data?.getLoyaltyRecords?.find((e) => e?.type === 'G')?.amount;
-  const mileStones = data?.getLoyaltyRecords
-    ?.find((e) => e?.type === 'G')
-    ?.loyalty?.configs?.filter((e) => e.name?.startsWith('MILESTONE'))
-    ?.map((e) => {
-      return JSON.parse(e?.value);
-    });
-
-  const getCurrentBadge = (userAmount: number, milestones: any[]) => {
-    if (userAmount === undefined) return '';
-    const sortedMilestones = milestones?.sort((a, b) => a.value - b.value);
-
-    for (let i = 0; i < sortedMilestones?.length; i++) {
-      if (userAmount <= sortedMilestones[i]?.value) {
-        return sortedMilestones[i].image;
-      }
-    }
-
-    return null;
-  };
 
   var curr = new Date();
   const dateTime = moment(curr).format('dddd');
@@ -134,21 +108,6 @@ const Index = () => {
             <div className=" relative">
               <span className="align-center line-clamp-2 text-white text-base ">{participant.branch.name}</span>
             </div>
-
-            {data?.getLoyaltyRecords.length > 1 ? (
-              <div>
-                <div className="absolute grid items-center w-10 h-10 top-[-10px]">
-                  <img
-                    width={24}
-                    height={24}
-                    src={getCurrentBadge(currentAmount, mileStones)}
-                    className=" text-white text-base mt-2 ml-1"
-                  />
-                </div>
-              </div>
-            ) : (
-              <></>
-            )}
           </span>
 
           <span>
