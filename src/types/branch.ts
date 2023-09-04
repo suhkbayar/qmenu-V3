@@ -8,6 +8,7 @@ export interface IBranch {
   description: string;
   email: string;
   id: string;
+  facebook: string;
   logo: string;
   name: string;
   website?: string;

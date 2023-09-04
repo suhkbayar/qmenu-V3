@@ -66,7 +66,7 @@ const BottomNavigation = () => {
               </div>
               <div
                 id="tabs"
-                className="flex justify-between rounded-t-lg z-8 bg-white bg-opacity-91 dark:bg-gray-700 shadow"
+                className="flex justify-between rounded-t-lg z-8 bg-white opacity-90 dark:bg-gray-700 shadow"
               >
                 <div
                   className={`w-full ${

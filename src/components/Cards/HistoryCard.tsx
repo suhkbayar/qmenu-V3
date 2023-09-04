@@ -5,6 +5,7 @@ import { useNotificationContext } from '../../providers/notification';
 import { ConvertOrderType } from '../../tools/convertImg';
 import { IBranch } from '../../types';
 import { IOrder } from '../../types/order';
+import { IoReceiptOutline } from 'react-icons/io5';
 
 type Props = {
   branch: IBranch;
@@ -42,19 +43,38 @@ const Index = ({ branch, order }: Props) => {
             <img src={ConvertOrderType(order.type)} className="w-10 h-10  rounded-lg" />
           </div>
           <div className=" grid grid-cols-4  col-span-5">
-            <div className="col-span-2 grid content-between ">
-              <span className="text-xs text-misty"> {t('mainPage.OrderStatus2')}: </span>
-              <span className="text-xs text-misty ">{t(`mainPage.${order.state}`)}</span>
-            </div>
-            <div className="col-span-2 text-end  content-between grid">
-              <span className="text-xs text-misty"> {t('mainPage.Total')}: </span>
-              <span className=" flex gap-2 place-self-end">
-                <span className="text-sm">
-                  {order.grandTotal.toLocaleString()} {CURRENCY}
-                </span>
-                <span className="text-xs text-misty">( {order.items.length}ш )</span>
-              </span>
-            </div>
+            {order.paymentState === 'PAID' ? (
+              <>
+                <div className="col-span-2 text-start  content-between grid">
+                  <span className="text-xs text-misty"> {t('mainPage.Total')}: </span>
+                  <span className=" flex gap-2 place-self-start">
+                    <span className="text-sm">
+                      {order.grandTotal.toLocaleString()} {CURRENCY}
+                    </span>
+                    <span className="text-xs text-misty">( {order.items.length}ш )</span>
+                  </span>
+                </div>
+                <div className="col-span-2 text-start  content-between grid">
+                  <IoReceiptOutline className="w-6 h-6" />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="col-span-2 grid content-between ">
+                  <span className="text-xs text-misty"> {t('mainPage.OrderStatus2')}: </span>
+                  <span className="text-xs text-misty ">{t(`mainPage.${order.state}`)}</span>
+                </div>
+                <div className="col-span-2 text-end  content-between grid">
+                  <span className="text-xs text-misty"> {t('mainPage.Total')}: </span>
+                  <span className=" flex gap-2 place-self-end">
+                    <span className="text-sm">
+                      {order.grandTotal.toLocaleString()} {CURRENCY}
+                    </span>
+                    <span className="text-xs text-misty">( {order.items.length}ш )</span>
+                  </span>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
