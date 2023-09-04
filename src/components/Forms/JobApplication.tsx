@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Loader from '../Loader/Loader';
+import { CgSpinner } from 'react-icons/cg';
 
 type Props = {
   structure: any;
   onSubmit: (formData: any) => void;
+  loading: boolean;
 };
 
-const Index = ({ onSubmit, structure }: Props) => {
+const Index = ({ onSubmit, structure, loading }: Props) => {
   const [formValues, setFormValues] = useState(() => {
     const initialValues = {};
     if (structure) {
@@ -69,8 +71,10 @@ const Index = ({ onSubmit, structure }: Props) => {
         <div className="flex items-center justify-between mt-6">
           <button
             type="submit"
-            className="w-40 rounded-lg px-4 py-2  md: px-5 py-3 bg-current text-blue-100 hover:bg-current duration-300"
+            disabled={loading}
+            className="w-40  flex place-content-center place-items-center  rounded-lg px-4 py-2  md: px-5 py-3 bg-current text-blue-100 hover:bg-current duration-300"
           >
+            {loading && <CgSpinner className="text-lg text-white mr-1 animate-spin" />}
             Илгээх
           </button>
         </div>

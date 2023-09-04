@@ -161,7 +161,7 @@ const Index = () => {
                         }
 
                         return (
-                          <div className="w-full " key={record.id}>
+                          <div className="w-full" key={record.id}>
                             <RankingCard
                               configs={configs}
                               isRounded={false}

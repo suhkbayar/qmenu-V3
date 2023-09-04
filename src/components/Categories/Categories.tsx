@@ -27,12 +27,12 @@ const Index = ({
 
   return (
     <>
-      <div className="sticky top-0 z-10 w-full m-0 xl:hidden bg-white dark:bg-gray-800 pt-2 pb-2 pl-2 pr-2 rounded drop-shadow-xl">
+      <div className="sticky top-0 z-10 w-full m-0 xl:hidden bg-white dark:bg-gray-800 pt-3 pb-0 pl-2 pr-2 rounded drop-shadow-xl">
         <div className="flex space-x-2" style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
           {categories.map((category) => (
             <div
               key={category.id}
-              className={`rounded-lg${
+              className={`rounded-lg mb-3 ${
                 selectedCategoryId && category.id === selectedCategoryId ? ' bg-opacity-60' : ''
               }`}
               style={{
@@ -58,35 +58,37 @@ const Index = ({
       </div>
 
       {selectedSubCategoryId && (
-        <div
-          className="sticky top-12 md:top-16 z-10 w-full m-0 flex xl:hidden items-start space-x-2 overflow-x-auto stories bg-white dark:bg-gray-800 pl-2 pb-2 pr-2 rounded drop-shadow-xl"
-          style={{ WebkitOverflowScrolling: 'touch' }}
-        >
-          {categories
-            .find((category) => category.id === selectedCategoryId)
-            ?.children?.map((subCategory) => (
-              <div
-                key={subCategory.id}
-                className="rounded-lg"
-                style={{
-                  background:
-                    selectedSubCategoryId && subCategory.id === selectedSubCategoryId
-                      ? `${subCategory.color}99`
-                      : `${subCategory.color}`,
-                }}
-              >
-                <li
+        <div className="sticky top-12 z-10 w-full m-0 xl:hidden bg-white dark:bg-gray-800 pt-0 pb-0 pl-2 pr-2 rounded drop-shadow-xl">
+          <div
+            className="flex space-x-2"
+            style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}
+          >
+            {categories
+              .find((category) => category.id === selectedCategoryId)
+              ?.children?.map((subCategory) => (
+                <div
                   key={subCategory.id}
-                  onClick={() => handleSubCategoryClick(subCategory.id)}
-                  style={{ background: `${subCategory.color ?? '#999'}` }}
-                  className="flex rounded-md h-6 m-1 md:h-8 m-1 md:m-2 items-center space-y-1"
+                  className="rounded-lg mb-3"
+                  style={{
+                    background:
+                      selectedSubCategoryId && subCategory.id === selectedSubCategoryId
+                        ? `${subCategory.color}99`
+                        : `${subCategory.color}`,
+                  }}
                 >
-                  <a className="whitespace-nowrap pl-3 pr-3 pt-1 pb-1 text-xs md:text-base text-white font-semibold">
-                    {subCategory.name}
-                  </a>
-                </li>
-              </div>
-            ))}
+                  <li
+                    key={subCategory.id}
+                    onClick={() => handleSubCategoryClick(subCategory.id)}
+                    style={{ background: `${subCategory.color ?? '#999'}` }}
+                    className="flex rounded-md h-6 m-1 md:h-8 m-1 md:m-2 items-center space-y-1"
+                  >
+                    <a className="whitespace-nowrap pl-3 pr-3 pt-1 pb-1 text-xs md:text-base text-white font-semibold">
+                      {subCategory.name}
+                    </a>
+                  </li>
+                </div>
+              ))}
+          </div>
         </div>
       )}
     </>

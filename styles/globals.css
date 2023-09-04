@@ -21,11 +21,11 @@
   transition: transform 0.3s ease-in-out;
 }
 .drop-shape {
-  width: 0;
+  width: 2px;
   height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 21px solid;
+  border-left: 0px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 24px solid;
   /* position: absolute; */
   bottom: 0px;
   /* right: -8%; */

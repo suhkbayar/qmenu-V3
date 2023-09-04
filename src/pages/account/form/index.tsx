@@ -63,7 +63,7 @@ const Index = () => {
         </div>
       </div>
       {structure ? (
-        <JobApplication onSubmit={(values) => onFinish(values)} structure={structure} />
+        <JobApplication loading={loading} onSubmit={(values) => onFinish(values)} structure={structure} />
       ) : (
         <div className="w-full flex align-center justify-center ">Одоогоор анкет байхгүй байна</div>
       )}
