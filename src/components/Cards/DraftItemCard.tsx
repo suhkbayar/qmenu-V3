@@ -33,7 +33,7 @@ const Index = ({ item, image }: Props) => {
           <div className="w-40 place-self-center ">
             <img alt="image " className="w-40 rounded-lg h-full" src={image} />
           </div>
-          <div className="w-40 ml-2 grid p-1 place-content-between">
+          <div className="w-38 ml-2 grid p-1 place-content-between">
             <span className="text-base  font-medium line-clamp-2 ">{item.name}</span>
 
             <div className="flex items-center cursor-pointer" onClick={() => showAddComment()}>
