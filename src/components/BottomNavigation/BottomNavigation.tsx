@@ -58,7 +58,7 @@ const BottomNavigation = () => {
   return (
     <>
       <div className="w-full  block xl:hidden">
-        <section id="bottom-navigation" className="block fixed inset-x-0 bottom-0 ">
+        <section id="bottom-navigation" className="block fixed inset-x-0 bottom-0 z-10">
           {participant.channel === 'Q' && (
             <>
               <div>
