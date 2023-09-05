@@ -62,8 +62,9 @@ const Index = ({ product, orderItem }: Props) => {
 
   return (
     <>
-      <div key={product.id} className="w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/4 p-2 ">
-        <div className=" hover:shadow-xl  shadow-lg bg-white  dark:bg-gray-700 rounded-md ">
+      <div key={product.id} className=" w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/4 p-2 ">
+        <div className=" relative hover:shadow-xl  shadow-lg bg-white  dark:bg-gray-700 rounded-md ">
+          {product.bonus && <div className="ribbon-2">{product.bonus}</div>}
           <div className="relative object-cover rounded-md " onClick={() => setVisible(true)}>
             <Image
               src={isEmpty(product.image) ? fallback.src : product.image}

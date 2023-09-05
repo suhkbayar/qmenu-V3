@@ -77,6 +77,7 @@ export const OptionCard = dynamic(() => import('./Cards/OptionCard'));
 export const OptionValuesModal = dynamic(() => import('./Modal/OptionValues'));
 export const OrderTotalButton = dynamic(() => import('./Button/OrderTotalBotton'));
 export const DraftItemsModal = dynamic(() => import('./Modal/DraftItemsModal'));
+export const ReceiptModal = dynamic(() => import('./Modal/ReceiptModal'));
 export const DraftItemCard = dynamic(() => import('./Cards/DraftItemCard'), {
   loading: () => <DraftCardSkelton />,
 });

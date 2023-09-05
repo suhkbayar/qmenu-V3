@@ -218,7 +218,7 @@ export const customAlertModal = {
 
 export const customThemeWaiterModal = {
   root: {
-    base: 'fixed top-0 right-0 left-0 z-50 h-modal h-screen overflow-y-auto overflow-x-hidden inset-0 h-full',
+    base: 'fixed top-0 right-0 left-0 z-50  overflow-y-auto overflow-x-hidden inset-0 h-full',
     show: {
       on: 'flex bg-gray-900 bg-opacity-50 dark:bg-opacity-80',
       off: 'hidden',
