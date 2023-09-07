@@ -17,7 +17,7 @@ const Index = ({ visible, onClose, onConfirm }: Props) => {
   const { order } = useCallStore();
 
   return (
-    <Modal show={visible} theme={customThemeWaiterModal} className="flex h-96" onClose={() => onClose()}>
+    <Modal show={visible} theme={customThemeWaiterModal} onClose={() => onClose()}>
       <Modal.Body className="p-1">
         <div className="flex place-content-center">
           <img src={list.src} className="w-36 h-36" />

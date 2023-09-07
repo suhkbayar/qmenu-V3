@@ -17,7 +17,7 @@ const Index = ({ visible, onClose, onConfirm, loading }: Props) => {
   const { t } = useTranslation('language');
 
   return (
-    <Modal show={visible} theme={customThemeWaiterModal} className="flex h-96" onClose={() => onClose()}>
+    <Modal show={visible} theme={customThemeWaiterModal} onClose={() => onClose()}>
       <Modal.Body className="p-1">
         <Alert additionalContent={t('mainPage.isAdultsOnlyDescription')} color="warning" icon={HiInformationCircle}>
           <span>

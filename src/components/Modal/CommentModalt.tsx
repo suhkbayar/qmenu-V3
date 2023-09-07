@@ -32,7 +32,7 @@ const Index = ({ visible, onClose, addComment, comment }: Props) => {
   };
 
   return (
-    <Modal show={visible} theme={customThemeWaiterModal} className="flex h-96" onClose={() => onClose()}>
+    <Modal show={visible} theme={customThemeWaiterModal} onClose={() => onClose()}>
       <form className=" w-full   place-items-center" action="" onSubmit={handleSubmit(onSave)}>
         <Modal.Body className="p-1">
           <div className="text-base mb-2 text-misty text-center font-semibold ">{t('mainPage.additionalRequests')}</div>

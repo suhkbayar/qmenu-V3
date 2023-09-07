@@ -18,7 +18,7 @@ const Index = ({ visible, onClose, refetch, transaction, loadingCancel }: Props)
   const { t } = useTranslation('language');
 
   return (
-    <Modal show={visible} theme={customThemeWaiterModal} className="flex h-96" onClose={() => onClose(transaction.id)}>
+    <Modal show={visible} theme={customThemeWaiterModal} onClose={() => onClose(transaction.id)}>
       <Modal.Body className="p-1">
         <div className="flex place-content-center">
           <img src={pending.src} className="w-32 h-32" />

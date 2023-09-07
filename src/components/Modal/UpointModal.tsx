@@ -90,7 +90,7 @@ const Index = ({ visible, onClose, onSubmit }: Props) => {
   ];
 
   return (
-    <Modal show={visible} dismissible theme={customThemeWaiterModal} className="flex h-96" onClose={() => onClose()}>
+    <Modal show={visible} dismissible theme={customThemeWaiterModal} onClose={() => onClose()}>
       {renderBody[upointStep]}
       {renderFooter[upointStep]}
     </Modal>

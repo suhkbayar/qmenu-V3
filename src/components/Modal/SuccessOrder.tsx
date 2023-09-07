@@ -25,7 +25,7 @@ const Index = ({ visible, orderNumber }: Props) => {
   };
 
   return (
-    <Modal show={visible} theme={customThemeWaiterModal} className="flex h-96">
+    <Modal show={visible} theme={customThemeWaiterModal}>
       <Modal.Body className="p-1">
         <div className="flex place-content-center">
           <div className=" h-24 w-24">
