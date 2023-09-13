@@ -17,10 +17,10 @@ const Index = () => {
   });
   const bonus = data?.getLoyaltyRecords.filter((val) => val.type === 'P');
 
-  const promotion = data?.getLoyaltyRecords.find((val) => val.type === 'G');
+  const promotion = data?.getLoyaltyRecords.find((val) => val.type === 'T');
 
   const configs = promotion?.loyalty.configs
-    .filter((config) => config.name !== 'TYPE_G')
+    .filter((config) => config.name !== 'TYPE_T')
     .sort((a, b) => {
       const aIndex = JSON.parse(a.value).index;
       const bIndex = JSON.parse(b.value).index;
@@ -64,7 +64,7 @@ const Index = () => {
 
         <div className="grid gap-2 pr-2">
           {promotion?.loyalty.configs
-            .filter((config) => config.name !== 'TYPE_G')
+            .filter((config) => config.name !== 'TYPE_T')
             .sort((a, b) => {
               const aIndex = JSON.parse(a.value).index;
               const bIndex = JSON.parse(b.value).index;
@@ -73,9 +73,9 @@ const Index = () => {
             .map((record) => {
               let isActive = false;
 
-              const { image, value, description, color, index } = JSON.parse(record.value);
+              const { image, amount, description, color, index } = JSON.parse(record.value);
 
-              if (Number(promotion.amount) < Number(value)) {
+              if (Number(promotion.amount) < Number(amount)) {
                 if (isFirstIteration) {
                   isActive = true;
                   isFirstIteration = false;
@@ -91,7 +91,7 @@ const Index = () => {
                   configs={configs}
                   progress={promotion.progress}
                   image={image}
-                  price={value}
+                  price={amount}
                   color={color}
                   description={description}
                   amount={promotion.amount}

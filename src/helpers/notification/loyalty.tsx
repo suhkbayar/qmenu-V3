@@ -9,7 +9,6 @@ import giftIcon from '../../assets/icons/gift-solid.png';
 
 export const LoyaltyModal = ({ type, visible, message, onClose, title, image, actions }) => {
   const router = useRouter();
-
   const renderFooter = () => {
     const renderItem = (item?: INotificationAction) => {
       let action = async () => {
@@ -52,10 +51,8 @@ export const LoyaltyModal = ({ type, visible, message, onClose, title, image, ac
       onClose={() => onClose()}
     >
       <Modal.Body className="p-3 flex flex-col items-center">
-        <div className="mb-3 text-black text-opacity-90 text-sm font-normal">{title || 'Мэдэгдэл'}</div>
-        {image && (
-          <img className={`${type === 'P' ? 'w-[283px] h-[180px]' : 'w-[283px] h-[250px]'} rounded-md`} src={image} />
-        )}
+        <div className="mb-3  text-misty text-lg font-normal">{title || 'Мэдэгдэл'}</div>
+        {image && <img src={image} />}
         <div className="text-red-500 text-sm font-medium m-2">Таньд баяр хүргье!</div>
         <div className="text-center text-neutral-400 text-xs font-normal">{message}</div>
       </Modal.Body>

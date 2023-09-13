@@ -37,7 +37,7 @@ const SubscriptionProvider = ({ children }) => {
       if (subscriptionOrder.state === 'PREPARED' || subscriptionOrder.state === 'COMPLETED') {
         if (subscriptionOrder.type === 'Dining') {
           showOrderNotification(subscriptionOrder.id);
-          setTimeout(refetch, 3000);
+          setTimeout(refetch, 6000);
         }
       }
 

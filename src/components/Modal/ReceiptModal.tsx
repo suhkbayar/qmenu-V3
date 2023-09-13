@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'flowbite-react';
-import { customThemeDraftModal, customThemeWaiterModal } from '../../../styles/themes';
+import { customThemeWaiterModal } from '../../../styles/themes';
 import { useTranslation } from 'react-i18next';
 import OrderReceipt from '../Receipt/Order';
 import { IOrder } from '../../types';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ConvertBankImg } from '../../../tools/convertImg';
 import checkImage from './img/Check.png';
+import { isEmpty } from 'lodash';
 
 type Bank = {
   type: string;
@@ -15,8 +16,7 @@ type Props = {
 
 const Index: React.FC<Props> = ({ watch, onSelect, banks }) => {
   const paymentType = watch('paymentType');
-
-  if (!banks) return null;
+  if (isEmpty(banks)) return null;
 
   return (
     <div className="w-full bg-white rounded-lg p-2 mt-4">

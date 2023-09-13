@@ -36,13 +36,13 @@ export const ME = gql`
 export const GET_CUSTOMER_PRODUCTS = gql`
   {
     getCustomerProducts {
-      state
       id
       spentdOrderId
-      issuedType
-      issuedOrderId
-      expiredAt
+      state
       code
+      expiredAt
+      issuedOrderId
+      issuedType
       product {
         ...ProductFields
         variants {

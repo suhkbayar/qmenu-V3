@@ -14,7 +14,6 @@ import {
   SuccesOrderModal,
   VatForm,
   WaitPaymentModal,
-  VoucherForm,
 } from '../../components';
 import Loader from '../../components/Loader/Loader';
 import { useForm } from 'react-hook-form';
@@ -29,6 +28,7 @@ import {
 import { ITransaction } from '../../types/transaction';
 import { useNotificationContext } from '../../providers/notification';
 import { useLoyaltyContext } from '../../contexts/loyalty.context';
+import { isEmpty } from 'lodash';
 
 const filterBanks = ['QPay', 'UPT', 'Upoint', 'VCR'];
 
@@ -237,17 +237,6 @@ const Index = () => {
     setValue('paymentType', type);
   };
 
-  const onSeletId = (id: string) => {
-    setValue('paymentId', id);
-    setValue('paymentType', null);
-    setValue('paymentCode', null);
-  };
-
-  const onSelectVoucher = (type: any, code: string) => {
-    setValue('paymentType', type);
-    setValue('paymentCode', code);
-  };
-
   const onRefetch = async (transactionId: string) => {
     try {
       await validateTransaction({
@@ -298,7 +287,9 @@ const Index = () => {
               className="w-full sm:w-full md:w-6/12 lg:w-6/12 xl:w-4/12 2xl:w-4/12 "
             >
               <div className="pl-4 pr-4 pt-2 pb-4">
-                <InfoAlert text={'Та төлбөрөө төлөөд энэхүү дэлгэцрүү буцан орж захиалгаа баталгаажуулаарай.'} />
+                {isEmpty(participant.payments) && (
+                  <InfoAlert text={'Та төлбөрөө төлөөд энэхүү дэлгэцрүү буцан орж захиалгаа баталгаажуулаарай.'} />
+                )}
               </div>
               <div className="px-4 mb-5 gap-y-4">
                 {participant.vat && <VatForm register={register} errors={errors} setValue={setValue} reset={reset} />}
@@ -313,12 +304,6 @@ const Index = () => {
                   id={participant.payments.find((payment) => payment.type === PAYMENT_TYPE.QPay)?.id}
                   watch={watch}
                   onSelect={onSelectBank}
-                />
-                <VoucherForm
-                  onSeletId={onSeletId}
-                  id={participant.payments.find((payment) => payment.type === PAYMENT_TYPE.VCR)?.id}
-                  watch={watch}
-                  onSelect={onSelectVoucher}
                 />
 
                 <UpointForm

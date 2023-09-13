@@ -63,7 +63,7 @@ export const NotificationModal = ({ visible, alertType, message, onClose, title,
           </div>
         )}
         <div className="grid gap-2 place-items-center w-full">
-          <span className="text-lg font-normal">{title}</span>
+          <span className="text-xl text-misty font-normal">{title}</span>
           <span className=" text-sm text-misty font-normal">{message}</span>
         </div>
       </Modal.Body>

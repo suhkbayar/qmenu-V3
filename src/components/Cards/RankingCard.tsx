@@ -25,7 +25,7 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
     <div className={`w-full pt-8 pb-1`}>
       <div className="flex place-content-between text-center">
         <span style={{ color: color }} className="text-xs relative font-semibold  w-full text-current">
-          <p className="text-xs">{numberFormat.format(price)}₮</p>
+          <p className="text-xs">{numberFormat.format(price)}</p>
           <div style={isRounded ? { left: '-12px' } : {}} className="w-full flex place-content-end">
             <div className={` absolute top-[-5px]  ${index === 4 ? ' right-[0px] ' : 'right-[-1px] '}`}>
               <div
@@ -38,7 +38,7 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
                   onClick={() => onShow()}
                   className="circle flex place-content-center"
                 >
-                  <img className="rotate-180 w-5" src={image} />
+                  <img className="rotate-180 w-6" src={image} />
                 </div>
               </div>
             </div>

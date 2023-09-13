@@ -29,7 +29,7 @@ const Index = ({ register, errors }: Props) => {
     if (!participant?.branch.timetable) return { isOpen: false };
 
     return {
-      isOpen: participant?.branch.timetable[dayKey],
+      isOpen: participant?.branch.timetable ? participant?.branch.timetable[dayKey] : false,
     };
   };
 
