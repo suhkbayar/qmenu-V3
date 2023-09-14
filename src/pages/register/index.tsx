@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,7 @@ import { SIGN_UP } from '../../graphql/mutation/sign';
 import { AuthContext } from '../../providers/auth';
 import { NotificationType } from '../../constants/constant';
 import { useNotificationContext } from '../../providers/notification';
+import { GET_LOYALTIES_RECORDS, GET_ORDERS, ME } from '../../graphql/query';
 
 function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -17,7 +18,7 @@ function capitalizeFirstLetter(str: string): string {
 
 const Index = () => {
   const router = useRouter();
-  const { participant } = useCallStore();
+  const { participant, setUser } = useCallStore();
   const { authenticate } = useContext(AuthContext);
   const { showNotification } = useNotificationContext();
   const [formStep, setFormStep] = useState(0);
@@ -40,11 +41,26 @@ const Index = () => {
     },
   });
 
+  const [getLoyaltiesRecords, { refetch: refetchLoyalties }] = useLazyQuery(GET_LOYALTIES_RECORDS);
+  const [getMe, { data, refetch: refetchMe }] = useLazyQuery(ME, {
+    onCompleted: (data) => {
+      setUser(data.me);
+    },
+  });
+  const [getOrder, { refetch }] = useLazyQuery(GET_ORDERS);
+
+  const onSuccess = async () => {
+    await refetchLoyalties();
+    await refetch();
+    await refetchMe();
+    showNotification(NotificationType.SUCCESS, t('mainPage.LoginSuccess'));
+    goBack();
+  };
+
   const [signUp] = useMutation(SIGN_UP, {
     onCompleted: (data) => {
       authenticate(data.signUp.token, () => {
-        showNotification(NotificationType.SUCCESS, 'Амжилттай Бүртгүүллээ');
-        goBack();
+        onSuccess();
       });
     },
     onError(err) {
