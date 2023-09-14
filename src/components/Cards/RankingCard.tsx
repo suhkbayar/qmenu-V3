@@ -21,6 +21,48 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
     setVisible(true);
   };
 
+  const isCompleted = (index: any) => (
+    <div
+      className={`${index === 1 ? 'rounded-l-md' : ''}`}
+      style={{
+        border: `1px solid #87D068`,
+        borderRight: 'none',
+      }}
+    >
+      <div
+        className={`bg-success text-xs font-medium text-blue-100 text-center p-1.5  ${
+          index === 1 ? 'rounded-l' : ''
+        } leading-none`}
+        style={{
+          width: '100%',
+          backgroundColor: `#87D068`,
+        }}
+      ></div>
+    </div>
+  );
+
+  const isProcessing = (index: any) => (
+    <div
+      className={`bg-gray-100  ${isRounded ? `  'rounded-l-md' ` : `${index === 1 ? 'rounded-l-md' : ''}`} `}
+      style={{
+        border: `1px solid ${color}`,
+        borderRight: `${index !== 4 && 'none'}`,
+      }}
+    >
+      <div
+        className={
+          isRounded
+            ? `text-xs font-medium  text-center p-1.5 leading-none  ${index === 1 ? 'rounded-l' : ''} `
+            : `text-xs font-medium  text-center p-1.5 leading-none ${index === 1 ? 'rounded-l' : ''}`
+        }
+        style={{
+          backgroundColor: !isActive ? `#87D068` : isRounded ? (isActive ? `#87D068` : `  ${color}`) : 'none',
+          width: `${Math.min(100, (Number(amount) / Number(price)) * 100)}%`,
+        }}
+      ></div>
+    </div>
+  );
+
   return (
     <div className={`w-full pt-8 pb-1`}>
       <div className="flex place-content-between text-center">
@@ -47,46 +89,12 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
       </div>
 
       <div className="w-full   relative  dark:bg-gray-700">
-        {amount > price ? (
-          <div
-            className={`${index === 1 ? 'rounded-l-md' : ''}`}
-            style={{
-              border: `1px solid #87D068`,
-              borderRight: 'none',
-            }}
-          >
-            <div
-              className={`bg-success text-xs font-medium text-blue-100 text-center p-1.5  ${
-                index === 1 ? 'rounded-l' : ''
-              } leading-none`}
-              style={{
-                width: '100%',
-                backgroundColor: `#87D068`,
-              }}
-            ></div>
-          </div>
+        {Number(amount) > Number(price) ? (
+          <>{isCompleted(index)}</>
+        ) : Number(amount) < Number(price) ? (
+          <>{isProcessing(index)}</>
         ) : (
-          <>
-            <div
-              className={`bg-gray-100  ${isRounded ? `  'rounded-l-md' ` : `${index === 1 ? 'rounded-l-md' : ''}`} `}
-              style={{
-                border: `1px solid ${color}`,
-                borderRight: `${index !== 4 && 'none'}`,
-              }}
-            >
-              <div
-                className={
-                  isRounded
-                    ? `text-xs font-medium  text-center p-1.5 leading-none  ${index === 1 ? 'rounded-l' : ''} `
-                    : `text-xs font-medium  text-center p-1.5 leading-none ${index === 1 ? 'rounded-l' : ''}`
-                }
-                style={{
-                  backgroundColor: !isActive ? `#87D068` : isRounded ? (isActive ? `#87D068` : `  ${color}`) : 'none',
-                  width: `${Math.min(100, (Number(amount) / Number(price)) * 100)}%`,
-                }}
-              ></div>
-            </div>
-          </>
+          <>{isCompleted(index)}</>
         )}
       </div>
       {isRounded && <span className="text-xs mr-16 font-normal">{description}</span>}
