@@ -51,7 +51,6 @@ const Index = () => {
     watch,
     formState: { errors },
   } = useForm();
-  console.log(transaction);
   register('paymentId', { required: true });
   register('paymentType', { required: true });
 
