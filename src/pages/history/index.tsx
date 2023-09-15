@@ -58,7 +58,7 @@ const OrderHistory = () => {
       </div>
       <div className="p-4">
         <ul className="grid grid-cols-6 flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-          <li onClick={() => setActive(true)} className="mr-2 col-span-3 ">
+          <li onClick={() => setActive(true)} className="mr-2 col-span-3">
             <a
               className={`inline-block w-full px-4 py-3  ${
                 active ? ' text-white bg-current ' : ' bg-gray-200 '

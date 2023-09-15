@@ -14,6 +14,7 @@ import {
   SuccesOrderModal,
   VatForm,
   WaitPaymentModal,
+  VoucherForm,
 } from '../../components';
 import Loader from '../../components/Loader/Loader';
 import { useForm } from 'react-hook-form';
@@ -28,7 +29,6 @@ import {
 import { ITransaction } from '../../types/transaction';
 import { useNotificationContext } from '../../providers/notification';
 import { useLoyaltyContext } from '../../contexts/loyalty.context';
-import { isEmpty } from 'lodash';
 
 const filterBanks = ['QPay', 'UPT', 'Upoint', 'VCR'];
 
@@ -51,7 +51,7 @@ const Index = () => {
     watch,
     formState: { errors },
   } = useForm();
-
+  console.log(transaction);
   register('paymentId', { required: true });
   register('paymentType', { required: true });
 
@@ -60,7 +60,7 @@ const Index = () => {
   const vatType = watch('vatType');
   const companyRegister = watch('register');
 
-  const { loading, data } = useQuery(GET_ORDER, {
+  const { loading, data, refetch } = useQuery(GET_ORDER, {
     skip: !id,
     variables: { id: id },
     onError(err) {
@@ -105,22 +105,18 @@ const Index = () => {
   });
 
   const [payOrderByPayment, { loading: paying }] = useMutation(GET_PAY_ORDER, {
-    onCompleted: (data) => {
+    onCompleted: async (data) => {
       if (data.payOrder.order.paymentState === 'PAID') {
         setVisibleCashier(false);
         setVisiblePending(false);
         setVisibleSucces(true);
       } else {
-        setTransaction(data.payOrder.transaction);
-        let link = data.payOrder.transaction.links.find(
-          (link) => link.name.toUpperCase() === paymentType.toUpperCase(),
-        )?.link;
-
-        if (link) {
-          window.location.href = link;
-          setVisiblePending(true);
-        } else {
-          showNotification(NotificationType.ERROR, 'Payment link not found'); // Handle the case when the link is not found
+        switch (data.payOrder.transaction) {
+          case 'QPAY':
+            await onCompletedQpay(data);
+            break;
+          default:
+            break;
         }
       }
     },
@@ -128,6 +124,23 @@ const Index = () => {
       showNotification(NotificationType.ERROR, err.message);
     },
   });
+
+  const onCompletedQpay = async (data: any) => {
+    setTransaction(data.payOrder.transaction);
+    let link = null;
+    if (data.payOrder.transaction.links) {
+      link = data.payOrder.transaction.links.find(
+        (link) => link.name.toUpperCase() === paymentType.toUpperCase(),
+      )?.link;
+    }
+
+    if (link) {
+      window.location.href = link;
+      setVisiblePending(true);
+    } else {
+      showNotification(NotificationType.ERROR, 'Payment link not found'); // Handle the case when the link is not found
+    }
+  };
 
   const onCompletedPayOrder = (data: any) => {
     if (upointBalance?.state === 'spend')
@@ -180,7 +193,22 @@ const Index = () => {
     router.push(`/restaurant?id=${participant.id}`);
   };
 
-  useEffect(() => clearUpointState(), []);
+  const updateOrder = (data) => {
+    refetch();
+  };
+
+  const finish = () => {
+    setVisibleCashier(false);
+    setVisiblePending(false);
+    setVisibleSucces(true);
+  };
+
+  useEffect(() => {
+    clearUpointState();
+    if (data?.getOrder?.transaction?.length > 0) {
+      setTransaction(data.getOrder.transaction[0]);
+    }
+  }, []);
 
   if (!data) {
     return <Loader />;
@@ -287,9 +315,7 @@ const Index = () => {
               className="w-full sm:w-full md:w-6/12 lg:w-6/12 xl:w-4/12 2xl:w-4/12 "
             >
               <div className="pl-4 pr-4 pt-2 pb-4">
-                {isEmpty(participant.payments) && (
-                  <InfoAlert text={'Та төлбөрөө төлөөд энэхүү дэлгэцрүү буцан орж захиалгаа баталгаажуулаарай.'} />
-                )}
+                <InfoAlert text={'Та төлбөрөө төлөөд энэхүү дэлгэцрүү буцан орж захиалгаа баталгаажуулаарай.'} />
               </div>
               <div className="px-4 mb-5 gap-y-4">
                 {participant.vat && <VatForm register={register} errors={errors} setValue={setValue} reset={reset} />}
@@ -306,6 +332,16 @@ const Index = () => {
                   onSelect={onSelectBank}
                 />
 
+                {participant.payments.find((payment) => payment.type === PAYMENT_TYPE.VCR) && (
+                  <VoucherForm
+                    order={data?.getOrder?.id}
+                    id={participant.payments.find((payment) => payment.type === PAYMENT_TYPE.VCR)?.id}
+                    watch={watch}
+                    onUpdateOrder={(data) => updateOrder(data)}
+                    onFinish={finish}
+                  />
+                )}
+
                 <UpointForm
                   order={data.getOrder}
                   user={user}
@@ -317,7 +353,7 @@ const Index = () => {
                 showCashier={showCashier}
                 paymentType={paymentType}
                 loading={loading || paying || cashierPaying || addingLoyalty || paying2 || validating}
-                grandTotal={data.getOrder.grandTotal}
+                grandTotal={data.getOrder.debtAmount}
               />
             </form>
           </div>
