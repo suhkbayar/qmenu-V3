@@ -141,7 +141,7 @@ export const NotificationProvider = ({ children }: any) => {
         title = 'Амжилттай';
         break;
       case NotificationType.ERROR:
-        title = 'Алдаа';
+        title = 'Амжилтгүй';
         break;
       case NotificationType.INFO:
         title = 'Мэдэгдэл';

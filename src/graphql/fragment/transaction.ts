@@ -7,6 +7,7 @@ export const TRANSACTION_FIELDS = gql`
     type
     state
     token
+    code
     amount
     currency
     description

@@ -16,6 +16,7 @@ import { BiRefresh } from 'react-icons/bi';
 import { VALIDATE_TRANSACTION } from '../../graphql/mutation/order';
 import { useNotificationContext } from '../../providers/notification';
 import { useCallStore } from '../../contexts/call.store';
+import VoucherReturn from '../Button/VoucherReturn';
 
 export const OrderModal = ({ orderId, orderVisible, onClose }) => {
   const router = useRouter();
@@ -23,7 +24,7 @@ export const OrderModal = ({ orderId, orderVisible, onClose }) => {
   const [transactionId, setTransactionId] = useState<string>('');
   const { showCustomNotification } = useNotificationContext();
   const { participant } = useCallStore();
-  const { loading, data } = useQuery(GET_ORDER, {
+  const { loading, data, refetch } = useQuery(GET_ORDER, {
     skip: !orderId,
     variables: { id: orderId },
   });
@@ -121,10 +122,20 @@ export const OrderModal = ({ orderId, orderVisible, onClose }) => {
                   <div className="border-b my-2"></div>
                   <div className="flex justify-between place-items-center ">
                     <div className="flex gap-2">
-                      <img src={ConvertBankImg(transaction.type)} className="w-10 h-10  rounded-lg" />
+                      <img src={ConvertBankImg(transaction.type)} alt="bank" className="w-10 h-10  rounded-lg" />
                       <span className="text-sm place-self-center text-misty">{transaction.type}</span>
                     </div>
                     <div className="flex gap-2 place-items-center">
+                      <div>
+                        {transaction.type === 'VCR' && (
+                          <VoucherReturn
+                            order={data?.getOrder}
+                            loading={false}
+                            transaction={transaction}
+                            onUpdateOrder={() => refetch()}
+                          />
+                        )}
+                      </div>
                       <div className="text-xs">
                         {numberFormat.format(transaction?.amount)} {CURRENCY}
                       </div>

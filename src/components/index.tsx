@@ -120,6 +120,7 @@ export const PaymentHeader = dynamic(() => import('./Order/PayOrder/PaymentHeade
 export const QpayForm = dynamic(() => import('./Forms/PaymentForms/Qpay'));
 export const BankFrom = dynamic(() => import('./Forms/PaymentForms/Bank'));
 export const UpointForm = dynamic(() => import('./Forms/PaymentForms/Upoint'));
+export const VoucherForm = dynamic(() => import('./Forms/PaymentForms/Voucher'));
 
 export const OrderTypeStepper = dynamic(() => import('./Stepper/OrderType'));
 export const RankingCard = dynamic(() => import('./Cards/RankingCard'), {
