@@ -24,3 +24,14 @@ export interface ITransactionLink {
   log: string;
   link: string;
 }
+
+export interface TransactionInput {
+  order: string;
+  confirm: boolean;
+  payment: string;
+  amount: number;
+  vatType: number;
+  register: string;
+  buyer: string;
+  code: string;
+}

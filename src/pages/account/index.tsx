@@ -149,7 +149,10 @@ const Index = () => {
               <FiChevronRight className="text-gray-500 text-xl dark:text-white" />
             </div>
 
-            <div className="flex cursor-pointer hover:bg-gainsboro rounded-lg dark:hover:bg-gray1 items-center place-content-between p-2">
+            <div
+              onClick={() => router.push('/account/basket')}
+              className="flex cursor-pointer hover:bg-gainsboro rounded-lg dark:hover:bg-gray1 items-center place-content-between p-2"
+            >
               <div className="flex place-content-between">
                 <img src={Calories.src} className="h-7 w-7 text-gray-400 mr-2" />
                 <span className="text-gray-700 dark:text-white">{t('mainPage.GiftCoupon')}</span>

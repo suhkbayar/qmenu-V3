@@ -48,9 +48,8 @@ const Index = ({ branch, order }: Props) => {
           onClick={() => order.paymentState === 'PAID' && showOrderNotification(order.id)}
         >
           <div className="col-span-1 flex place-content-center">
-            <img src={branch.logo} className="w-20  rounded-lg" />
+            <img src={branch.logo} alt="branch" className="w-20  rounded-lg" />
           </div>
-
           <div className="col-span-5 place-content-around">
             <span className=" ">{branch.name} </span>
             <div className="flex gap-1">
@@ -92,7 +91,7 @@ const Index = ({ branch, order }: Props) => {
               <div className="grid  grid-cols-6 gap-2">
                 {order.paymentState !== 'PAID' && (
                   <div className="col-span-1 flex place-content-center">
-                    <img src={ConvertOrderType(order.type)} className="w-10 h-10  rounded-lg" />
+                    <img src={ConvertOrderType(order.type)} alt="" className="w-10 h-10  rounded-lg" />
                   </div>
                 )}
                 <div className=" grid grid-cols-4  col-span-5">

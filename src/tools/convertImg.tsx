@@ -23,6 +23,7 @@ import dining from '../assets/order/dinig.svg';
 import preOrder from '../assets/order/preOrder.svg';
 import takeAway from '../assets/order/takeAway.svg';
 import delivery from '../assets/order/delivery.svg';
+import voucher from '../assets/user/voucher.svg';
 
 export const ConvertQpayBankImg = (type: any) => {
   switch (type) {
@@ -70,7 +71,8 @@ export const ConvertBankImg = (type: any) => {
       return monpay.src;
     case PAYMENT_TYPE.UNP:
       return unp.src;
-
+    case PAYMENT_TYPE.VCR:
+      return voucher.src;
     default:
       return type;
   }

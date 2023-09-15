@@ -1,44 +1,71 @@
-import React, { useState } from 'react';
+import React from 'react';
 import banner from '../../assets/card/voucherBanner.svg';
 import dashed from '../../assets/card/voucherDashed.svg';
-import { IMenuProduct } from '../../types/menu';
-import date from '../../assets/card/date.svg';
-import check from '../../assets/card/Check.png';
+import router from 'next/router';
 
 type Props = {
-  product: IMenuProduct;
-  expiredAt: any;
-  id: string;
+  loading: boolean;
+  customerProduct: any;
   selectedId: string;
-  onSelect: (id: string) => void;
+  isBasket: boolean;
+  onChangeState: (voucher: any, state: any) => void;
 };
 
-const Index = ({ product, expiredAt, id, selectedId, onSelect }: Props) => {
+export const getButton = (state) => {
+  let name = '';
+  switch (state) {
+    case 'ACTIVE':
+      name = 'Ашиглах';
+      break;
+    case 'READY':
+      name = 'Буцаах';
+      break;
+
+    default:
+      break;
+  }
+
+  return name;
+};
+
+const Index = ({ loading, customerProduct, isBasket, onChangeState }: Props) => {
+  let product = customerProduct?.product;
+
   return (
     <>
-      <div
-        onClick={() => onSelect(id)}
-        className="w-[342px] h-[104px] relative transform transition duration-100 hover:scale-[1.01] cursor-pointer "
-      >
-        <img className="w-[342px] h-[104px] left-0 top-[0.42px] absolute  " src={banner.src} />
+      <div className="w-[342px] h-[104px] relative transform transition duration-100 hover:scale-[1.01] cursor-pointer ">
+        <img className="w-[342px] h-[104px] left-0 top-[0.42px] absolute " alt="banner" src={banner.src} />
         <div className="w-10 h-10 left-[50px] top-[31.97px] absolute">
           <div className="w-[39.81px] h-[39.88px] left-[-0px] top-[-0px] absolute">
-            <img className=" absolute left-[71px] top-[-24px]" src={dashed.src} />
+            <img className=" absolute left-[71px] top-[-24px]" alt="dash" src={dashed.src} />
           </div>
         </div>
-        <div className="w-[158px] h-[4.75rem] left-[140px] top-[16.97px] absolute grid place-items-start">
-          <div className=" w-full text-gray-700 text-base font-medium leading-snug">{product.name}</div>
-
-          <div className=" w-full text-zinc-600 text-xs font-medium">{product.description}</div>
-          {expiredAt && (
-            <div className="flex gap-2">
-              <img className="w-4 h-4 relative" src={date.src} />
-              <div className="text-gray-400 text-xs font-normal">2023/08/31 хүртэл</div>
+        <div className="w-[160px] h-[4.75rem] left-[140px] top-[16.97px] flex flex-row justify-between align-center absolute">
+          <div className="text-gray-700 text-base font-medium leading-snug  flex  flex-col justify-center align-center">
+            <div>{product?.name}</div>
+          </div>
+          {!isBasket && (
+            <div className=" flex  flex-row justify-center align-center ">
+              <button
+                type="button"
+                disabled={loading}
+                onClick={() => {
+                  onChangeState(customerProduct, customerProduct?.state);
+                }}
+                className={`w-16 h-8 text-xs flex justify-center place-self-center ${
+                  customerProduct?.state === 'ACTIVE' ? 'bg-green-500 ' : 'bg-current'
+                } p-2 rounded-lg cursor-pointer`}
+              >
+                {getButton(customerProduct?.state)}
+              </button>
             </div>
           )}
         </div>
-        {selectedId && selectedId === id && <img className="absolute right-[19px] top-[9px]" src={check.src} />}
-        <img className="w-[87.27px] h-[74.67px] left-[29px] top-[12.42px] absolute rounded-md" src={product.image} />
+        <img
+          className="w-[87.27px] h-[74.67px] left-[29px] top-[12.42px] absolute rounded-md"
+          alt="product"
+          src={product?.image}
+        />
       </div>
     </>
   );
