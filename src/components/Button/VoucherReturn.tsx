@@ -51,7 +51,7 @@ const Index = ({ loading, order, transaction, onUpdateOrder }: Props) => {
           },
         })
       }
-      className="w-14 h-4 text-xs flex justify-center place-self-center bg-current  rounded-lg cursor-pointer"
+      className=" text-white px-2 py-1 text-xs flex justify-center place-self-center bg-current  rounded-lg cursor-pointer"
     >
       {getButton(product?.state)}
     </button>

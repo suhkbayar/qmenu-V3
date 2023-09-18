@@ -6,6 +6,7 @@ import coupon from '../../../assets/user/coupon.svg';
 import { VoucherCard, Empty } from '../../../components';
 import voucher from '../../../assets/user/voucher.svg';
 import { GET_CUSTOMER_PRODUCTS } from '../../../graphql/query';
+import { isEmpty } from 'lodash';
 
 const Index = () => {
   const router = useRouter();
@@ -39,6 +40,7 @@ const Index = () => {
 
     return name;
   };
+
   return (
     <>
       <div className="relative  top-0 w-full z-10 bg-white py-2 md:py-4 dark:bg-gray-800  ">
@@ -72,8 +74,8 @@ const Index = () => {
                 <button
                   type="button"
                   onClick={() => selectTab(e)}
-                  className={` ${e === tab ? 'bg-current text-white ' : 'bg-white text-current '}  w-full p-2 ${
-                    index === 0 ? 'rounded-l-lg ' : 'rounded-r-lg'
+                  className={` ${e === tab ? 'bg-current text-white ' : 'bg-white text-current '}  w-full p-2  ${
+                    index === 0 ? 'rounded-l-md ' : 'rounded-r-md'
                   } `}
                 >
                   {getState(e)}
@@ -93,10 +95,9 @@ const Index = () => {
                 onChangeState={onSelect}
               />
             ))}
-          {data?.getCustomerProducts.filter((customerProduct) => customerProduct.state === 'READY').length === 0 && (
-            <Empty />
-          )}
         </div>
+
+        {isEmpty(data?.getCustomerProducts.filter((e) => e.state === tab)) && <Empty />}
 
         <div
           onClick={() => router.push('/account/basket')}

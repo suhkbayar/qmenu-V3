@@ -1,7 +1,6 @@
 import React from 'react';
 import banner from '../../assets/card/voucherBanner.svg';
 import dashed from '../../assets/card/voucherDashed.svg';
-import router from 'next/router';
 
 type Props = {
   loading: boolean;
@@ -40,7 +39,7 @@ const Index = ({ loading, customerProduct, isBasket, onChangeState }: Props) => 
             <img className=" absolute left-[71px] top-[-24px]" alt="dash" src={dashed.src} />
           </div>
         </div>
-        <div className="w-[160px] h-[4.75rem] left-[140px] top-[16.97px] flex flex-row justify-between align-center absolute">
+        <div className="w-[160px] h-[3.75rem] left-[140px] top-[16.97px] flex flex-row justify-between align-center absolute">
           <div className="text-gray-700 text-base font-medium leading-snug  flex  flex-col justify-center align-center">
             <div>{product?.name}</div>
           </div>
@@ -52,7 +51,7 @@ const Index = ({ loading, customerProduct, isBasket, onChangeState }: Props) => 
                 onClick={() => {
                   onChangeState(customerProduct, customerProduct?.state);
                 }}
-                className={`w-16 h-8 text-xs flex justify-center place-self-center ${
+                className={`w-16 h-8 p-2 text-xs flex justify-center place-self-center ${
                   customerProduct?.state === 'ACTIVE' ? 'bg-green-500 ' : 'bg-current'
                 } p-2 rounded-lg cursor-pointer`}
               >

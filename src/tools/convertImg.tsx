@@ -78,6 +78,34 @@ export const ConvertBankImg = (type: any) => {
   }
 };
 
+export const BankName = (type: any) => {
+  switch (type) {
+    case PAYMENT_TYPE.Cash:
+      return PAYMENT_TYPE.Cash;
+    case PAYMENT_TYPE.Kart:
+      return PAYMENT_TYPE.Kart;
+    case PAYMENT_TYPE.QPay:
+      return PAYMENT_TYPE.QPay;
+    case PAYMENT_TYPE.MonPay:
+      return PAYMENT_TYPE.MonPay;
+    case PAYMENT_TYPE.SocialPay:
+      return PAYMENT_TYPE.SocialPay;
+    case PAYMENT_TYPE.Toki:
+      return PAYMENT_TYPE.Toki;
+    case PAYMENT_TYPE.UPT:
+    case PAYMENT_TYPE.Upoint:
+      return PAYMENT_TYPE.Upoint;
+    case PAYMENT_TYPE.MNQ:
+      return PAYMENT_TYPE.MNQ;
+    case PAYMENT_TYPE.UNP:
+      return PAYMENT_TYPE.UNP;
+    case PAYMENT_TYPE.VCR:
+      return 'Voucher';
+    default:
+      return type;
+  }
+};
+
 export const ConvertImgUrl = (transaction: ITransaction) => {
   switch (transaction.type) {
     case PAYMENT_TYPE.SocialPay:

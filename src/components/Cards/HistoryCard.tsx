@@ -40,12 +40,12 @@ const Index = ({ branch, order }: Props) => {
   return (
     <>
       <div
-        onClick={() => order.paymentState !== 'PAID' && showOrderNotification(order.id)}
+        onClick={() => order.state !== 'COMPLETED' && showOrderNotification(order.id)}
         className="bg-white cursor-pointer p-3 mb-4 rounded-xl w-full place-content-between drop-shadow-lg  dark:bg-gray-700 "
       >
         <div
           className="grid grid grid-cols-6 gap-2"
-          onClick={() => order.paymentState === 'PAID' && showOrderNotification(order.id)}
+          onClick={() => order.state === 'COMPLETED' && showOrderNotification(order.id)}
         >
           <div className="col-span-1 flex place-content-center">
             <img src={branch.logo} alt="branch" className="w-20  rounded-lg" />
@@ -62,7 +62,7 @@ const Index = ({ branch, order }: Props) => {
         <div className="w-full ">
           <div className="border-b my-2"></div>
 
-          {order.paymentState === 'PAID' ? (
+          {order.state === 'COMPLETED' ? (
             <>
               <div className="flex justify-between place-items-center">
                 <div className="col-span-2 text-start  content-between grid">
@@ -89,7 +89,7 @@ const Index = ({ branch, order }: Props) => {
           ) : (
             <>
               <div className="grid  grid-cols-6 gap-2">
-                {order.paymentState !== 'PAID' && (
+                {order.state !== 'COMPLETED' && (
                   <div className="col-span-1 flex place-content-center">
                     <img src={ConvertOrderType(order.type)} alt="" className="w-10 h-10  rounded-lg" />
                   </div>

@@ -110,12 +110,19 @@ const Index = () => {
         setVisiblePending(false);
         setVisibleSucces(true);
       } else {
-        switch (data.payOrder.transaction) {
-          case 'QPAY':
-            await onCompletedQpay(data);
-            break;
-          default:
-            break;
+        setTransaction(data.payOrder.transaction);
+        let link = null;
+        if (data.payOrder.transaction.links) {
+          link = data.payOrder.transaction.links.find(
+            (link) => link.name.toUpperCase() === paymentType.toUpperCase(),
+          )?.link;
+        }
+
+        if (link) {
+          window.location.href = link;
+          setVisiblePending(true);
+        } else {
+          showNotification(NotificationType.ERROR, 'Payment link not found'); // Handle the case when the link is not found
         }
       }
     },
@@ -123,23 +130,6 @@ const Index = () => {
       showNotification(NotificationType.ERROR, err.message);
     },
   });
-
-  const onCompletedQpay = async (data: any) => {
-    setTransaction(data.payOrder.transaction);
-    let link = null;
-    if (data.payOrder.transaction.links) {
-      link = data.payOrder.transaction.links.find(
-        (link) => link.name.toUpperCase() === paymentType.toUpperCase(),
-      )?.link;
-    }
-
-    if (link) {
-      window.location.href = link;
-      setVisiblePending(true);
-    } else {
-      showNotification(NotificationType.ERROR, 'Payment link not found'); // Handle the case when the link is not found
-    }
-  };
 
   const onCompletedPayOrder = (data: any) => {
     if (upointBalance?.state === 'spend')

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { customeModalTheme } from '../../../styles/themes';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ORDER } from '../../graphql/query';
-import { ConvertBankImg, ConvertOrderType } from '../../tools/convertImg';
+import { BankName, ConvertBankImg, ConvertOrderType } from '../../tools/convertImg';
 import { ItemCard, OrderTypeStepper } from '..';
 import { DRAFT_TYPE } from '../../constants/constant';
 import { CgSpinner } from 'react-icons/cg';
@@ -87,7 +87,9 @@ export const OrderModal = ({ orderId, orderVisible, onClose }) => {
 
           <Modal.Body className="overflow-auto">
             <div className="px-4">
-              <OrderTypeStepper order={data.getOrder} count={convertState(data.getOrder.state)} />
+              {data.getOrder?.state !== 'COMPLETED' && (
+                <OrderTypeStepper order={data.getOrder} count={convertState(data.getOrder.state)} />
+              )}
             </div>
             <div className="text-sm mt-2 font-semibold mb-2 ">{t('mainPage.YourOrder')}</div>
             <div>
@@ -123,52 +125,54 @@ export const OrderModal = ({ orderId, orderVisible, onClose }) => {
                   <div className="flex justify-between place-items-center ">
                     <div className="flex gap-2">
                       <img src={ConvertBankImg(transaction.type)} alt="bank" className="w-10 h-10  rounded-lg" />
-                      <span className="text-sm place-self-center text-misty">{transaction.type}</span>
+                      <span className="text-sm place-self-center text-misty">{BankName(transaction.type)}</span>
                     </div>
                     <div className="flex gap-2 place-items-center">
-                      <div>
-                        {transaction.type === 'VCR' && (
+                      <div></div>
+                      <div className="text-xs">
+                        {numberFormat.format(transaction?.amount)} {CURRENCY}
+                      </div>
+
+                      <div className="flex gap-2 place-items-center">
+                        {transaction.type === 'VCR' ? (
                           <VoucherReturn
                             order={data?.getOrder}
                             loading={false}
                             transaction={transaction}
                             onUpdateOrder={() => refetch()}
                           />
+                        ) : (
+                          <>
+                            <span
+                              className={`${transaction.state === 'PAID' ? 'text-success' : 'text-yellow-400'} text-xs`}
+                            >
+                              {transaction.state === 'PAID'
+                                ? 'Төлөгдсөн'
+                                : transaction.state === 'RETURN'
+                                ? 'Буцаагдсан'
+                                : transaction.state === 'CANCELLED'
+                                ? 'Цуцлагдсан'
+                                : 'Төлөгдөөгүй'}
+                            </span>
+
+                            <span>
+                              {transaction.state === 'PAID' ? (
+                                <>
+                                  <AiOutlineCheckCircle className="text-success w-5 h-5 " />
+                                </>
+                              ) : (
+                                <>
+                                  <BiRefresh
+                                    onClick={() => validTransaction(transaction.id)}
+                                    className={`text-yellow-400 ${
+                                      transactionId === transaction.id ? 'animate-spin' : 'animate-none'
+                                    }  w-5 h-5`}
+                                  />
+                                </>
+                              )}
+                            </span>
+                          </>
                         )}
-                      </div>
-                      <div className="text-xs">
-                        {numberFormat.format(transaction?.amount)} {CURRENCY}
-                      </div>
-
-                      <div className="flex gap-2 place-items-center">
-                        <span
-                          className={`${transaction.state === 'PAID' ? 'text-success' : 'text-yellow-400'} text-xs`}
-                        >
-                          {transaction.state === 'PAID'
-                            ? 'Төлөгдсөн'
-                            : transaction.state === 'RETURN'
-                            ? 'Буцаагдсан'
-                            : transaction.state === 'CANCELLED'
-                            ? 'Цуцлагдсан'
-                            : 'Төлөгдөөгүй'}
-                        </span>
-
-                        <span>
-                          {transaction.state === 'PAID' ? (
-                            <>
-                              <AiOutlineCheckCircle className="text-success w-5 h-5 " />
-                            </>
-                          ) : (
-                            <>
-                              <BiRefresh
-                                onClick={() => validTransaction(transaction.id)}
-                                className={`text-yellow-400 ${
-                                  transactionId === transaction.id ? 'animate-spin' : 'animate-none'
-                                }  w-5 h-5`}
-                              />
-                            </>
-                          )}
-                        </span>
                       </div>
                     </div>
                   </div>
