@@ -10,15 +10,17 @@ const Index = ({ branch }: Props) => {
   return (
     <>
       <div className=" bg-gray-400 h-52 sm:h-64 xl:h-80 2xl:h-96">
-        <div
-          style={{
-            background: `url(${branch.banner}) no-repeat scroll 0 0 / cover`,
-            backgroundPosition: 'center',
-            scrollBehavior: 'smooth',
-            overscrollBehaviorBlock: 'inherit',
-          }}
-          className=" brightness-50 block w-full h-full bg-cover bg-center object-cover "
-        ></div>
+        {branch.banner && (
+          <div
+            style={{
+              background: `url(${branch.banner}) no-repeat scroll 0 0 / cover`,
+              backgroundPosition: 'center',
+              scrollBehavior: 'smooth',
+              overscrollBehaviorBlock: 'inherit',
+            }}
+            className=" brightness-50 block w-full h-full bg-cover bg-center object-cover "
+          ></div>
+        )}
       </div>
       <RestauarantCover />
     </>
