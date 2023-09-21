@@ -3,6 +3,7 @@ import { IMenuProduct } from '../../types/menu';
 import { isEmpty } from 'lodash';
 import { Empty, ProductCard } from '..';
 import { useCallStore } from '../../contexts/call.store';
+import useEffect from 'react';
 
 type Props = {
   products: IMenuProduct[];
@@ -21,7 +22,7 @@ const Index = ({ products }: Props) => {
               <ProductCard
                 key={product.id}
                 product={product}
-                orderItem={order.items.find((item) => item.productId === product.productId)}
+                orderItem={order?.items?.find((item) => item.productId === product.productId)}
               />
             ))}
           </div>
