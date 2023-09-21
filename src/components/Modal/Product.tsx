@@ -124,7 +124,7 @@ const Index = ({ onClose, product, visible }: Props) => {
             <div className="w-full ">
               <div className=" text-center sm:mt-0 sm:ml-4 sm:text-left lg:flex lg:place-content-center">
                 <div className=" items-center lg:w-96 flex place-content-center object-cover rounded-md ">
-                  <Image
+                  {/* <Image
                     src={isEmpty(product.image) ? fallback.src : product.image}
                     alt="stew"
                     loader={imageLoader}
@@ -133,6 +133,13 @@ const Index = ({ onClose, product, visible }: Props) => {
                     placeholder="empty"
                     style={{ borderRadius: '10px', width: 'auto', height: 'auto' }}
                     priority={true}
+                  /> */}
+
+                  <img
+                    width={500}
+                    placeholder="empty"
+                    className="rounded-lg"
+                    src={isEmpty(product.image) ? fallback.src : product.image}
                   />
                 </div>
               </div>
