@@ -29,7 +29,7 @@
     "lodash.debounce": "^4.0.8",
     "minisearch": "^3.2.0",
     "moment": "^2.29.4",
-    "next": "^13.4.0",
+    "next": "^13.5.2",
     "next-images": "^1.8.5",
     "next-themes": "^0.2.1",
     "postcss": "^8.4.23",
@@ -52,12 +52,12 @@
     "@types/node": "18.16.3",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
+    "aws-cdk-lib": "2.91.0",
+    "constructs": "10.2.69",
     "eslint": "8.39.0",
     "eslint-config-next": "^13.4.0",
     "eslint-config-react-app": "^7.0.1",
-    "typescript": "5.0.4",
     "sst": "^2.24.20",
-    "aws-cdk-lib": "2.91.0",
-    "constructs": "10.2.69"
+    "typescript": "5.0.4"
   }
 }
