@@ -66,25 +66,16 @@ const Index = ({ product, orderItem }: Props) => {
         <div className=" relative hover:shadow-xl  shadow-lg bg-white  dark:bg-gray-700 rounded-md ">
           {product.bonus && <div className="ribbon-2">{product.bonus}</div>}
           <div className="relative object-cover rounded-md " onClick={() => setVisible(true)}>
-            {/* <Image
+            <Image
+              alt="product"
               src={isEmpty(product.image) ? fallback.src : product.image}
-              alt="stew"
-              loader={imageLoader}
               width={500}
-              height={600}
-              placeholder="empty"
-              object-fit="cover"
-              style={{ borderRadius: '8px' }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={true}
-            /> */}
-
-            <img
-              width={500}
-              placeholder="empty"
               height={600}
               className="rounded-lg"
-              src={isEmpty(product.image) ? fallback.src : product.image}
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+              }}
             />
           </div>
           <div className="m-4  mb-0">
