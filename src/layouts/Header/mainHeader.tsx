@@ -7,6 +7,11 @@ import ToggleLanguage from '../../components/Button/ToggleLanguage';
 const MainHeader = () => {
   const { t } = useTranslation('language');
   const [isExpanded, toggleExpansion] = useState(false);
+
+  const handleLink = (e: any) => {
+    window.open(e, '_blank');
+  };
+
   return (
     <>
       <div className="flex-wrap">
@@ -33,7 +38,10 @@ const MainHeader = () => {
             className={`${isExpanded ? `block` : `hidden`} w-full block flex-grow lg:flex lg:items-center lg:w-auto`}
           >
             <div className="text-base lg:flex-grow">
-              <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+              <a
+                onClick={() => handleLink('https://about.qmenu.mn/')}
+                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              >
                 <Text text={t('mainPage.AboutQmenu')} />
               </a>
               <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
