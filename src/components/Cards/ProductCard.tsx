@@ -3,7 +3,6 @@ import { IMenuProduct } from '../../types/menu';
 import fallback from '../../assets/images/noImage.jpg';
 import { isEmpty } from 'lodash';
 import Image from 'next/image';
-import { imageLoader } from '../../tools/image';
 import { CalculateProductPrice, isConfigurable } from '../../tools/calculate';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';

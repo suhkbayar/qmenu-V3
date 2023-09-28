@@ -38,6 +38,7 @@ const Index = ({ option, onSelect, isSelected, value, setVisibleValues, visibleV
       >
         <div className="flex">
           <img
+            alt="check-img"
             src={isSelected ? check.src : unCheck.src}
             className="place-self-center mr-2 animate-quantity-change"
             width={15}

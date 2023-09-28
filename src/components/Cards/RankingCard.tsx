@@ -80,7 +80,7 @@ const Index = ({ index, isRounded, amount, image, price, configs, description, i
                   onClick={() => onShow()}
                   className="circle flex place-content-center"
                 >
-                  <img className="rotate-180 w-6" src={image} />
+                  <img alt="ranking-img" className="rotate-180 w-6" src={image} />
                 </div>
               </div>
             </div>

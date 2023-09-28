@@ -49,7 +49,7 @@ const Index = ({ setVisible, visible, onCloseSideBars }: Props) => {
     >
       <TfiClose onClick={handleClose} className="absolute top-2 right-2 w-5 h-5" />
       <div className="flex place-content-center">
-        <img src={participant.branch.logo} className="w-44 rounded-lg" />
+        <img src={participant.branch.logo} alt="alt-logo" className="w-44 rounded-lg" />
       </div>
       <div>
         <div className="flex place-content-center mt-2">

@@ -4,7 +4,7 @@ import { BsSun, BsFillMoonFill } from 'react-icons/bs';
 import { useEffect } from 'react';
 
 const ToggleButton = () => {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const toggleTheme = () => {

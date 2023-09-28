@@ -23,7 +23,7 @@ const Index = ({ selectedCategoryId, setSelectedCategoryId, categories }: Props)
               backgroundColor: selectedCategoryId && category.id === selectedCategoryId ? '#f2633399' : '#a8abb3',
             }}
           >
-            <a
+            <div
               key={category.id}
               onClick={() => handleCategoryClick(category.id)}
               className="flex rounded-md h-6 md:h-8 m-1 md:m-2 items-center space-y-1"
@@ -34,7 +34,7 @@ const Index = ({ selectedCategoryId, setSelectedCategoryId, categories }: Props)
               <span className="whitespace-nowrap pl-3 pr-3 pt-1 pb-1 text-xs md:text-base text-white font-semibold">
                 {category.name}
               </span>
-            </a>
+            </div>
           </div>
         ))}
       </div>

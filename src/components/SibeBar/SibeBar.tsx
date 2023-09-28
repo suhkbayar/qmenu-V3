@@ -5,7 +5,6 @@ import { IoMdRestaurant } from 'react-icons/io';
 import { MdDinnerDining, MdOutlineAvTimer } from 'react-icons/md';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { foodTypes } from '../../mock';
-import RestaurantsCard from '../Cards/RestaurantsCard';
 import { IBranch } from '../../types/branch';
 import MiniSearch from 'minisearch';
 import { getOpenOrClosedBranches } from '../../tools/timeTable';

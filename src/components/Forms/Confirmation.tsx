@@ -19,7 +19,7 @@ const Index = ({ goBack, phone, tryCode, start, setFormStep, onError, sessionId 
   const [time, setTime] = useState(60000);
   const [pin, setPin] = useState<string>();
 
-  const [verifySession, { loading }] = useMutation(VERIFY_SESSION, {
+  const [verifySession, {}] = useMutation(VERIFY_SESSION, {
     onCompleted: (data) => {
       if (data.verifySession) {
         setFormStep(2);

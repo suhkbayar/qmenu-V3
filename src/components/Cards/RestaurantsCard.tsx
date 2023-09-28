@@ -105,7 +105,12 @@ const RestaurantsCard = ({ branches, participants }: Props) => {
                       </div>
                       <div className="flex items-center gap-1">
                         {branch.services.map((item) => (
-                          <img width={24} key={item} src={services.find((val) => val.name === item).url} />
+                          <img
+                            alt="item-img"
+                            width={24}
+                            key={item}
+                            src={services.find((val) => val.name === item).url}
+                          />
                         ))}
                       </div>
                     </div>

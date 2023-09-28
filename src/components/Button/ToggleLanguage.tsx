@@ -17,6 +17,7 @@ const ToggleLanguage = () => {
       <img
         height={10}
         width={28}
+        alt="languages"
         src={
           Languages.find((item) => i18n.language.includes(item.name.toLowerCase())).icon.src ?? Languages[0].icon.src
         }
@@ -28,6 +29,7 @@ const ToggleLanguage = () => {
             {Languages.map((item, index) => (
               <img
                 key={item.name}
+                alt="item"
                 height={10}
                 width={28}
                 onClick={() => onSelect(item.name.toLowerCase())}

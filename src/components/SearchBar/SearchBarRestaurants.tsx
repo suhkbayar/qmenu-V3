@@ -58,7 +58,7 @@ const SearchBarRestaurants = () => {
             <ul className=" z-10 w-50 bg-white l-10  rounded divide-y divide-gray-100 shadow ">
               {sorts.map((item) => (
                 <li onClick={handleDropDown} key={item.name}>
-                  <a className="block  py-2 px-4 hover:bg-gray-100">{item.name}</a>
+                  <div className="block  py-2 px-4 hover:bg-gray-100">{item.name}</div>
                 </li>
               ))}
             </ul>

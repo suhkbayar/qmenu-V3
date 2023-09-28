@@ -27,6 +27,7 @@ const Index = ({ variant, selectedItem, onSelect, onRemove }: Props) => {
         <div className="flex justify-between">
           <h2 className="line-clamp-2  font-normal text-misty text-sm ">{variant.name}</h2>
           <img
+            alt="check-variant"
             src={selectedItem.id === variant.id ? check.src : unCheck.src}
             className="animate-quantity-change"
             width={20}

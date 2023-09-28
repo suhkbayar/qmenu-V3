@@ -53,7 +53,9 @@ const Index = ({ notification: item }: Props) => {
     >
       <div className="grid grid-cols-6 gap-3 place-items-center">
         <div className="col-span-1">
-          {getImage() && <img className="w-10 h-10 rounded-full border border-zinc-100" src={getImage()} />}
+          {getImage() && (
+            <img className="w-10 h-10 rounded-full border border-zinc-100" alt="branch-image" src={getImage()} />
+          )}
         </div>
         <div className="col-span-5">
           <div className="flex gap-1 justify-between items-start">

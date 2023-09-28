@@ -1,11 +1,7 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { AiOutlineEdit } from 'react-icons/ai';
 import { CURRENCY } from '../../constants/currency';
 import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import { useCallStore } from '../../contexts/call.store';
-import { CommentModal } from '..';
-import { isEmpty } from 'lodash';
 
 type Props = {
   item: any;
@@ -13,8 +9,6 @@ type Props = {
 };
 
 const Index = ({ item, image }: Props) => {
-  const { t } = useTranslation('language');
-
   const { addOrderItem, remove } = useCallStore();
 
   return (
@@ -22,7 +16,7 @@ const Index = ({ item, image }: Props) => {
       <div className="bg-white flex mb-4 rounded-xl w-full place-content-between drop-shadow-lg  dark:bg-gray-700 ">
         <div className="flex">
           <div className="w-40 place-self-center ">
-            <img alt="image " className="w-40 rounded-lg h-full" src={image} />
+            <img alt="bonus-card" className="w-40 rounded-lg h-full" src={image} />
           </div>
           <div className="w-40 ml-2 grid p-1 place-content-between">
             <span className="text-base  font-medium line-clamp-2 ">{item.name}</span>

@@ -15,7 +15,7 @@ type Props = {
 };
 
 const Index = ({ loading, order, transaction, onUpdateOrder }: Props) => {
-  const { showNotification, showCustomNotification } = useNotificationContext();
+  const { showNotification } = useNotificationContext();
 
   const { data, refetch } = useQuery(GET_CUSTOMER_PRODUCTS, { fetchPolicy: 'network-only' });
 

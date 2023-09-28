@@ -7,14 +7,11 @@ import { Banner, BottomNavigation, Header, KaraokeCategories, SearchInput, SongL
 import Loader from '../../components/Loader/Loader';
 import Footer from '../../layouts/footer';
 
-import { cacheProvider } from '../../contexts/translate.context';
 import { useCallStore } from '../../contexts/call.store';
 
 import { GET_BRANCH, GET_SONGS, GET_SONG_CATEGORIES, SEARCH_SONGS } from '../../graphql/query';
 import { isValidToken } from '../../providers/auth';
 
-import { GOOGLE_CLOUD_KEY } from '../../constants/api';
-import { Languages } from '../../constants/constantLang';
 import HideKeyboardOnScroll from '../../tools/hideKeyboardOnScroll';
 import { debounce, isEmpty } from 'lodash';
 

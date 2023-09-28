@@ -78,9 +78,9 @@ const Index = () => {
             <BiArrowBack onClick={goBack} className="text-xl dark:text-white " />
           </div>
           <div className="flex w-full place-items-center place-content-center">
-            <a className=" text-gray1 p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">
+            <div className=" text-gray1 p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">
               {t('mainPage.ForgotPassword')}
-            </a>
+            </div>
           </div>
         </div>
       </div>

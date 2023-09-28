@@ -49,8 +49,9 @@ const Index = ({ configs, loyaltyId, products }: Props) => {
   return (
     <>
       <div className="w-[241px] h-[330px] relative">
-        <img className="w-[241px] h-[329.55px] left-0 top-0 absolute " src={banner.src} />
+        <img alt="banner-img" className="w-[241px] h-[329.55px] left-0 top-0 absolute " src={banner.src} />
         <img
+          alt="product-img"
           className="w-[241px] h-[161.14px] left-0 top-0 absolute rounded-tl-xl rounded-tr-xl"
           src={product?.image}
         />

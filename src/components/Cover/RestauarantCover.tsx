@@ -6,7 +6,6 @@ import { GET_ORDER_REVIEWS } from '../../graphql/query/order';
 import { IOrderReview } from '../../types/order.review';
 import { BiLike } from 'react-icons/bi';
 import moment from 'moment';
-import { getPayload } from '../../providers/auth';
 
 const Index = () => {
   const { participant } = useCallStore();
@@ -17,7 +16,7 @@ const Index = () => {
 
   const [orderReviews, setOrderReviews] = useState<IOrderReview[]>([]);
 
-  const { loading } = useQuery(GET_ORDER_REVIEWS, {
+  const {} = useQuery(GET_ORDER_REVIEWS, {
     skip: participant?.channel === 'W',
     onCompleted: (data: any) => {
       setOrderReviews(data.getOrderReviewsByLimit);

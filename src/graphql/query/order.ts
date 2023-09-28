@@ -1,11 +1,5 @@
 import { gql } from '@apollo/client';
-import {
-  BRANCH_FIELDS,
-  CUSTOMER_FIELDS,
-  ORDER_ITEM_OPTION_FIELDS,
-  TABLE_FIELDS,
-  TRANSACTION_FIELDS,
-} from '../fragment';
+import { CUSTOMER_FIELDS, ORDER_ITEM_OPTION_FIELDS, TABLE_FIELDS, TRANSACTION_FIELDS } from '../fragment';
 
 export const ORDER_FIELDS = gql`
   fragment OrderFields on Order {

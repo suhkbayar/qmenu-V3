@@ -14,7 +14,7 @@ const Index = ({ item, image }: Props) => {
       <div className="bg-white flex mb-4 rounded-xl w-full place-content-between drop-shadow-lg  dark:bg-gray-700 ">
         <div className="flex gap-2">
           <div className="w-28 place-self-center ">
-            <img alt="image " className="w-28 rounded-lg h-full" src={image} />
+            <img alt="item-card" className="w-28 rounded-lg h-full" src={image} />
           </div>
           <div className="grid place-content-around">
             <span className="text-sm  font-medium line-clamp-2 ">{item.name} </span>

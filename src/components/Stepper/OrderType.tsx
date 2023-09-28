@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { IOrder } from '../../types';
+import { TfiReload } from 'react-icons/tfi';
 
 type Props = {
   order: IOrder;
@@ -27,7 +28,7 @@ const Stepper = ({ order, count }: Props) => {
               count > index + 1
                 ? 'bg-green-200 dark:bg-green-900'
                 : count === index + 1
-                ? 'bg-current'
+                ? 'bg-current '
                 : 'bg-gainsboro border border-grayish'
             } rounded-full -left-4 ring-4 ring-white`}
           >
@@ -48,7 +49,14 @@ const Stepper = ({ order, count }: Props) => {
                 />
               </svg>
             ) : (
-              <div className="text-white dark:text-gray-400">{count === index + 1 && count}</div>
+              <>
+                {count === index + 1 && (
+                  <>
+                    {/* <TfiReload className="text-white animate-spin">2</TfiReload> */}
+                    <div className="text-white dark:text-gray-400 ">{count === index + 1 && count}</div>
+                  </>
+                )}
+              </>
             )}
           </span>
           <div className="font-medium text-sm leading-tight">{label}</div>

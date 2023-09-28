@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { useCallStore } from '../../contexts/call.store';
 import moment from 'moment';
 import { numberFormat } from '../../utils';
@@ -207,7 +207,7 @@ const OrderReceipt = ({ qrUrl, order }: Props) => {
 
         {withVat && (
           <div className="flex place-items-center">
-            <div>{order?.vatData && <img src={qrUrl} className="w-32" width={'100%'} />}</div>
+            <div>{order?.vatData && <img src={qrUrl} alt="qr-url" className="w-32" width={'100%'} />}</div>
             {order?.vatType === 1 && (
               <div>
                 <strong>

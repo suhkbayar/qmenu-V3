@@ -26,7 +26,7 @@ const Index = () => {
         </div>
 
         {data.getOrderReviewsByLimit.map((review, i) => {
-          if (isEmpty(review.additional)) return;
+          if (isEmpty(review.additional)) return null;
           return (
             <>
               <div className="flex w-full items-center ">

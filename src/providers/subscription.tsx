@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useSubscription, useLazyQuery } from '@apollo/client';
 import { ON_TRACK_ORDER } from '../graphql/subscription/order';
 import { IOrder } from '../types';
-import { GET_LOYALTIES_RECORDS, GET_ORDERS } from '../graphql/query';
+import { GET_LOYALTIES_RECORDS, GET_ORDER, GET_ORDERS } from '../graphql/query';
 import { AuthContext, getPayload } from './auth';
 import { ON_UPDATED_CUSTOMER_NOTIFICATION } from '../graphql/subscription';
 import { useNotificationContext } from './notification';
@@ -47,6 +47,12 @@ const SubscriptionProvider = ({ children }) => {
           if (!updatedOrders.find((order) => order.id === subscriptionOrder.id)) {
             updatedOrders.push(subscriptionOrder);
           }
+          client.writeQuery({
+            query: GET_ORDER,
+            data: {
+              getOrder: updatedOrders.find((order) => order.id === subscriptionOrder.id),
+            },
+          });
           break;
         case 'DELETE':
           client.writeQuery({
