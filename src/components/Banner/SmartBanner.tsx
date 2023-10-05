@@ -27,9 +27,7 @@ const SmartBanner = ({ types, empty }: Props) => {
     window.open(url, '_blank');
   };
 
-  if (!data?.getBanners || data?.getBanners.length < 1) return <></>;
-
-  if (!loading && isEmpty(data?.getBanners)) {
+  if (!loading && isEmpty(data?.getBanners?.filter((item) => types.includes(item.type)))) {
     if (empty) return <Empty />;
     return <></>;
   }
