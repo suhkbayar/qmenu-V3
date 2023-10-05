@@ -35,4 +35,6 @@ export enum BannerType {
   E = 'E', //End
   P = 'P', //Popup
   A = 'A', //After
+  PF = 'PF', //Popup full image
+  PQ = 'PQ', //Popup QR Menu
 }

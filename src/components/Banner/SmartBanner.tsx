@@ -16,7 +16,8 @@ interface Props {
 
 const SmartBanner = ({ types, empty }: Props) => {
   const { data, loading } = useQuery<{ getBanners: IBanner[] }>(GET_BANNERS, {
-    variables: { system: BannerSystem.Q, types: [BannerType.M, BannerType.E, BannerType.A] },
+    fetchPolicy: 'cache-first',
+    variables: { system: BannerSystem.Q },
   });
 
   const onClickItem = (item: IBanner) => {
@@ -32,30 +33,37 @@ const SmartBanner = ({ types, empty }: Props) => {
     return <></>;
   }
 
+  const getItems = () => {
+    return data?.getBanners.filter((item) => types.includes(item.type)) ?? [];
+  };
+
   return (
     <div className="w-full p-2">
-      <Carousel className="w-full" style={{ height: types.includes(BannerType.A) ? '228px' : '172px' }}>
-        {data?.getBanners
-          .filter((item) => types.includes(item.type))
-          .map((item, index) => (
-            <div
-              key={index}
-              className="flex gap-4 items-center justify-between hover:shadow-xl shadow-lg bg-white dark:bg-gray-700 rounded-md"
-            >
-              <Image
-                onClick={() => onClickItem(item)}
-                className="rounded-md w-full"
-                alt="stew"
-                key={`image-${index}`}
-                src={isEmpty(item.image) ? fallback.src : item.image}
-                loader={imageLoader}
-                width={350}
-                height={173}
-                priority={true}
-                style={{ height: types.includes(BannerType.A) ? '228px' : '172px', width: '100%' }}
-              />
-            </div>
-          ))}
+      <Carousel
+        className="w-full"
+        style={{ height: types.includes(BannerType.A) ? '228px' : '172px' }}
+        leftControl={getItems().length < 2 && <></>}
+        rightControl={getItems().length < 2 && <></>}
+      >
+        {getItems().map((item, index) => (
+          <div
+            key={index}
+            className="flex gap-4 items-center justify-between hover:shadow-xl shadow-lg bg-white dark:bg-gray-700 rounded-md"
+          >
+            <Image
+              onClick={() => onClickItem(item)}
+              className="rounded-md w-full"
+              alt="stew"
+              key={`image-${index}`}
+              src={isEmpty(item.image) ? fallback.src : item.image}
+              loader={imageLoader}
+              width={350}
+              height={173}
+              priority={true}
+              style={{ height: types.includes(BannerType.A) ? '228px' : '172px', width: '100%' }}
+            />
+          </div>
+        ))}
       </Carousel>
     </div>
   );

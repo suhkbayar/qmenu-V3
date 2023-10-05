@@ -31,6 +31,7 @@ const Qr = () => {
 
   React.useEffect(() => {
     if (id) {
+      localStorage.setItem('banner', JSON.stringify(true));
       changeQr(id.toString());
       getCurrentToken({ variables: { code: id, type: 'Q' } });
     }
