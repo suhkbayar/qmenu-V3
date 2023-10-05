@@ -27,9 +27,7 @@ const SmartBanner = ({ types, empty }: Props) => {
     window.open(url, '_blank');
   };
 
-  if (!data?.getBanners || data?.getBanners.length < 1) return <></>;
-
-  if (!loading && isEmpty(data?.getBanners)) {
+  if (!loading && isEmpty(data?.getBanners?.filter((item) => types.includes(item.type)))) {
     if (empty) return <Empty />;
     return <></>;
   }
@@ -48,13 +46,13 @@ const SmartBanner = ({ types, empty }: Props) => {
                 onClick={() => onClickItem(item)}
                 className="rounded-md w-full"
                 alt="stew"
-                key={index}
+                key={`image-${index}`}
                 src={isEmpty(item.image) ? fallback.src : item.image}
                 loader={imageLoader}
                 width={350}
-                height={172}
+                height={173}
                 priority={true}
-                style={{ height: types.includes(BannerType.A) ? '228px' : '172px' }}
+                style={{ height: types.includes(BannerType.A) ? '228px' : '172px', width: '100%' }}
               />
             </div>
           ))}
