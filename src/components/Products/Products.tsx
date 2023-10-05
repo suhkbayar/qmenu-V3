@@ -31,9 +31,9 @@ const Index = ({ products }: Props) => {
       <div className=" card-body items-center place-content-center">
         <div className=" text-gray-900 font-sans ">
           <div className="flex flex-wrap">
-            {renderItems().map((product) => {
+            {renderItems().map((product, index) => {
               if (typeof product === 'object' && product.length > 0)
-                return <SmartBanner types={product as BannerType[]} />;
+                return <SmartBanner types={product as BannerType[]} key={index} />;
               return (
                 <ProductCard
                   key={product.id}
