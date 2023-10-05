@@ -1,9 +1,9 @@
 import React from 'react';
 import { IMenuProduct } from '../../types/menu';
 import { isEmpty } from 'lodash';
-import { Empty, ProductCard } from '..';
+import { SmartBanner, ProductCard } from '..';
 import { useCallStore } from '../../contexts/call.store';
-import useEffect from 'react';
+import { BannerType } from '../../types';
 
 type Props = {
   products: IMenuProduct[];
@@ -11,20 +11,37 @@ type Props = {
 
 const Index = ({ products }: Props) => {
   const { order } = useCallStore();
-  if (isEmpty(products)) return <Empty />;
+  if (isEmpty(products)) return <SmartBanner types={[BannerType.M, BannerType.E]} empty />;
+
+  const renderItems = () => {
+    let result: any = products ? [...products] : [];
+
+    if (result.length <= 4) {
+      result.push([BannerType.E, BannerType.M]);
+    } else {
+      result.splice(4, 0, [BannerType.M]);
+      result.push([BannerType.E]);
+    }
+
+    return result;
+  };
 
   return (
     <>
       <div className=" card-body items-center place-content-center">
         <div className=" text-gray-900 font-sans ">
           <div className="flex flex-wrap">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                orderItem={order?.items?.find((item) => item.productId === product.productId)}
-              />
-            ))}
+            {renderItems().map((product) => {
+              if (typeof product === 'object' && product.length > 0)
+                return <SmartBanner types={product as BannerType[]} />;
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  orderItem={order?.items?.find((item) => item.productId === product.productId)}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

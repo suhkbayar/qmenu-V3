@@ -18,6 +18,8 @@ export const Banner = dynamic(() => import('./Banner/Banner'), {
   loading: () => <BannerSkelton />,
 });
 
+export const SmartBanner = dynamic(() => import('./Banner/SmartBanner'));
+
 export const HistoryCard = dynamic(() => import('./Cards/HistoryCard'), {
   loading: () => <ListSkelton />,
 });
