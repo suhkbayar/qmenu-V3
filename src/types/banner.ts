@@ -12,7 +12,7 @@ export interface IBanner {
   description: string;
   startAt: string;
   endAt: string;
-  system: BannerSystem;
+  system: string;
   type: BannerType;
   image: string;
   actions: IBannerAction[];
@@ -20,13 +20,6 @@ export interface IBanner {
 
 export enum BannerActionType {
   L = 'L', //Link
-}
-
-export enum BannerSystem {
-  Q = 'Q', //QR Menu
-  K = 'K', //Kiosk
-  M = 'M', //Merchant
-  B = 'B', //Buyer
 }
 
 export enum BannerType {

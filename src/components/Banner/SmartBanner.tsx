@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { isEmpty } from 'lodash';
 import fallback from '../../assets/images/noImage.jpg';
 import { imageLoader } from '../../tools/image';
-import { BannerSystem, BannerType, IBanner } from '../../types';
+import { BannerType, IBanner } from '../../types';
 import { useQuery } from '@apollo/client';
 import { GET_BANNERS } from '../../graphql/query';
 import { Empty } from '..';
@@ -15,10 +15,7 @@ interface Props {
 }
 
 const SmartBanner = ({ types, empty }: Props) => {
-  const { data, loading } = useQuery<{ getBanners: IBanner[] }>(GET_BANNERS, {
-    fetchPolicy: 'cache-first',
-    variables: { system: BannerSystem.Q },
-  });
+  const { data, loading } = useQuery<{ getBannersByBranch: IBanner[] }>(GET_BANNERS, { fetchPolicy: 'cache-first' });
 
   const onClickItem = (item: IBanner) => {
     let url = null;
@@ -28,13 +25,15 @@ const SmartBanner = ({ types, empty }: Props) => {
     window.open(url, '_blank');
   };
 
-  if (!loading && isEmpty(data?.getBanners?.filter((item) => types.includes(item.type)))) {
+  if (loading) return <></>;
+
+  if (!loading && isEmpty(data?.getBannersByBranch?.filter((item) => types.includes(item.type)))) {
     if (empty) return <Empty />;
     return <></>;
   }
 
   const getItems = () => {
-    return data?.getBanners.filter((item) => types.includes(item.type)) ?? [];
+    return data?.getBannersByBranch.filter((item) => types.includes(item.type)) ?? [];
   };
 
   return (

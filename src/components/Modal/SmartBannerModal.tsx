@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GET_BANNERS } from '../../graphql/query';
-import { BannerSystem, BannerType, IBanner } from '../../types';
+import { BannerType, IBanner } from '../../types';
 import { useLazyQuery } from '@apollo/client';
 import { Carousel, Modal } from 'flowbite-react';
 import Image from 'next/image';
@@ -26,9 +26,9 @@ const SmartBannerModal = ({ types }: Props) => {
     }
   };
 
-  const [getBanners, { data }] = useLazyQuery<{ getBanners: IBanner[] }>(GET_BANNERS, {
+  const [getBannersByBranch, { data }] = useLazyQuery<{ getBannersByBranch: IBanner[] }>(GET_BANNERS, {
     onCompleted(data) {
-      if (data.getBanners.filter((item) => types.includes(item.type)).length > 0) {
+      if (data.getBannersByBranch.filter((item) => types.includes(item.type)).length > 0) {
         setVisible(true);
       }
       localStorage.setItem('banner', JSON.stringify(false));
@@ -40,11 +40,11 @@ const SmartBannerModal = ({ types }: Props) => {
   };
 
   const getItems = () => {
-    return data?.getBanners.filter((item) => types.includes(item.type)) ?? [];
+    return data?.getBannersByBranch.filter((item) => types.includes(item.type)) ?? [];
   };
 
   useEffect(() => {
-    if (checkStorage()) getBanners({ variables: { system: BannerSystem.Q } });
+    if (checkStorage()) getBannersByBranch();
   }, []);
 
   return (
