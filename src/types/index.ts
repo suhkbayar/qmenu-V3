@@ -1,4 +1,5 @@
 export * from './base';
+export * from './banner';
 export * from './branch';
 export * from './menu';
 export * from './order';

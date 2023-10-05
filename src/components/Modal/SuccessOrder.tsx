@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal } from 'flowbite-react';
+import React, { useState } from 'react';
+import { Button, Modal } from 'flowbite-react';
 import { useTranslation } from 'react-i18next';
 import { customThemeWaiterModal } from '../../../styles/themes';
 import { useRouter } from 'next/router';
@@ -7,6 +7,8 @@ import { useCallStore } from '../../contexts/call.store';
 import { emptyOrder } from '../../mock';
 
 import { AiFillCheckCircle } from 'react-icons/ai';
+import { SmartBanner } from '..';
+import { BannerType } from '../../types';
 
 type Props = {
   visible: boolean;
@@ -16,12 +18,17 @@ type Props = {
 const Index = ({ visible, orderNumber }: Props) => {
   const { t } = useTranslation('language');
   const router = useRouter();
+  const [disabled, setDisabled] = useState(false);
 
   const { participant, load } = useCallStore();
 
   const goBack = () => {
     load(emptyOrder);
-    router.push(`/restaurant?id=${participant.id}`);
+    setDisabled(true);
+    setTimeout(() => {
+      setDisabled(false);
+      router.push(`/restaurant?id=${participant.id}`);
+    }, 3000);
   };
 
   return (
@@ -38,16 +45,18 @@ const Index = ({ visible, orderNumber }: Props) => {
           <p>{t('mainPage.YourOrderNumber')}:</p>
           <p className="text-current">{orderNumber.slice(-4)} </p>
         </div>
+        <SmartBanner types={[BannerType.A]} />
       </Modal.Body>
 
       <Modal.Footer className="place-content-center">
         <div className="grid gap-2 place-items-center w-full">
-          <div
+          <Button
+            disabled={disabled}
             onClick={() => goBack()}
-            className="w-8/12 flex place-content-center justify-center bg-current p-3 rounded-lg cursor-pointer"
+            className="w-8/12 flex place-content-center justify-center bg-current p-1 rounded-lg cursor-pointer"
           >
             <span className="block  text-sm text-white   font-semibold ">{t('mainPage.GoBack')}</span>
-          </div>
+          </Button>
         </div>
       </Modal.Footer>
     </Modal>
