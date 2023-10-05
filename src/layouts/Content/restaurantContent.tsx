@@ -53,7 +53,7 @@ const Index = () => {
   useEffect(() => {
     if (categories) {
       const firstCategory = categories[0];
-      setSelectedCategoryId(firstCategory.id);
+      setSelectedCategoryId(firstCategory?.id);
     }
   }, [categories]);
 
