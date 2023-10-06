@@ -15,7 +15,7 @@ interface Props {
 }
 
 const SmartBanner = ({ types, empty }: Props) => {
-  const { data, loading } = useQuery<{ getBannersByBranch: IBanner[] }>(GET_BANNERS, { fetchPolicy: 'cache-first' });
+  const { data, loading } = useQuery<{ getBanners: IBanner[] }>(GET_BANNERS, { fetchPolicy: 'cache-first' });
 
   const onClickItem = (item: IBanner) => {
     let url = null;
@@ -27,13 +27,13 @@ const SmartBanner = ({ types, empty }: Props) => {
 
   if (loading) return <></>;
 
-  if (!loading && isEmpty(data?.getBannersByBranch?.filter((item) => types.includes(item.type)))) {
+  if (!loading && isEmpty(data?.getBanners?.filter((item) => types.includes(item.type)))) {
     if (empty) return <Empty />;
     return <></>;
   }
 
   const getItems = () => {
-    return data?.getBannersByBranch.filter((item) => types.includes(item.type)) ?? [];
+    return data?.getBanners.filter((item) => types.includes(item.type)) ?? [];
   };
 
   return (

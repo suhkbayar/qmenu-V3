@@ -26,9 +26,9 @@ const SmartBannerModal = ({ types }: Props) => {
     }
   };
 
-  const [getBannersByBranch, { data }] = useLazyQuery<{ getBannersByBranch: IBanner[] }>(GET_BANNERS, {
+  const [getBanners, { data }] = useLazyQuery<{ getBanners: IBanner[] }>(GET_BANNERS, {
     onCompleted(data) {
-      if (data.getBannersByBranch.filter((item) => types.includes(item.type)).length > 0) {
+      if (data.getBanners.filter((item) => types.includes(item.type)).length > 0) {
         setVisible(true);
       }
       localStorage.setItem('banner', JSON.stringify(false));
@@ -40,11 +40,11 @@ const SmartBannerModal = ({ types }: Props) => {
   };
 
   const getItems = () => {
-    return data?.getBannersByBranch.filter((item) => types.includes(item.type)) ?? [];
+    return data?.getBanners.filter((item) => types.includes(item.type)) ?? [];
   };
 
   useEffect(() => {
-    if (checkStorage()) getBannersByBranch();
+    if (checkStorage()) getBanners();
   }, []);
 
   return (
