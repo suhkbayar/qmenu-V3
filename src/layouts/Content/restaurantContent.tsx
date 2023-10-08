@@ -8,8 +8,9 @@ import CardSkelton from '../../components/Skelton/CardSkelton';
 import { getPayload } from '../../providers/auth';
 import { useQuery } from '@apollo/client';
 import { GET_LOYALTIES_RECORDS } from '../../graphql/query/loyalty';
-import { RankingCard } from '../../components';
+import { RankingCard, SmartBannerModal } from '../../components';
 import { IMenuCategory } from '../../types/menu';
+import { BannerType } from '../../types';
 
 const SideBarCategories = dynamic(() => import('../../components/Categories/SideBarCategories'));
 const Products = dynamic(() => import('../../components/Products/Products'), {
@@ -220,6 +221,7 @@ const Index = () => {
         )}
 
         <Products products={getSelectedProducts(participant, selectedCategoryId, selectedSubCategoryId)} />
+        <SmartBannerModal types={[BannerType.PQ]} />
       </div>
     </>
   );
