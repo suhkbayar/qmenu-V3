@@ -17,5 +17,6 @@ export interface IBranch {
   images: any[];
   timetable: ITimeTable;
   type: string;
+  instagram: string;
   services: string[];
 }
