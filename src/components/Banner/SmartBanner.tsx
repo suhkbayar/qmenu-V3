@@ -37,17 +37,17 @@ const SmartBanner = ({ types, empty }: Props) => {
   };
 
   return (
-    <div className="w-full p-2">
+    <div className="w-full p-2 sm:w-2/3 md:w-full">
       <Carousel
-        className="w-full"
-        style={{ height: types.includes(BannerType.A) ? '228px' : '172px' }}
+        className="w-full h-[50.7vw] sm:h-[33vw] md:h-[30vw] xl:h-[15vw]"
         leftControl={getItems().length < 2 && <></>}
         rightControl={getItems().length < 2 && <></>}
+        indicators={getItems().length > 1}
       >
         {getItems().map((item, index) => (
           <div
             key={index}
-            className="flex gap-4 items-center justify-between hover:shadow-xl shadow-lg bg-white dark:bg-gray-700 rounded-md"
+            className="flex gap-4 items-center justify-between hover:shadow-xl shadow-lg bg-white dark:bg-gray-700 rounded-md "
           >
             <Image
               onClick={() => onClickItem(item)}
@@ -57,9 +57,8 @@ const SmartBanner = ({ types, empty }: Props) => {
               src={isEmpty(item.image) ? fallback.src : item.image}
               loader={imageLoader}
               width={350}
-              height={173}
+              height={types.includes(BannerType.A) ? 228 : 172}
               priority={true}
-              style={{ height: types.includes(BannerType.A) ? '228px' : '172px', width: '100%' }}
             />
           </div>
         ))}
