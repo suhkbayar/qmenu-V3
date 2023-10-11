@@ -34,18 +34,20 @@ const Index = ({ visible, orderNumber }: Props) => {
   return (
     <Modal show={visible} theme={customThemeWaiterModal}>
       <Modal.Body className="p-1">
-        <div className="flex place-content-center">
-          <div className=" h-24 w-24">
-            <AiFillCheckCircle className="text-success text-2xl h-full w-full " />
+        <div className=" max-w-[400px] m-auto">
+          <div className="flex place-content-center">
+            <div className=" h-24 w-24">
+              <AiFillCheckCircle className="text-success text-2xl h-full w-full " />
+            </div>
           </div>
-        </div>
-        <div className="text-sm mt-2 text-misty text-center font-semibold ">{t('mainPage.YourOrderSuccess')} </div>
+          <div className="text-sm mt-2 text-misty text-center font-semibold ">{t('mainPage.YourOrderSuccess')} </div>
 
-        <div className="text-sm flex gap-2 place-content-center mt-2 text-misty text-center font-semibold ">
-          <p>{t('mainPage.YourOrderNumber')}:</p>
-          <p className="text-current">{orderNumber.slice(-4)} </p>
+          <div className="text-sm flex gap-2 place-content-center mt-2 text-misty text-center font-semibold ">
+            <p>{t('mainPage.YourOrderNumber')}:</p>
+            <p className="text-current">{orderNumber.slice(-4)} </p>
+          </div>
+          <SmartBanner types={[BannerType.A]} />
         </div>
-        <SmartBanner types={[BannerType.A]} />
       </Modal.Body>
 
       <Modal.Footer className="place-content-center">

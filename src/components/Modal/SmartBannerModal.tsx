@@ -57,10 +57,10 @@ const SmartBannerModal = ({ types }: Props) => {
           <CgClose />
         </div>
         <Carousel
-          className="w-full"
-          style={{ height: '614px' }}
+          className=" h-[149.5vw] max-[305px]:h-[147vw] max-[270px]:h-[145vw] min-[500px]:h-[700px] "
           rightControl={getItems().length < 2 && <></>}
           leftControl={getItems().length < 2 && <></>}
+          indicators={getItems().length > 1}
         >
           {getItems().map((item, index) => (
             <div
@@ -74,9 +74,8 @@ const SmartBannerModal = ({ types }: Props) => {
                 src={isEmpty(item.image) ? fallback.src : item.image}
                 loader={imageLoader}
                 width={350}
-                height={615}
+                height={614}
                 priority={true}
-                style={{ height: '614px', width: '100%' }}
               />
             </div>
           ))}
