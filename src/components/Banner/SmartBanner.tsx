@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Carousel } from 'flowbite-react';
 import Image from 'next/image';
 import { isEmpty } from 'lodash';
@@ -8,6 +8,7 @@ import { BannerType, IBanner } from '../../types';
 import { useQuery } from '@apollo/client';
 import { GET_BANNERS } from '../../graphql/query';
 import { Empty } from '..';
+import { shuffleArray } from '../../utils';
 
 interface Props {
   types: BannerType[];
@@ -15,7 +16,13 @@ interface Props {
 }
 
 const SmartBanner = ({ types, empty }: Props) => {
-  const { data, loading } = useQuery<{ getBanners: IBanner[] }>(GET_BANNERS, { fetchPolicy: 'cache-first' });
+  const [banners, setBanners] = useState([]);
+  const { loading } = useQuery<{ getBanners: IBanner[] }>(GET_BANNERS, {
+    fetchPolicy: 'cache-first',
+    onCompleted(data) {
+      setBanners(shuffleArray(data.getBanners.filter((item) => types.includes(item.type))));
+    },
+  });
 
   const onClickItem = (item: IBanner) => {
     let url = null;
@@ -27,24 +34,20 @@ const SmartBanner = ({ types, empty }: Props) => {
 
   if (loading) return <></>;
 
-  if (!loading && isEmpty(data?.getBanners?.filter((item) => types.includes(item.type)))) {
+  if (!loading && isEmpty(banners)) {
     if (empty) return <Empty />;
     return <></>;
   }
-
-  const getItems = () => {
-    return data?.getBanners.filter((item) => types.includes(item.type)) ?? [];
-  };
 
   return (
     <div className="w-full p-2 sm:w-2/3 md:w-full">
       <Carousel
         className="w-full h-[50.7vw] sm:h-[33vw] md:h-[30vw] xl:h-[15vw]"
-        leftControl={getItems().length < 2 && <></>}
-        rightControl={getItems().length < 2 && <></>}
-        indicators={getItems().length > 1}
+        leftControl={banners.length < 2 && <></>}
+        rightControl={banners.length < 2 && <></>}
+        indicators={banners.length > 1}
       >
-        {getItems().map((item, index) => (
+        {banners.map((item, index) => (
           <div
             key={index}
             className="flex gap-4 items-center justify-between hover:shadow-xl shadow-lg bg-white dark:bg-gray-700 rounded-md "

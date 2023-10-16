@@ -1,5 +1,14 @@
 export const numberFormat = new Intl.NumberFormat();
 
+export const shuffleArray = (array: any[]) => {
+  const shuffled = array.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export const getTimeDiff = (sk: string): string => {
   const skTimestamp = parseInt(sk, 10);
   const currentTime = new Date().getTime();
