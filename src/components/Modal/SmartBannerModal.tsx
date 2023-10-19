@@ -9,6 +9,7 @@ import { imageLoader } from '../../tools/image';
 import { isEmpty } from 'lodash';
 import { customThemeWaiterModal } from '../../../styles/themes';
 import { CgClose } from 'react-icons/cg';
+import { shuffleArray } from '../../utils';
 
 type Props = {
   types: BannerType[];
@@ -16,6 +17,7 @@ type Props = {
 
 const SmartBannerModal = ({ types }: Props) => {
   const [visible, setVisible] = useState(false);
+  const [banners, setBanners] = useState([]);
 
   const checkStorage = () => {
     const showBanner = JSON.parse(localStorage.getItem('banner'));
@@ -26,9 +28,10 @@ const SmartBannerModal = ({ types }: Props) => {
     }
   };
 
-  const [getBanners, { data }] = useLazyQuery<{ getBanners: IBanner[] }>(GET_BANNERS, {
+  const [getBanners] = useLazyQuery<{ getBanners: IBanner[] }>(GET_BANNERS, {
     onCompleted(data) {
       if (data.getBanners.filter((item) => types.includes(item.type)).length > 0) {
+        setBanners(shuffleArray(data.getBanners.filter((item) => types.includes(item.type))));
         setVisible(true);
       }
       localStorage.setItem('banner', JSON.stringify(false));
@@ -37,10 +40,6 @@ const SmartBannerModal = ({ types }: Props) => {
 
   const onClose = () => {
     setVisible(false);
-  };
-
-  const getItems = () => {
-    return data?.getBanners.filter((item) => types.includes(item.type)) ?? [];
   };
 
   useEffect(() => {
@@ -58,11 +57,11 @@ const SmartBannerModal = ({ types }: Props) => {
         </div>
         <Carousel
           className=" h-[149.5vw] max-[305px]:h-[147vw] max-[270px]:h-[145vw] min-[500px]:h-[700px] "
-          rightControl={getItems().length < 2 && <></>}
-          leftControl={getItems().length < 2 && <></>}
-          indicators={getItems().length > 1}
+          rightControl={banners.length < 2 && <></>}
+          leftControl={banners.length < 2 && <></>}
+          indicators={banners.length > 1}
         >
-          {getItems().map((item, index) => (
+          {banners.map((item, index) => (
             <div
               key={index}
               className="flex gap-4 items-center justify-between hover:shadow-xl shadow-lg bg-white dark:bg-gray-700 rounded-md"
