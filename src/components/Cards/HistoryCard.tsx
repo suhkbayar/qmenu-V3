@@ -52,10 +52,12 @@ const Index = ({ branch, order }: Props) => {
           </div>
           <div className="col-span-5 place-content-around">
             <span className=" ">{branch.name} </span>
-            <div className="flex gap-1">
-              <div className="text-xs text-misty   ">{t('mainPage.OrderNumber')}:</div>
-              <div className="text-xs text-current text-center  "> {order?.number.slice(-4)}</div>
-            </div>
+            {order.number && (
+              <div className="flex gap-1">
+                <div className="text-xs text-misty   ">{t('mainPage.OrderNumber')}:</div>
+                <div className="text-xs text-current text-center  "> {order?.number.slice(-4)}</div>
+              </div>
+            )}
           </div>
           <div className=" absolute top-1.5 right-2 text-xs text-misty">{order.date}</div>
         </div>

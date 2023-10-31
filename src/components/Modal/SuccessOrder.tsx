@@ -42,10 +42,13 @@ const Index = ({ visible, orderNumber }: Props) => {
           </div>
           <div className="text-sm mt-2 text-misty text-center font-semibold ">{t('mainPage.YourOrderSuccess')} </div>
 
-          <div className="text-sm flex gap-2 place-content-center mt-2 text-misty text-center font-semibold ">
-            <p>{t('mainPage.YourOrderNumber')}:</p>
-            <p className="text-current">{orderNumber.slice(-4)} </p>
-          </div>
+          {orderNumber && (
+            <div className="text-sm flex gap-2 place-content-center mt-2 text-misty text-center font-semibold ">
+              <p>{t('mainPage.YourOrderNumber')}:</p>
+              <p className="text-current">{orderNumber.slice(-4)} </p>
+            </div>
+          )}
+
           <SmartBanner types={[BannerType.A]} />
         </div>
       </Modal.Body>

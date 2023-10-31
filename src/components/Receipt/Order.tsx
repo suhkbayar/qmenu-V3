@@ -33,7 +33,7 @@ const OrderReceipt = ({ qrUrl, order }: Props) => {
       </div>
       <div className="border-b  my-1"></div>
       <div className="flex justify-between my-2">
-        <span className="text-sm font-semibold"> Дугаар: {order?.number.slice(8)} </span>
+        {order?.number && <span className="text-sm font-semibold"> Дугаар: {order?.number.slice(8)} </span>}
         <span className="text-sm font-semibold">Ширээ: {order?.table?.name} </span>
       </div>
       <div className="border-b  my-1"></div>

@@ -74,13 +74,14 @@ export const OrderModal = ({ orderId, orderVisible, onClose }) => {
               <img src={ConvertOrderType(data.getOrder.type)} className="w-12 h-12" />
               <div>
                 <div className="text-sm mt-2  ">{t(`mainPage.${data && data.getOrder?.type}`)}</div>
-                <div className="flex gap-1">
-                  <div className="text-sm mt-2 text-misty   ">{t('mainPage.OrderNumber')}:</div>
-                  <div className="text-sm mt-2 text-current text-center  ">
-                    {' '}
-                    {data && data.getOrder?.number.slice(-4)}
+                {data.getOrder?.number && (
+                  <div className="flex gap-1">
+                    <div className="text-sm mt-2 text-misty   ">{t('mainPage.OrderNumber')}:</div>
+                    <div className="text-sm mt-2 text-current text-center  ">
+                      {data && data.getOrder?.number.slice(-4)}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </Modal.Header>
