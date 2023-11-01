@@ -331,11 +331,13 @@ const Index = () => {
                   />
                 )}
 
-                <UpointForm
-                  order={data.getOrder}
-                  user={user}
-                  payment={participant.payments.find((item) => item.type === PAYMENT_TYPE.UPT)}
-                />
+                {user && (
+                  <UpointForm
+                    order={data.getOrder}
+                    user={user}
+                    payment={participant.payments.find((item) => item.type === PAYMENT_TYPE.UPT)}
+                  />
+                )}
               </div>
 
               <PaymentBotton
