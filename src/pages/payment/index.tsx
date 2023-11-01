@@ -331,7 +331,7 @@ const Index = () => {
                   />
                 )}
 
-                {user && (
+                {user && participant.payments.find((item) => item.type === PAYMENT_TYPE.UPT) && (
                   <UpointForm
                     order={data.getOrder}
                     user={user}
