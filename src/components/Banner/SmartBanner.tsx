@@ -61,7 +61,6 @@ const SmartBanner = ({ types, empty }: Props) => {
               loader={imageLoader}
               width={350}
               height={types.includes(BannerType.A) ? 228 : 172}
-              priority={true}
             />
           </div>
         ))}
