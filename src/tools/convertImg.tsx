@@ -7,6 +7,10 @@ import most from './img/most.png';
 import taniBank from './img/nibank.png';
 import stateBank from './img/statebank.png';
 import tbd from './img/tdbbank.png';
+import ardapp from './img/ardapp.png';
+import arig from './img/arig.png';
+import mbank from './img/mbank.png';
+import transabnk from './img/transbank.png';
 import { PAYMENT_TYPE, QPAY_BANK_TYPE, TYPE } from '../constants/constant';
 
 import cash from './img/cash.png';
@@ -27,6 +31,8 @@ import voucher from '../assets/user/voucher.svg';
 
 export const ConvertQpayBankImg = (type: any) => {
   switch (type) {
+    case QPAY_BANK_TYPE.MBANK:
+      return mbank.src;
     case QPAY_BANK_TYPE.KHAAN_BANK:
       return khaan.src;
     case QPAY_BANK_TYPE.KHAS_BANK:
@@ -45,6 +51,16 @@ export const ConvertQpayBankImg = (type: any) => {
       return stateBank.src;
     case QPAY_BANK_TYPE.TRADE_AND_DEVELOPMENT_BANK:
       return tbd.src;
+    case QPAY_BANK_TYPE.ARD_APP:
+      return ardapp.src;
+    case QPAY_BANK_TYPE.SOCIAL_PAY:
+      return socialPay.src;
+    case QPAY_BANK_TYPE.MONPAY:
+      return monpay.src;
+    case QPAY_BANK_TYPE.ARIG_BANK:
+      return arig.src;
+    case QPAY_BANK_TYPE.TRANS_BANK:
+      return transabnk.src;
     default:
       return type;
   }

@@ -73,6 +73,51 @@ export const qpyBanks = [
   },
 ];
 
+export const qpy2Banks = [
+  {
+    type: QPAY_BANK_TYPE.MBANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.KHAAN_BANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.BOGD_BANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.CAPITRON_BANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.CHINGIG_KHAAN_BANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.MOST_MONEY,
+  },
+  {
+    type: QPAY_BANK_TYPE.SOCIAL_PAY,
+  },
+  {
+    type: QPAY_BANK_TYPE.MONPAY,
+  },
+  {
+    type: QPAY_BANK_TYPE.STATE_BANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.TRADE_AND_DEVELOPMENT_BANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.KHAS_BANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.ARD_APP,
+  },
+  {
+    type: QPAY_BANK_TYPE.ARIG_BANK,
+  },
+  {
+    type: QPAY_BANK_TYPE.TRANS_BANK,
+  },
+];
+
 export interface CreateOrderInput {
   contact: string;
   name: string;
