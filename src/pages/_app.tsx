@@ -14,6 +14,7 @@ import React from 'react';
 import { LoyaltyProvider } from '../contexts/loyalty.context';
 import SubscriptionProvider from '../providers/subscription';
 import { NotificationProvider } from '../providers/notification';
+import Script from 'next/script';
 
 const payload = getPayload();
 
@@ -32,6 +33,16 @@ i18next.init({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-JXL5W43FVQ" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-JXL5W43FVQ');
+        `}
+      </Script>
       <Head>
         <title>Q-Menu</title>
       </Head>
