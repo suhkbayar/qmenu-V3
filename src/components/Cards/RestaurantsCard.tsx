@@ -66,7 +66,7 @@ const RestaurantsCard = ({ branches, participants }: Props) => {
             {currentCards.map((branch) => {
               const dayOfWeek = DayOfWeek[dateTime];
 
-              let isOpen = branch.timetable[dayOfWeek];
+              let isOpen = branch.timetable?.[dayOfWeek];
 
               let open =
                 'absolute z-10 top-4 bg-success text-white text-sm font-medium mr-2 px-2.5 py-0.5 rounded-e dark:bg-success';
