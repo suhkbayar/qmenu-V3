@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import fallback from '../../assets/images/noImage.jpg';
 import { isEmpty } from 'lodash';
-import { imageLoader } from '../../tools/image';
 import { OptionCard, VariantCard } from '..';
 import { generateUUID } from '../../tools/generate';
 import { CURRENCY } from '../../constants/currency';
 import { Modal } from 'flowbite-react';
 import { customThemeModal } from '../../../styles/themes';
+import { Translate } from 'react-auto-translate';
 
 type Props = {
   onClose: () => void;
@@ -140,7 +140,7 @@ const Index = ({ onClose, product, visible }: Props) => {
               <div className=" flex place-content-between mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                 <div className="mt-2 items-center flex place-content-center">
                   <p className="text-gray1 p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">
-                    {product.name}
+                    <Translate>{product.name}</Translate>
                   </p>
                 </div>
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">

@@ -11,6 +11,7 @@ import { useCallStore } from '../../contexts/call.store';
 import { IOrderItem } from '../../types';
 import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import { ProductModal } from '..';
+import { Translate } from 'react-auto-translate';
 
 type Props = {
   product: IMenuProduct;
@@ -79,10 +80,10 @@ const Index = ({ product, orderItem }: Props) => {
           </div>
           <div className="m-4  mb-0">
             <h2 className="line-clamp-2 h-9 leading-4 font-bold  dark:text-gray-400 text-sm text-misty">
-              {product.name}
+              <Translate>{product.name}</Translate>
             </h2>
             <span className="line-clamp-2 text-misty mb-1 dark:text-gray-400  leading-3 h-7 text-gray-500 text-sm  ">
-              {product.description}
+              <Translate>{product.description}</Translate>
             </span>
             <span className="block text-gray-500 text-sm h-7 leading-3 ">
               {CalculateProductPrice(product.variants)}

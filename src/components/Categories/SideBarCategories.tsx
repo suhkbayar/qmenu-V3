@@ -4,6 +4,7 @@ import { IMenuCategory } from '../../types';
 import { useTranslation } from 'react-i18next';
 import { MdMenuBook } from 'react-icons/md';
 import { isEmpty } from 'lodash';
+import { Translate } from 'react-auto-translate';
 
 type Props = {
   selectedCategoryId: string;
@@ -55,9 +56,7 @@ const SideBarCategories = ({
                       }
                       onClick={() => handleSubCategoryClick(child.id)}
                       key={child.id}
-                    >
-                      {child.name}
-                    </Sidebar.Item>
+                    ></Sidebar.Item>
                   ))}
                 </Sidebar.Collapse>
               );

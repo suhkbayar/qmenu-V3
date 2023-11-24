@@ -6,6 +6,7 @@ import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import { useCallStore } from '../../contexts/call.store';
 import { CommentModal } from '..';
 import { isEmpty } from 'lodash';
+import { Translate } from 'react-auto-translate';
 
 type Props = {
   item: any;
@@ -34,7 +35,9 @@ const Index = ({ item, image }: Props) => {
             <img alt="A scenic landscape" className="w-40 rounded-lg h-full" src={image} />
           </div>
           <div className="w-38 ml-2 grid p-1 place-content-between">
-            <span className="text-base  font-medium line-clamp-2 ">{item.name}</span>
+            <span className="text-base  font-medium line-clamp-2 ">
+              <Translate>{item.name}</Translate>
+            </span>
 
             <div className="flex items-center cursor-pointer" onClick={() => showAddComment()}>
               <AiOutlineEdit className="text-gray1 mr-2" />

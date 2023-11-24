@@ -5,6 +5,7 @@ import { IOrderItem } from '../../types';
 import check from '../../assets/order/Check.png';
 import unCheck from '../../assets/order/UnCheck.png';
 import { CURRENCY } from '../../constants/currency';
+import { Translate } from 'react-auto-translate';
 
 type Props = {
   variant: IMenuVariant;
@@ -25,7 +26,9 @@ const Index = ({ variant, selectedItem, onSelect, onRemove }: Props) => {
         }`}
       >
         <div className="flex justify-between">
-          <h2 className="line-clamp-2  font-normal text-misty text-sm ">{variant.name}</h2>
+          <h2 className="line-clamp-2  font-normal text-misty text-sm ">
+            <Translate>{variant.name}</Translate>
+          </h2>
           <img
             alt="check-variant"
             src={selectedItem.id === variant.id ? check.src : unCheck.src}
