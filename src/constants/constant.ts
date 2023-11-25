@@ -1,5 +1,6 @@
 export const PAYMENT_TYPE = {
   QPay: 'QPay',
+  QPay2: 'QPay2',
   MonPay: 'MonPay',
   SocialPay: 'SocialPay',
   Toki: 'Toki',
@@ -14,7 +15,9 @@ export const PAYMENT_TYPE = {
 };
 
 export const QPAY_BANK_TYPE = {
+  MBANK: 'M bank',
   KHAAN_BANK: 'Khan bank',
+  SOCIAL_PAY: 'Social Pay',
   BOGD_BANK: 'Bogd bank',
   CAPITRON_BANK: 'Capitron bank',
   CHINGIG_KHAAN_BANK: 'Chinggis khaan bank',
@@ -23,6 +26,10 @@ export const QPAY_BANK_TYPE = {
   STATE_BANK: 'State bank',
   TRADE_AND_DEVELOPMENT_BANK: 'Trade and Development bank',
   KHAS_BANK: 'Xac bank',
+  MONPAY: 'Monpay',
+  ARIG_BANK: 'Arig bank',
+  ARD_APP: 'Ard App',
+  TRANS_BANK: 'Trans bank',
 };
 
 export const DRAFT_TYPE = {

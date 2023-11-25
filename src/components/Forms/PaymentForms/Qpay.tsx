@@ -1,26 +1,28 @@
 import React from 'react';
-import { qpyBanks } from '../../../mock'; // Import your data source
+import { qpyBanks, qpy2Banks } from '../../../mock'; // Import your data source
 import { ConvertQpayBankImg } from '../../../tools/convertImg'; // Import your image conversion function
 import checkImage from './img/Check.png'; // Import the checkmark image
+import { IPayment } from '../../../types';
+import { PAYMENT_TYPE } from '../../../constants/constant';
 
 type Props = {
-  id: string;
+  payment?: IPayment;
   watch: any;
   onSelect: (type: string, id: string) => void;
 };
 
-const Index: React.FC<Props> = ({ id, watch, onSelect }) => {
+const Index: React.FC<Props> = ({ payment, watch, onSelect }) => {
   const paymentType = watch('paymentType');
 
-  if (!id) return null;
+  if (!payment?.id) return null;
 
   return (
     <div className="w-full bg-white rounded-lg p-2 mt-4">
       <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-6">
-        {qpyBanks.map((bank, index) => (
+        {(payment.type === PAYMENT_TYPE.QPay ? qpyBanks : qpy2Banks).map((bank, index) => (
           <div
             key={index}
-            onClick={() => onSelect(bank.type, id)}
+            onClick={() => onSelect(bank.type, payment.id)}
             className="rounded-lg flex place-self-center relative"
           >
             {paymentType === bank.type && (

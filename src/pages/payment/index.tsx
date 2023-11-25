@@ -30,7 +30,7 @@ import { ITransaction } from '../../types/transaction';
 import { useNotificationContext } from '../../providers/notification';
 import { useLoyaltyContext } from '../../contexts/loyalty.context';
 
-const filterBanks = ['QPay', 'UPT', 'Upoint', 'VCR'];
+const filterBanks = ['QPay', 'QPay2', 'UPT', 'Upoint', 'VCR'];
 
 const Index = () => {
   const router = useRouter();
@@ -316,7 +316,9 @@ const Index = () => {
                 />
 
                 <QpayForm
-                  id={participant.payments.find((payment) => payment.type === PAYMENT_TYPE.QPay)?.id}
+                  payment={participant.payments.find((payment) =>
+                    [PAYMENT_TYPE.QPay, PAYMENT_TYPE.QPay2].includes(payment.type),
+                  )}
                   watch={watch}
                   onSelect={onSelectBank}
                 />
