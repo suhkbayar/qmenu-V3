@@ -185,8 +185,10 @@ const Index = () => {
                       })
                       .map((record, index) => {
                         let isActive = true;
-
                         const { image, amount, description, color } = JSON.parse(record.value);
+
+                        if (!image && !amount && !description && !color) return null;
+
                         if (Number(promotion.amount) < Number(amount)) {
                           if (isFirstIteration) {
                             isActive = false;
