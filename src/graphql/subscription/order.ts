@@ -2,9 +2,9 @@ import { gql } from '@apollo/client';
 import { TABLE_FIELDS, TRANSACTION_FIELDS } from '../fragment';
 import { CHARGES_FIELDS, DISCOUNTS_FIELDS, ORDER_FIELDS, ORDER_ITEM_FIELDS, ORDER_LOYALTY_FIELDS } from '../query';
 
-export const ON_TRACK_ORDER = gql`
-  subscription onTrackOrder($customer: ID!) {
-    onTrackOrder(customer: $customer) {
+export const ON_UPDATED_ORDER = gql`
+  subscription onUpdatedOrder($customer: ID!) {
+    onUpdatedOrder(customer: $customer) {
       branch
       customer
       event
