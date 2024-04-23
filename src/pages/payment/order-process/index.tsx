@@ -159,7 +159,7 @@ const Index = () => {
           <div className="overflow-auto login-body w-full  ">
             <form onSubmit={handleSubmit(onSubmit)} className="w-full    flex place-content-center">
               <div className="  w-full sm:w-full md:w-6/12 lg:w-6/12 xl:w-4/12 2xl:w-4/12 ">
-                <div className="bg-white rounded-lg p-6 pt-2 pb-4   mt-10  ">
+                <div className="bg-white rounded-lg p-6 pt-2 pb-4   mt-10 dark:bg-gray-700   ">
                   <label className="text-gray-700 font-normal text-base  font-bold py-2 dark:text-white  " htmlFor="">
                     {t('mainPage.OrderType')}
                   </label>
@@ -184,7 +184,7 @@ const Index = () => {
                 </div>
                 {ComponentForms ? (
                   <>
-                    <div className="bg-white rounded-lg p-6 pt-2 pb-12 mb-5 mt-5  ">
+                    <div className="bg-white rounded-lg p-6 pt-2 pb-12 mb-5 mt-5 dark:bg-gray-700  ">
                       <ComponentForms register={register} errors={errors} setValue={setValue} />
                     </div>
                     <br />
@@ -194,7 +194,7 @@ const Index = () => {
                 ) : null}
               </div>
               <div className=" fixed cursor-pointer bottom-0 sm:bottom-0 transition-all duration-500  md:bottom-5 lg:bottom-5 w-full   sm:w-full md:w-6/12 lg:w-6/12 xl:w-4/12 2xl:w-4/12">
-                <div className="bg-white pl-4 pr-4 pt-7 pb-2 rounded-t-lg">
+                <div className="bg-white pl-4 pr-4 pt-7 pb-2 rounded-t-lg  dark:bg-gray-700 ">
                   <div
                     onClick={() => onExpant()}
                     className=" absolute top-2.5 w-full flex right-0 place-content-center "
@@ -229,7 +229,7 @@ const Index = () => {
                   ) : (
                     <div
                       onClick={() => onExpant()}
-                      className="w-full mb-3 flex place-content-between place-items-center rounded-lg px-4 py-3 bg-iceBlue"
+                      className="w-full mb-3 flex place-content-between place-items-center rounded-lg px-4 py-3 bg-iceBlue dark:bg-gray-700 "
                     >
                       <span className="text-misty">{t('mainPage.Products')}</span>
                       <span className="p-1 rounded-lg text-sm bg-gainsboro font-semibold text-misty">
