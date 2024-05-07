@@ -1,4 +1,5 @@
 import { IBranch } from './branch';
+import { IChannelConfig } from './channel.config';
 import { IMenu } from './menu';
 import { IPayment } from './payment';
 
@@ -13,5 +14,5 @@ export interface IParticipant {
   payments: IPayment[];
   services: string[];
   vat: boolean;
-  loginRequired?: boolean;
+  configs?: IChannelConfig[];
 }

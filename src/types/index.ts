@@ -9,3 +9,5 @@ export * from './time-table';
 export * from './transaction';
 export * from './loyalty';
 export * from './form';
+export * from './channel.config';
+export * from './config';

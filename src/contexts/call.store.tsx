@@ -7,6 +7,9 @@ import { IMenuVariant } from '../types/menu';
 import { generateUUID } from '../tools/generate';
 import { isEmpty } from 'lodash';
 import { IUser } from '../types/user';
+import { IConfig } from '../types';
+import { qmenuConfigs } from '../constants/constant';
+import { parseConfig } from '../utils';
 
 const storage: StateStorage = {
   getItem: async (name: string): Promise<string | null> => {
@@ -22,6 +25,7 @@ const storage: StateStorage = {
 
 interface ICallStore {
   order: ICustomerOrder;
+  config: IConfig;
   user: IUser;
   setUser: (user: IUser) => void;
   participant: IParticipant;
@@ -41,6 +45,7 @@ export const useCallStore = create<ICallStore>(
     (set, get) => ({
       order: null,
       user: null,
+      config: null,
       participant: undefined,
 
       calculate: () => {
@@ -177,7 +182,19 @@ export const useCallStore = create<ICallStore>(
         });
         get().calculate();
       },
-      setParticipant: (participant) => set({ participant: participant }),
+      setParticipant: (participant) => {
+        const mappedConfigs = (participant.configs || []).reduce((acc, config) => {
+          const matchedQMenuConfig = qmenuConfigs.find((qconfig) => qconfig.value === config.name);
+          if (matchedQMenuConfig) {
+            acc[matchedQMenuConfig.name] = parseConfig(config.value);
+          }
+          return acc;
+        }, {});
+
+        set({ config: { ...mappedConfigs } });
+
+        set({ participant: participant });
+      },
     }),
     {
       name: 'call-storage-array',

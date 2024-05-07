@@ -32,18 +32,18 @@ const Index = () => {
               <div className="flex w-full items-center ">
                 <div className="flex flex-row justify-center">
                   <span className="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-full bg-gray-200 text-xl text-gray1 uppercase">
-                    {review.customer.firstName.slice(0, 1).toLowerCase()}
+                    {review.customer?.firstName.slice(0, 1).toLowerCase()}
                   </span>
                 </div>
 
                 <div className="flex  items-center w-full place-content-between">
                   <div>
-                    <p className="font-medium">{review.customer.firstName}</p>
+                    <p className="font-medium">{review.customer?.firstName}</p>
                     <p className="text-sm mt-2">{review.additional}</p>
                   </div>
                   <div className="place-content-end">
                     <div className="flex items-center place-content-end">
-                      <p className="text-sm items-left text-current">{review.comment.replace(/\[|\]/g, '')}</p>
+                      <p className="text-sm items-left text-current">{review.comment?.replace(/\[|\]/g, '')}</p>
                       {review.liked < 1 ? (
                         <AiOutlineDislike className="text-current text-lg" />
                       ) : (

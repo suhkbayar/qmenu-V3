@@ -17,7 +17,7 @@ const Index: React.FC<Props> = ({ payment, watch, onSelect }) => {
   if (!payment?.id) return null;
 
   return (
-    <div className="w-full bg-white rounded-lg p-2 mt-4">
+    <div className="w-full bg-white rounded-lg p-2 mt-4 dark:bg-gray-700">
       <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-6">
         {(payment.type === PAYMENT_TYPE.QPay ? qpyBanks : qpy2Banks).map((bank, index) => (
           <div

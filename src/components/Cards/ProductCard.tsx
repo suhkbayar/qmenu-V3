@@ -20,7 +20,7 @@ type Props = {
 
 const Index = ({ product, orderItem }: Props) => {
   const { t } = useTranslation('language');
-  const { participant } = useCallStore();
+  const { participant, config } = useCallStore();
 
   const [visible, setVisible] = useState(false);
   const { add, remove } = useCallStore();
@@ -65,19 +65,23 @@ const Index = ({ product, orderItem }: Props) => {
       <div key={product.id} className=" w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/4 p-2 ">
         <div className=" relative hover:shadow-xl  shadow-lg bg-white  dark:bg-gray-700 rounded-md ">
           {product.bonus && <div className="ribbon-2">{product.bonus}</div>}
-          <div className="relative object-cover rounded-md " onClick={() => setVisible(true)}>
-            <Image
-              alt="product"
-              src={isEmpty(product.image) ? fallback.src : product.image}
-              width={500}
-              height={600}
-              className="rounded-lg"
-              style={{
-                maxWidth: '100%',
-                height: 'auto',
-              }}
-            />
-          </div>
+          {!config || !config.hideImage ? (
+            <div className="relative object-cover rounded-md " onClick={() => setVisible(true)}>
+              <Image
+                alt="product"
+                src={isEmpty(product.image) ? fallback.src : product.image}
+                width={500}
+                height={600}
+                className="rounded-lg object-cover overflow-hidden rounded-tl-xl rounded-bl-xl product-card"
+                style={{
+                  maxWidth: '100%',
+                }}
+              />
+            </div>
+          ) : (
+            <div className="p-1" />
+          )}
+
           <div className="m-4  mb-0">
             <h2 className="line-clamp-2 h-9 leading-4 font-bold  dark:text-gray-400 text-sm text-misty">
               <Translate>{product.name}</Translate>

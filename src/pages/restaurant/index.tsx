@@ -5,7 +5,7 @@ import { isValidToken, setAccessToken } from '../../providers/auth';
 import { useCallStore } from '../../contexts/call.store';
 import { GET_BRANCH } from '../../graphql/query/branch';
 import Loader from '../../components/Loader/Loader';
-import { Banner, BottomNavigation, Header, RestaurantContent } from '../../components';
+import { Banner, BlockContent, BottomNavigation, Header, ListContent } from '../../components';
 import { cacheProvider } from '../../contexts/translate.context';
 import { Languages } from '../../constants/constantLang';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,7 @@ const Index = () => {
   const { id } = router.query;
   const isValid = isValidToken();
 
-  const { setParticipant, participant, order, load } = useCallStore();
+  const { setParticipant, participant, order, load, config } = useCallStore();
   const { i18n } = useTranslation('language');
 
   const [currentToken] = useMutation(CURRENT_TOKEN, {
@@ -61,20 +61,18 @@ const Index = () => {
   return (
     <>
       {data && participant && (
-        <>
-          <Translator
-            cacheProvider={cacheProvider}
-            from="mn"
-            to={Languages.find((item) => i18n.language.includes(item.name.toLowerCase())).name.toLowerCase()}
-            googleApiKey={GOOGLE_CLOUD_KEY}
-          >
-            <Header />
-            <Banner branch={data.getParticipant.branch} />
-            <RestaurantContent />
-            <Footer branch={data.getParticipant.branch} />
-            <BottomNavigation />
-          </Translator>
-        </>
+        <Translator
+          cacheProvider={cacheProvider}
+          from="mn"
+          to={Languages.find((item) => i18n.language.includes(item.name.toLowerCase())).name.toLowerCase()}
+          googleApiKey={GOOGLE_CLOUD_KEY}
+        >
+          <Header />
+          <Banner branch={data.getParticipant.branch} />
+          {config ? config.menuTheme === 'list' ? <ListContent /> : <BlockContent /> : <BlockContent />}
+          <Footer />
+          <BottomNavigation />
+        </Translator>
       )}
     </>
   );

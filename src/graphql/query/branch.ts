@@ -7,12 +7,12 @@ import {
   MENU_PRODUCT_FIELDS,
   MENU_VARIANT_FIELDS,
 } from '../fragment/menu';
+import { CHANNEL_CONFIG_FIELDS } from '../fragment';
 
 export const GET_BRANCHES = gql`
   {
     getParticipants {
       id
-      loginRequired
       branch {
         ...BranchFields
       }
@@ -25,13 +25,15 @@ export const GET_BRANCH = gql`
   query getParticipant($id: ID!) {
     getParticipant(id: $id) {
       id
-      loginRequired
       advancePayment
       services
       vat
       waiter
       orderable
       channel
+      configs {
+        ...ChannelConfigFields
+      }
       branch {
         ...BranchFields
       }
@@ -69,6 +71,7 @@ export const GET_BRANCH = gql`
       }
     }
   }
+  ${CHANNEL_CONFIG_FIELDS}
   ${MENU_CATEGORY_FIELDS}
   ${MENU_OPTION_FIELDS}
   ${MENU_PRODUCT_FIELDS}

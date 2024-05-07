@@ -71,7 +71,7 @@ const Index = () => {
   function getSelectedProducts(participant, searchField, miniSearch) {
     if (!isEmpty(searchField)) {
       const results = miniSearch.search(searchField);
-      return results.length > 0 ? [results[0]] : [];
+      return results.length > 0 ? results : [];
     }
 
     const category = participant.menu.categories.flatMap((category) => category.products);

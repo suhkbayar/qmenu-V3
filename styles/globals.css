@@ -79,6 +79,251 @@
   }
 }
 
+
+.product-card {
+height:  180px;
+}
+
+
+
+@media screen and (max-width: 2000px) and (min-width: 1800px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 140px;
+  }
+}
+
+
+@media screen and (max-width: 1800px) and (min-width: 1600px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 124px;
+  }
+}
+
+
+@media screen and (max-width: 1600px) and (min-width: 1400px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 107px;
+  }
+}
+
+
+
+@media screen and (max-width: 1400px) and (min-width: 1280px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 98px;
+  }
+}
+
+
+
+
+@media screen and (max-width: 1279px) and (min-width: 1200px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 198px;
+  }
+}
+
+
+@media screen and (max-width: 1200px) and (min-width: 1100px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 177px;
+  }
+}
+
+@media screen and (max-width: 1100px) and (min-width: 1000px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 158px;
+  }
+}
+
+
+
+@media screen and (max-width: 1000px) and (min-width: 900px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 144px;
+  }
+}
+
+
+@media screen and (max-width: 900px) and (min-width: 800px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 125px;
+  }
+}
+
+
+@media screen and (max-width: 800px) and (min-width: 767px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 118px;
+  }
+}
+
+
+
+@media screen and (max-width: 767px) and (min-width: 760px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 160px;
+  }
+}
+
+
+@media screen and (max-width: 760px) and (min-width: 720px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 158px;
+  }
+}
+
+@media screen and (max-width: 720px) and (min-width: 700px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 147px;
+  }
+}
+
+
+@media screen and (max-width: 700px) and (min-width: 660px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 137px;
+  }
+}
+
+
+@media screen and (max-width: 660px) and (min-width: 640px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 132px;
+  }
+}
+
+
+
+@media screen and (max-width: 640px) and (min-width: 600px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 199px;
+  }
+}
+
+
+@media screen and (max-width: 600px) and (min-width: 560px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 188px;
+    
+  }
+}
+
+
+
+@media screen and (max-width: 560px) and (min-width: 540px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height:  173px;
+  }
+}
+
+
+
+
+@media screen and (max-width: 540px) and (min-width: 520px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height:  165px;
+  }
+}
+
+
+@media screen and (max-width: 520px) and (min-width: 480px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 153px;
+  }
+}
+
+
+@media screen and (max-width: 480px) and (min-width: 440px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 140px;
+  }
+}
+
+
+@media screen and (max-width: 440px) and (min-width: 400px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 125px;
+  }
+}
+
+
+
+@media screen and (max-width: 400px) and (min-width: 380px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 119px;
+  }
+}
+
+
+
+@media screen and (max-width: 380px) and (min-width: 360px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 113px;
+  }
+}
+
+
+@media screen and (max-width: 360px) and (min-width: 340px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 103px;
+  }
+}
+
+
+@media screen and (max-width: 340px) and (min-width: 300px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 93px;
+  }
+}
+
+@media screen and (max-width: 300px) and (min-width: 100px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 83px;
+  }
+}
+
+
+@media screen and (max-width:100px) and (min-width: 90px) {
+  /* Reduce max-height further for smaller screens */
+  .product-card {
+    height: 2vh;
+  }
+}
+
+
+
+
+
+
+
 .carousel-focus:hover {
   transition: all 0.8s;
   transform: scale(1.1);
@@ -223,4 +468,50 @@
   background: #87d068;
   color: white;
   box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+}
+
+
+.ribbon-3 {
+  --f: 5px; /* control the folded part*/
+  --r: 0px; /* control the ribbon shape */
+  --t: 10px; /* the top offset */
+  height: 20px;
+  position: absolute;
+  inset: var(--t) calc(-1 * var(--f)) auto auto;
+  padding: 0 5px var(--f) calc(5px + var(--r));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
+  background: #87d068;
+  color: white;
+}
+
+.ribbon-text {
+  --f: 5px; /* control the folded part*/
+  --r: 0px; /* control the ribbon shape */
+  --t: 10px; /* the top offset */
+  height: 20px;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 143px;
+font-size: 12px;
+  position: absolute;
+  inset: var(--t) calc(-1 * var(--f)) auto auto;
+  padding: 0 5px var(--f) calc(5px + var(--r));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
+  background: #87d068;
+  color: white;
 }

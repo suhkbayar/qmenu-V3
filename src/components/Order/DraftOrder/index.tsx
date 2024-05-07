@@ -75,14 +75,12 @@ const Index = () => {
   });
 
   const Continue = () => {
-    if (isDiningService) {
-      if (
-        order.items.some((item) =>
-          products.some((product) => product.productId === item.productId && product.adultsOnly),
-        )
-      ) {
-        setIsAdultOnly(true);
-      } else {
+    if (
+      order.items.some((item) => products.some((product) => product.productId === item.productId && product.adultsOnly))
+    ) {
+      setIsAdultOnly(true);
+    } else {
+      if (isDiningService) {
         let items = order.items.map((item) => ({
           id: item.id,
           quantity: item.quantity,
@@ -108,9 +106,9 @@ const Index = () => {
             },
           },
         });
+      } else {
+        router.push(`/payment/order-process`);
       }
-    } else {
-      router.push(`/payment/order-process`);
     }
   };
 

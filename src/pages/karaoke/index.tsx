@@ -86,7 +86,7 @@ const Index = () => {
             loading={getSongsLoading || searchLoading}
             songs={isEmpty(searchQuery) ? songs?.getSongs : resultSongs?.searchSongs}
           />
-          <Footer branch={data.getParticipant.branch} />
+          <Footer />
           <BottomNavigation />
           <HideKeyboardOnScroll />
         </>

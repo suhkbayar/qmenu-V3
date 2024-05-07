@@ -9,6 +9,14 @@ export const shuffleArray = (array: any[]) => {
   return shuffled;
 };
 
+export const parseConfig = (value: string): any | null => {
+  try {
+    return value === undefined ? null : JSON.parse(value);
+  } catch (error) {
+    return value;
+  }
+};
+
 export const getTimeDiff = (sk: string): string => {
   const skTimestamp = parseInt(sk, 10);
   const currentTime = new Date().getTime();

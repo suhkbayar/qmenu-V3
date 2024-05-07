@@ -10,3 +10,4 @@ export * from './loyalty';
 export * from './notification.action';
 export * from './notification';
 export * from './form';
+export * from './channel.config';

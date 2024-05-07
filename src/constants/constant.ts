@@ -101,3 +101,18 @@ export enum NotificationType {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
 }
+
+export const qmenuConfigs = [
+  {
+    name: 'menuTheme',
+    value: 'MENU_THEME',
+  },
+  {
+    name: 'hideImage',
+    value: 'HIDE_IMAGE',
+  },
+  {
+    name: 'loginRequired',
+    value: 'LOGIN_REQUIRED',
+  },
+];

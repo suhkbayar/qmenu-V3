@@ -10,7 +10,11 @@ import ServiceSkelton from './Skelton/ServiceSkelton';
 import RankingSkelton from './Skelton/RankingSkelton';
 import PromotionCardSkelton from './Skelton/PromotionCardSkelton';
 
-export const RestaurantContent = dynamic(() => import('../layouts/Content/restaurantContent'), {
+export const BlockContent = dynamic(() => import('../layouts/Content/blockContent'), {
+  loading: () => <CardSkelton />,
+});
+
+export const ListContent = dynamic(() => import('../layouts/Content/listContent'), {
   loading: () => <CardSkelton />,
 });
 
@@ -75,6 +79,9 @@ export const ProductList = dynamic(() => import('./Products/ProductList'), {
 export const SearchProducts = dynamic(() => import('./SearchBar/SearchBarProducts'));
 export const SearchEmpty = dynamic(() => import('./Empty/Search'));
 export const ProductCard = dynamic(() => import('./Cards/ProductCard'));
+export const ListProduct = dynamic(() => import('./Cards/ListProductCard'), {
+  loading: () => <DraftCardSkelton />,
+});
 export const ProductModal = dynamic(() => import('./Modal/Product'));
 export const VariantCard = dynamic(() => import('./Cards/VariantCard'));
 export const OptionCard = dynamic(() => import('./Cards/OptionCard'));
