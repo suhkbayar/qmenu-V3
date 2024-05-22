@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CURRENCY } from '../../constants/currency';
 import { useNotificationContext } from '../../providers/notification';
-import { ConvertOrderType } from '../../tools/convertImg';
 import { IBranch } from '../../types';
 import { IOrder } from '../../types/order';
-import { IoReceiptOutline } from 'react-icons/io5';
+import { BiReceipt } from 'react-icons/bi';
+
 import QRCode from 'qrcode';
 import { isEmpty } from 'lodash';
 import { ReceiptModal } from '..';
@@ -39,19 +39,13 @@ const Index = ({ branch, order }: Props) => {
 
   return (
     <>
-      <div
-        onClick={() => order.state !== 'COMPLETED' && showOrderNotification(order.id)}
-        className="bg-white cursor-pointer p-3 mb-4 rounded-xl w-full place-content-between drop-shadow-lg  dark:bg-gray-700 "
-      >
-        <div
-          className="grid grid grid-cols-6 gap-2"
-          onClick={() => order.state === 'COMPLETED' && showOrderNotification(order.id)}
-        >
+      <div className="bg-white cursor-pointer p-3 mb-4 rounded-xl w-full place-content-between drop-shadow-lg  dark:bg-gray-700 ">
+        <div className="grid  grid-cols-6 gap-2" onClick={() => showOrderNotification(order.id)}>
           <div className="col-span-1 flex place-content-center">
             <img src={branch.logo} alt="branch" className="w-20  rounded-lg" />
           </div>
-          <div className="col-span-5 place-content-around">
-            <span className=" ">{branch.name} </span>
+          <div className="col-span-4 place-content-around ">
+            <span className=" block-ellipsis ">{branch.name} </span>
             {order.number && (
               <div className="flex gap-1">
                 <div className="text-xs text-misty   ">{t('mainPage.OrderNumber')}:</div>
@@ -59,7 +53,7 @@ const Index = ({ branch, order }: Props) => {
               </div>
             )}
           </div>
-          <div className=" absolute top-1.5 right-2 text-xs text-misty">{order.date}</div>
+          <div className=" absolute top-4 right-2 text-xs text-misty">{order.date}</div>
         </div>
         <div className="w-full ">
           <div className="border-b my-2"></div>
@@ -76,39 +70,48 @@ const Index = ({ branch, order }: Props) => {
                     <span className="text-xs text-misty">( {order.items.length}ш )</span>
                   </span>
                 </div>
-
-                <div className="flex gap-4">
+                <div className="flex gap-2">
                   <button className="text-sm bg-current text-white rounded px-2 py-1">Үнэлгээ өгөх</button>
                   <div
                     onClick={() => showReciept(order)}
-                    className="text-start place-content-center content-center content-between grid"
+                    className="text-start place-content-center bg-current rounded px-2 py-1 content-center grid"
                   >
-                    <IoReceiptOutline className="w-6 h-6 text-current" />
+                    <BiReceipt className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </div>
             </>
           ) : (
             <>
-              <div className="grid  grid-cols-6 gap-2">
-                {order.state !== 'COMPLETED' && (
-                  <div className="col-span-1 flex place-content-center">
-                    <img src={ConvertOrderType(order.type)} alt="" className="w-10 h-10  rounded-lg" />
-                  </div>
-                )}
+              <div className="grid  grid-cols-5 gap-2">
                 <div className=" grid grid-cols-4  col-span-5">
-                  <div className="col-span-2 grid content-between ">
+                  <div className="col-span-2 grid gap-1 content-between ">
                     <span className="text-xs text-misty"> {t('mainPage.OrderStatus2')}: </span>
-                    <span className="text-xs text-misty ">{t(`mainPage.${order.state}`)}</span>
-                  </div>
-                  <div className="col-span-2 text-end  content-between grid">
-                    <span className="text-xs text-misty"> {t('mainPage.Total')}: </span>
-                    <span className=" flex gap-2 place-self-end">
-                      <span className="text-sm">
-                        {order.grandTotal.toLocaleString()} {CURRENCY}
+                    <div className="flex text-xs">
+                      <span className=" text-center bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 ">
+                        {t(`mainPage.${order.state}`)}
                       </span>
-                      <span className="text-xs text-misty">( {order.items.length}ш )</span>
-                    </span>
+                    </div>
+                  </div>
+                  <div className="col-span-2 text-end  place-self-end content-between grid">
+                    {order.vatState === 'G' ? (
+                      <div
+                        onClick={() => showReciept(order)}
+                        className="text-start w-8 place-content-center bg-current rounded px-2 py-1 content-center grid"
+                      >
+                        <BiReceipt className="w-6 h-6 text-white" />
+                      </div>
+                    ) : (
+                      <>
+                        <span className="text-xs text-misty"> {t('mainPage.Total')}: </span>
+                        <span className=" flex gap-2 place-self-end">
+                          <span className="text-sm">
+                            {order.grandTotal.toLocaleString()} {CURRENCY}
+                          </span>
+                          <span className="text-xs text-misty content-center">( {order.items.length}ш )</span>
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

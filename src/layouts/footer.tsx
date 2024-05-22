@@ -13,10 +13,10 @@ const Footer = () => {
       <footer className="relative p-2  bg-gray-50 dark:bg-gray-800 pt-2 pb-12 lg:pt-[50px] lg:pb-0">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className=" ">
-            <a href="https://flowbite.com/" className="flex items-center mb-4 space-x-3 rtl:space-x-reverse">
+            <div className="flex items-center mb-4 space-x-3 rtl:space-x-reverse">
               <img src={qmenuLogo.src} className="h-8" alt="Qmenu Logo" />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Qmenu</span>
-            </a>
+            </div>
             <ul className="flex flex-wrap items-center text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
               <div className=" flex items-center">
                 <p className="text-dark flex items-center text-sm font-medium">
@@ -65,11 +65,7 @@ const Footer = () => {
           </div>
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
           <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2023{' '}
-            <a href="https://flowbite.com/" className="hover:underline">
-              Qmenu™
-            </a>
-            . Бүх эрх хуулиар хамгаалагдсан.
+            © 2023 <div className="hover:underline">Qmenu™</div>. Бүх эрх хуулиар хамгаалагдсан.
           </span>
         </div>
       </footer>
