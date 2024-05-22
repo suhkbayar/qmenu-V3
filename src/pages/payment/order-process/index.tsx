@@ -167,7 +167,7 @@ const Index = () => {
                     participant?.services.map((service) => {
                       const serviceComponents = {
                         Dining,
-                        PreOrder,
+                        // PreOrder,
                         Delivery,
                         TakeAway,
                       };
