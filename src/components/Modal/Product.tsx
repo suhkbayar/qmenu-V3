@@ -13,6 +13,7 @@ import { CURRENCY } from '../../constants/currency';
 import { Modal } from 'flowbite-react';
 import { customThemeModal } from '../../../styles/themes';
 import { Translate } from 'react-auto-translate';
+import { GOOGLE_CLOUD_KEY } from '../../constants/api';
 
 type Props = {
   onClose: () => void;
@@ -22,8 +23,9 @@ type Props = {
 
 const Index = ({ onClose, product, visible }: Props) => {
   const { addOrderItem, addOrderItemOptional, participant } = useCallStore();
-  const { t } = useTranslation('language');
+  const { t, i18n } = useTranslation('language');
   const [selectedItem, setSelectedItem] = useState<IOrderItem>();
+  const [translatedText, setTranslatedText] = useState('');
   const [visibleValues, setVisibleValues] = useState(false);
 
   useEffect(() => {
@@ -106,6 +108,29 @@ const Index = ({ onClose, product, visible }: Props) => {
     onClose();
   };
 
+  useEffect(() => {
+    if (visible) {
+      const translateText = async () => {
+        const text = product.specification;
+        const response = await fetch(
+          `https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_CLOUD_KEY}`,
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              q: text,
+              target: i18n.language,
+            }),
+          },
+        );
+        const data = await response.json();
+        const translatedText = data.data.translations[0].translatedText;
+        setTranslatedText(translatedText);
+      };
+
+      translateText();
+    }
+  }, [visible]);
+
   return (
     <>
       <Modal
@@ -147,8 +172,7 @@ const Index = ({ onClose, product, visible }: Props) => {
                   <span className="block text-gray-500 text-sm  ">{CalculateProductPrice(product.variants)}</span>
                 </div>
               </div>
-              <div className="text-start text-gray1 mt-3" dangerouslySetInnerHTML={{ __html: product.specification }} />
-
+              <div className="text-start text-gray1 mt-3" dangerouslySetInnerHTML={{ __html: translatedText }} />
               {participant?.channel !== 'W' && (
                 <>
                   {participant?.orderable && (
