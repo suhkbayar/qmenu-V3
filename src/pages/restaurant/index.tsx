@@ -15,6 +15,7 @@ import { isEmpty } from 'lodash';
 import { Translator } from 'react-auto-translate';
 import { emptyOrder } from '../../mock';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
+import { getPartnerType } from '../../utils';
 
 const Index = () => {
   const router = useRouter();
@@ -45,7 +46,9 @@ const Index = () => {
       if (isValid) {
         router.push('/notfound');
       } else {
-        currentToken({ variables: { code: '', type: 'W' } });
+        const partner = getPartnerType();
+
+        currentToken({ variables: { code: '', type: 'W', token: partner?.token, partner: partner?.type } });
       }
     },
   });

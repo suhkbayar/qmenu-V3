@@ -116,3 +116,72 @@ export const qmenuConfigs = [
     value: 'LOGIN_REQUIRED',
   },
 ];
+
+export enum MiniAppType {
+  M = 'mbank',
+}
+
+export enum ChannelType {
+  S = 'S', //System
+  P = 'P', //Point of Sale
+  Q = 'Q', //QR Menu
+  W = 'W', //Web
+  K = 'K', //Kiosk
+  A = 'A', //Application
+  T = 'T', //Toki - Food Delivery
+  F = 'F', //Facebook
+  G = 'G', //Gastro
+  C = 'C', //FB Chat
+  M = 'M', //Monpay
+  U = 'U', //UBEats
+  I = 'I', //API
+  MR = 'MR', // Market
+  MB = 'MB', // MBank
+  PL = 'PL', // Public
+}
+
+export enum PaymentType {
+  Cash = 'Cash', //CSH
+  Card = 'Card', //CRD
+  QPay = 'QPay', //QPY
+  QPay2 = 'QPay2', //QPY v2
+  MonPay = 'MonPay', //MNP
+  SocialPay = 'SocialPay', //SLP
+  Toki = 'Toki', //TKI
+  Account = 'Account', //ACC
+  Invoice = 'Invoice', //INV
+  Upoint = 'Upoint', //UPT
+
+  UPT = 'UPT', //U-Point
+  CSH = 'CSH', //Cash
+  CRD = 'CRD', //Card
+  GLP = 'GLP', //GLMTPOS
+  QPY = 'QPY', //QPay
+  QP2 = 'QP2', //QPay v2
+  MNP = 'MNP', //MonPay
+  MNQ = 'MNQ', //MonPay QR
+  SLP = 'SLP', //SocialPay
+  TKI = 'TKI', //Toki
+  TKL = 'TKL', //Toki lunch
+  TKP = 'TKP', //Toki promo
+  CUP = 'CUP', //Coupon
+  VCR = 'VCR', //Voucher
+  GFT = 'GFT', //Gift Card
+  LOY = 'LOY', //Loyalty
+  CTE = 'CTE', //Canteen employee
+  MBK = 'MBK', //M-Bank
+  UNP = 'UNP', //UnionPay
+  UBE = 'UBE', //UBEats
+  MBP = 'MBP', //M-Bank Partner
+}
+
+export const PartnerObjType: {
+  [k in MiniAppType]?: {
+    channel: ChannelType;
+    payment: PaymentType;
+    name: string;
+    menu: string;
+  };
+} = {
+  [MiniAppType.M]: { channel: ChannelType.MB, payment: PaymentType.MBP, name: 'Mbank', menu: 'B' },
+};

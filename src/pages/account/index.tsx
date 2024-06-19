@@ -21,6 +21,7 @@ import Loader from '../../components/Loader/Loader';
 import ToggleButton from '../../components/Button/ToggleButton';
 import bonus from '../../assets/user/bonus.svg';
 import { GET_LOYALTIES_RECORDS, GET_ORDERS } from '../../graphql/query';
+import { getPartnerType } from '../../utils';
 
 const Index = () => {
   const { participant, setUser } = useCallStore();
@@ -59,9 +60,11 @@ const Index = () => {
 
   const onLogout = () => {
     const qr = localStorage.getItem('qr');
+    const partner = getPartnerType();
+
     if (qr) {
       localStorage.removeItem('token');
-      getCurrentToken({ variables: { code: qr, type: 'Q' } });
+      getCurrentToken({ variables: { code: qr, type: 'Q', token: partner?.token, partner: partner?.type } });
     }
   };
 

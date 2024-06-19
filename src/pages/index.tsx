@@ -9,6 +9,7 @@ import { isValidToken, setAccessToken } from '../providers/auth';
 import Footer from '../layouts/footer';
 import Features from '../layouts/feutures';
 import Loader from '../components/Loader/Loader';
+import { getPartnerType } from '../utils';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -24,7 +25,9 @@ const Home: NextPage = () => {
   });
 
   const fetchToken = useCallback(async () => {
-    await currentToken({ variables: { code: '', type: 'W' } });
+    const partner = getPartnerType();
+
+    await currentToken({ variables: { code: '', type: 'W', token: partner?.token, partner: partner?.type } });
   }, []);
 
   useEffect(() => {

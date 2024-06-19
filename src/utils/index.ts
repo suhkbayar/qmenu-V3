@@ -1,3 +1,5 @@
+import { MiniAppType } from '../constants/constant';
+
 export const numberFormat = new Intl.NumberFormat();
 
 export const shuffleArray = (array: any[]) => {
@@ -32,4 +34,28 @@ export const getTimeDiff = (sk: string): string => {
   } else {
     return `${timeDiffInDays} өдрийн${timeDiffInDays !== 1 ? '' : ''} өмнө`;
   }
+};
+
+export const getPartnerType = () => {
+  let item: { token: string; type: MiniAppType } | undefined;
+
+  try {
+    const type = JSON.parse(localStorage.getItem('partner'));
+    const token = JSON.parse(localStorage.getItem('partnerToken'));
+    if (type && token) item = { token, type };
+  } catch (error) {}
+
+  return item;
+};
+
+export const setPartnerType = (type: MiniAppType, token: string): void => {
+  try {
+    localStorage.setItem('partner', JSON.parse(type));
+    localStorage.setItem('partnerToken', JSON.parse(token));
+  } catch (error) {}
+};
+
+export const removePartnerType = (): void => {
+  localStorage.removeItem('partner');
+  localStorage.removeItem('partnerToken');
 };

@@ -19,7 +19,7 @@ import {
 import Loader from '../../components/Loader/Loader';
 import { useForm } from 'react-hook-form';
 
-import { NotificationType, PAYMENT_TYPE, LoyaltyType } from '../../constants/constant';
+import { NotificationType, PAYMENT_TYPE, LoyaltyType, MiniAppType, PartnerObjType } from '../../constants/constant';
 import {
   GET_PAY_ORDER,
   VALIDATE_TRANSACTION,
@@ -29,12 +29,14 @@ import {
 import { ITransaction } from '../../types/transaction';
 import { useNotificationContext } from '../../providers/notification';
 import { useLoyaltyContext } from '../../contexts/loyalty.context';
+import { getPartnerType } from '../../utils';
 
 const filterBanks = ['QPay', 'QPay2', 'UPT', 'Upoint', 'VCR'];
 
 const Index = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [partner, setPartner] = useState<MiniAppType>();
   const [visiblePending, setVisiblePending] = useState(false);
   const [visibleSucces, setVisibleSucces] = useState(false);
   const [visibleCashier, setVisibleCashier] = useState(false);
@@ -193,6 +195,13 @@ const Index = () => {
   };
 
   useEffect(() => {
+    const partner = getPartnerType();
+
+    if (partner) {
+      setPartner(partner.type);
+      setValue('paymentType', PartnerObjType[partner.type]?.payment);
+    }
+
     clearUpointState();
     if (data?.getOrder?.transaction?.length > 0) {
       setTransaction(data.getOrder.transaction[0]);
@@ -310,18 +319,22 @@ const Index = () => {
                 {participant.vat && <VatForm register={register} errors={errors} setValue={setValue} reset={reset} />}
 
                 <BankFrom
-                  banks={participant.payments.filter((payment) => !filterBanks.includes(payment.type))}
-                  watch={watch}
-                  onSelect={onSelectBank}
-                />
-
-                <QpayForm
-                  payment={participant.payments.find((payment) =>
-                    [PAYMENT_TYPE.QPay, PAYMENT_TYPE.QPay2].includes(payment.type),
+                  banks={participant.payments.filter((payment) =>
+                    partner ? PartnerObjType[partner]?.payment === payment.type : !filterBanks.includes(payment.type),
                   )}
                   watch={watch}
                   onSelect={onSelectBank}
                 />
+
+                {!partner && (
+                  <QpayForm
+                    payment={participant.payments.find((payment) =>
+                      [PAYMENT_TYPE.QPay, PAYMENT_TYPE.QPay2].includes(payment.type),
+                    )}
+                    watch={watch}
+                    onSelect={onSelectBank}
+                  />
+                )}
 
                 {participant.payments.find((payment) => payment.type === PAYMENT_TYPE.VCR) && (
                   <VoucherForm
@@ -347,6 +360,7 @@ const Index = () => {
                 paymentType={paymentType}
                 loading={loading || paying || cashierPaying || addingLoyalty || paying2 || validating}
                 grandTotal={data.getOrder.debtAmount}
+                partner={partner}
               />
             </form>
           </div>
