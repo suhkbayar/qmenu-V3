@@ -117,7 +117,7 @@ export const qmenuConfigs = [
   },
 ];
 
-export enum MiniAppType {
+export enum PartnerAppType {
   M = 'mbank',
 }
 
@@ -176,12 +176,12 @@ export enum PaymentType {
 }
 
 export const PartnerObjType: {
-  [k in MiniAppType]?: {
+  [k in PartnerAppType]?: {
     channel: ChannelType;
     payment: PaymentType;
     name: string;
     menu: string;
   };
 } = {
-  [MiniAppType.M]: { channel: ChannelType.MB, payment: PaymentType.MBP, name: 'Mbank', menu: 'B' },
+  [PartnerAppType.M]: { channel: ChannelType.MB, payment: PaymentType.MBP, name: 'Mbank', menu: 'B' },
 };

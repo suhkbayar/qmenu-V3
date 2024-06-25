@@ -1,4 +1,4 @@
-import { MiniAppType } from '../constants/constant';
+import { PartnerAppType } from '../constants/constant';
 
 export const numberFormat = new Intl.NumberFormat();
 
@@ -37,7 +37,7 @@ export const getTimeDiff = (sk: string): string => {
 };
 
 export const getPartnerType = () => {
-  let item: { token: string; type: MiniAppType } | undefined;
+  let item: { token: string; type: PartnerAppType } | undefined;
 
   try {
     const type = JSON.parse(localStorage.getItem('partner'));
@@ -48,7 +48,7 @@ export const getPartnerType = () => {
   return item;
 };
 
-export const setPartnerType = (type: MiniAppType, token: string): void => {
+export const setPartnerType = (type: PartnerAppType, token: string): void => {
   try {
     localStorage.setItem('partner', JSON.parse(type));
     localStorage.setItem('partnerToken', JSON.parse(token));

@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import Loader from '../../components/Loader/Loader';
-import { MiniAppType, NotificationType } from '../../constants/constant';
+import { PartnerAppType, NotificationType } from '../../constants/constant';
 import { useCallStore } from '../../contexts/call.store';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
 import { emptyOrder } from '../../mock';
@@ -12,7 +12,7 @@ import { removePartnerType, setPartnerType } from '../../utils';
 
 const Qr = () => {
   const router = useRouter();
-  const { id, token, type: partner } = router.query as { id?: string; token?: string; type?: MiniAppType };
+  const { id, token, type: partner } = router.query as { id?: string; token?: string; type?: PartnerAppType };
 
   const { authenticate, changeQr } = useContext(AuthContext);
   const { load, setUser } = useCallStore();
