@@ -35,8 +35,25 @@ const Index = () => {
 
   if (!participant) return null;
 
-  const products = participant.menu.categories.flatMap((category) => {
-    return [...category.products, ...category.children.flatMap((child) => child.products)];
+  const products = [];
+  const seenProductIds = new Set();
+
+  participant.menu.categories.forEach((category) => {
+    category.products.forEach((product) => {
+      if (!seenProductIds.has(product.productId)) {
+        products.push(product);
+        seenProductIds.add(product.productId);
+      }
+    });
+
+    category.children.forEach((child) => {
+      child.products.forEach((product) => {
+        if (!seenProductIds.has(product.productId)) {
+          products.push(product);
+          seenProductIds.add(product.productId);
+        }
+      });
+    });
   });
 
   const miniSearch = new MiniSearch({
