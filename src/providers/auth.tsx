@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useMemo, useState } from 'react';
 import decode from 'jwt-decode';
+import { SystemType } from '../constants/constant';
 
 export interface Payload {
   sub: string;
@@ -12,6 +13,7 @@ export interface Payload {
   currency: string;
   languages: string[];
   features: any[];
+  type: SystemType;
 }
 
 const getAccessToken = () => {

@@ -5,14 +5,14 @@ import { CURRENCY } from '../../constants/currency';
 import { useCallStore } from '../../contexts/call.store';
 import { numberFormat } from '../../utils';
 import { isEmpty } from 'lodash';
-import { PartnerAppType } from '../../constants/constant';
+import { SystemType } from '../../constants/constant';
 
 type Props = {
   loading: boolean;
   grandTotal: any;
   paymentType: string;
   showCashier: () => void;
-  partner?: PartnerAppType;
+  partner?: SystemType;
 };
 
 const Index = ({ loading, grandTotal, paymentType, showCashier, partner }: Props) => {

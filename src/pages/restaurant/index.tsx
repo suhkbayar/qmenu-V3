@@ -48,7 +48,7 @@ const Index = () => {
       } else {
         const partner = getPartnerType();
 
-        currentToken({ variables: { code: '', type: 'W', token: partner?.token, partner: partner?.type } });
+        currentToken({ variables: { code: '', type: 'W', ...(partner ?? {}) } });
       }
     },
   });

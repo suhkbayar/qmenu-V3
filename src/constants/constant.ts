@@ -1,3 +1,14 @@
+export enum SystemType {
+  C = 'C', //Customer
+  M = 'M', //Merchant
+  A = 'A', //Administrator
+  S = 'S', //System
+  T = 'T', //Toki
+  B = 'B', //Buyer
+  P = 'P', //Partner
+  MA = 'MA', // Mbank App
+}
+
 export const PAYMENT_TYPE = {
   QPay: 'QPay',
   QPay2: 'QPay2',
@@ -117,10 +128,6 @@ export const qmenuConfigs = [
   },
 ];
 
-export enum PartnerAppType {
-  M = 'mbank',
-}
-
 export enum ChannelType {
   S = 'S', //System
   P = 'P', //Point of Sale
@@ -172,16 +179,16 @@ export enum PaymentType {
   MBK = 'MBK', //M-Bank
   UNP = 'UNP', //UnionPay
   UBE = 'UBE', //UBEats
-  MBP = 'MBP', //M-Bank Partner
 }
 
 export const PartnerObjType: {
-  [k in PartnerAppType]?: {
+  [k in SystemType]?: {
+    type: SystemType;
     channel: ChannelType;
     payment: PaymentType;
     name: string;
     menu: string;
   };
 } = {
-  [PartnerAppType.M]: { channel: ChannelType.MB, payment: PaymentType.MBP, name: 'Mbank', menu: 'B' },
+  [SystemType.MA]: { type: SystemType.MA, channel: ChannelType.MB, payment: PaymentType.MBK, name: 'Mbank', menu: 'B' },
 };

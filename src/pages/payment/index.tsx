@@ -19,7 +19,7 @@ import {
 import Loader from '../../components/Loader/Loader';
 import { useForm } from 'react-hook-form';
 
-import { NotificationType, PAYMENT_TYPE, LoyaltyType, PartnerAppType, PartnerObjType } from '../../constants/constant';
+import { NotificationType, PAYMENT_TYPE, LoyaltyType, PartnerObjType, SystemType } from '../../constants/constant';
 import {
   GET_PAY_ORDER,
   VALIDATE_TRANSACTION,
@@ -29,14 +29,14 @@ import {
 import { ITransaction } from '../../types/transaction';
 import { useNotificationContext } from '../../providers/notification';
 import { useLoyaltyContext } from '../../contexts/loyalty.context';
-import { getPartnerType } from '../../utils';
+import { getPayload } from '../../providers/auth';
 
 const filterBanks = ['QPay', 'QPay2', 'UPT', 'Upoint', 'VCR'];
 
 const Index = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [partner, setPartner] = useState<PartnerAppType>();
+  const [partner, setPartner] = useState<SystemType>();
   const [visiblePending, setVisiblePending] = useState(false);
   const [visibleSucces, setVisibleSucces] = useState(false);
   const [visibleCashier, setVisibleCashier] = useState(false);
@@ -195,11 +195,11 @@ const Index = () => {
   };
 
   useEffect(() => {
-    const partner = getPartnerType();
+    const partner = PartnerObjType[getPayload()?.type ?? ('' as SystemType)];
 
     if (partner) {
       setPartner(partner.type);
-      setValue('paymentType', PartnerObjType[partner.type]?.payment);
+      setValue('paymentType', partner.payment);
     }
 
     clearUpointState();

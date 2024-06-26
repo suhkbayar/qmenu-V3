@@ -1,4 +1,4 @@
-import { PartnerAppType } from '../constants/constant';
+import { SystemType } from '../constants/constant';
 
 export const numberFormat = new Intl.NumberFormat();
 
@@ -36,26 +36,32 @@ export const getTimeDiff = (sk: string): string => {
   }
 };
 
+export const SystemTypeByPartner = {
+  mbank: SystemType.MA,
+};
+
+export type PartnerSystemType = typeof SystemTypeByPartner;
+
 export const getPartnerType = () => {
-  let item: { token: string; type: PartnerAppType } | undefined;
+  let item: { token: string; systemType: SystemType } | undefined;
 
   try {
-    const type = JSON.parse(localStorage.getItem('partner'));
+    const systemType = JSON.parse(localStorage.getItem('systemType'));
     const token = JSON.parse(localStorage.getItem('partnerToken'));
-    if (type && token) item = { token, type };
+    if (systemType && token) item = { token, systemType };
   } catch (error) {}
 
   return item;
 };
 
-export const setPartnerType = (type: PartnerAppType, token: string): void => {
+export const setPartnerType = (type: SystemType, token: string): void => {
   try {
-    localStorage.setItem('partner', JSON.parse(type));
+    localStorage.setItem('systemType', JSON.parse(type));
     localStorage.setItem('partnerToken', JSON.parse(token));
   } catch (error) {}
 };
 
 export const removePartnerType = (): void => {
-  localStorage.removeItem('partner');
+  localStorage.removeItem('systemType');
   localStorage.removeItem('partnerToken');
 };

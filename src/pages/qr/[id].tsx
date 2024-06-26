@@ -2,17 +2,17 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import Loader from '../../components/Loader/Loader';
-import { PartnerAppType, NotificationType } from '../../constants/constant';
+import { SystemType, NotificationType } from '../../constants/constant';
 import { useCallStore } from '../../contexts/call.store';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
 import { emptyOrder } from '../../mock';
 import { AuthContext } from '../../providers/auth';
 import { useNotificationContext } from '../../providers/notification';
-import { removePartnerType, setPartnerType } from '../../utils';
+import { SystemTypeByPartner, removePartnerType, setPartnerType } from '../../utils';
 
 const Qr = () => {
   const router = useRouter();
-  const { id, token, type: partner } = router.query as { id?: string; token?: string; type?: PartnerAppType };
+  const { id, token, type: systemType } = router.query as { id?: string; token?: string; type?: SystemType };
 
   const { authenticate, changeQr } = useContext(AuthContext);
   const { load, setUser } = useCallStore();
@@ -33,8 +33,8 @@ const Qr = () => {
   React.useEffect(() => {
     if (id) {
       // partner
-      console.log('Partner: ', token, partner);
-      if (token && partner) setPartnerType(partner, token);
+      console.log('Partner: ', token, systemType);
+      if (token && systemType) setPartnerType(SystemTypeByPartner[systemType], token);
       else removePartnerType();
 
       // banner
@@ -42,7 +42,7 @@ const Qr = () => {
 
       // qr & partner
       changeQr(id.toString());
-      getCurrentToken({ variables: { code: id, type: 'Q', token, partner } });
+      getCurrentToken({ variables: { code: id, type: 'Q', token, systemType } });
     }
   }, [id]);
 
