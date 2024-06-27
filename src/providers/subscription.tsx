@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useSubscription, useLazyQuery } from '@apollo/client';
-import { ON_TRACK_ORDER } from '../graphql/subscription/order';
+import { ON_UPDATED_ORDER } from '../graphql/subscription/order';
 import { IOrder } from '../types';
 import { GET_LOYALTIES_RECORDS, GET_ORDER, GET_ORDERS } from '../graphql/query';
 import { AuthContext, getPayload } from './auth';
@@ -21,7 +21,7 @@ const SubscriptionProvider = ({ children }) => {
     customerId = getPayload()?.sub;
   }
 
-  useSubscription(ON_TRACK_ORDER, {
+  useSubscription(ON_UPDATED_ORDER, {
     variables: { customer: customerId },
     skip: !customerId,
     onData({ client, data }) {
@@ -29,7 +29,7 @@ const SubscriptionProvider = ({ children }) => {
       const caches = client.readQuery<{ getOrders: IOrder[] }>({ query: GET_ORDERS });
       if (!caches?.getOrders) return;
 
-      const { event, order: subscriptionOrder } = data.data.onTrackOrder;
+      const { event, order: subscriptionOrder } = data.data.onUpdatedOrder;
       const updatedOrders = caches.getOrders.map((order) =>
         order.id === subscriptionOrder.id ? subscriptionOrder : order,
       );

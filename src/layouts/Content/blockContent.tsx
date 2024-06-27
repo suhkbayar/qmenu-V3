@@ -22,9 +22,12 @@ const DraftOrder = dynamic(() => import('../../components/Order/DraftOrder'));
 
 const Index = () => {
   const { participant } = useCallStore();
+
   const { role } = getPayload();
   const [searchField, setSearchField] = useState<string>();
   const [categories, setCategories] = useState<IMenuCategory[]>();
+
+  let imgUrl = participant?.branch?.background;
 
   useEffect(() => {
     if (participant.menu.categories.length > 0) {
@@ -132,7 +135,21 @@ const Index = () => {
   let isFirstIteration = true;
 
   return (
-    <>
+    <div
+      style={
+        imgUrl
+          ? {
+              backgroundImage: `url(${imgUrl})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              minHeight: '100vh',
+            }
+          : {
+              background: 'white',
+            }
+      }
+    >
       <div className="place-items-start hidden xl:grid grid-cols-10">
         <div className="col-span-2 w-full">
           {categories && (
@@ -225,7 +242,7 @@ const Index = () => {
         <Products products={getSelectedProducts(participant, selectedCategoryId, selectedSubCategoryId)} />
         <SmartBannerModal types={[BannerType.PQ]} />
       </div>
-    </>
+    </div>
   );
 };
 
