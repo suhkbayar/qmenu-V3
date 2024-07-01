@@ -12,6 +12,7 @@ const Index = () => {
   const [categories, setCategories] = useState<IMenuCategory[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  let imgUrl = participant?.branch?.background;
   useEffect(() => {
     const filteredCategories = participant.menu.categories.filter((category) => {
       const allProductsInactive = category.products.every((product) => product.state !== 'ACTIVE');
@@ -123,7 +124,22 @@ const Index = () => {
             </div>
           ))}
       </div>
-      <div className="col-span-9 sm:col-span-10 h-full bg-white overflow-y-auto dark:bg-gray-700">
+      <div
+        className="col-span-9 sm:col-span-10 h-full bg-white overflow-y-auto dark:bg-gray-700"
+        style={
+          imgUrl
+            ? {
+                backgroundImage: `url(${imgUrl})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                minHeight: '100vh',
+              }
+            : {
+                background: 'white',
+              }
+        }
+      >
         <GroupedVirtuoso
           ref={virtuoso}
           onScroll={onScroll}

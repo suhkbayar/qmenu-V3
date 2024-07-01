@@ -7,13 +7,16 @@ export const TRANSACTION_FIELDS = gql`
     type
     state
     token
-    code
     amount
+    vatExcludeAmount
     currency
     description
+    code
     comment
+    entry
     createdAt
     updatedAt
+    balance
     links {
       name
       description

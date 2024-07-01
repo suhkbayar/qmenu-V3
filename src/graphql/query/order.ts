@@ -51,9 +51,10 @@ export const ORDER_FIELDS = gql`
     returnedAt
     movedAt
     printed
+    printable
+    deliveryCode
   }
 `;
-
 export const ORDER_ITEM_FIELDS = gql`
   fragment OrderItemFields on OrderItem {
     id
@@ -64,17 +65,34 @@ export const ORDER_ITEM_FIELDS = gql`
     total
     name
     price
+    type
     discount
     createdAt
     updatedAt
     completedAt
     image
+    productId
     variantName
     options {
       ...OrderItemOptionFields
     }
   }
   ${ORDER_ITEM_OPTION_FIELDS}
+`;
+
+export const STAFF_FIELDS = gql`
+  fragment StaffFields on Staff {
+    id
+    name
+    firstName
+    lastName
+    phone
+    email
+    username
+    state
+    code
+    passwordChangedAt
+  }
 `;
 
 export const ORDER_LOYALTY_FIELDS = gql`

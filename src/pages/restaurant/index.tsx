@@ -73,7 +73,7 @@ const Index = () => {
           <Header />
           <Banner branch={data.getParticipant.branch} />
           {config ? config.menuTheme === 'list' ? <ListContent /> : <BlockContent /> : <BlockContent />}
-          <Footer />
+          <Footer branch={data.getParticipant.branch} />
           <BottomNavigation />
         </Translator>
       )}

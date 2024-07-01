@@ -1,18 +1,31 @@
 import { gql } from '@apollo/client';
 import { TABLE_FIELDS, TRANSACTION_FIELDS } from '../fragment';
-import { CHARGES_FIELDS, DISCOUNTS_FIELDS, ORDER_FIELDS, ORDER_ITEM_FIELDS, ORDER_LOYALTY_FIELDS } from '../query';
+import {
+  CHARGES_FIELDS,
+  DISCOUNTS_FIELDS,
+  ORDER_FIELDS,
+  ORDER_ITEM_FIELDS,
+  ORDER_LOYALTY_FIELDS,
+  STAFF_FIELDS,
+} from '../query';
 
-export const ON_TRACK_ORDER = gql`
-  subscription onTrackOrder($customer: ID!) {
-    onTrackOrder(customer: $customer) {
+export const ON_UPDATED_ORDER = gql`
+  subscription onUpdatedOrder($customer: ID!) {
+    onUpdatedOrder(customer: $customer) {
       branch
       customer
       event
       id
       order {
         ...OrderFields
+        table {
+          ...TableFields
+        }
         items {
           ...OrderItemFields
+        }
+        transactions {
+          ...TransactionFields
         }
         discounts {
           ...DiscountsFields
@@ -20,14 +33,11 @@ export const ON_TRACK_ORDER = gql`
         charges {
           ...ChargesFields
         }
-        transactions {
-          ...TransactionFields
-        }
         loyalties {
           ...OrderLoyaltyFields
         }
-        table {
-          ...TableFields
+        staff {
+          ...StaffFields
         }
       }
     }
@@ -39,4 +49,5 @@ export const ON_TRACK_ORDER = gql`
   ${ORDER_ITEM_FIELDS}
   ${TRANSACTION_FIELDS}
   ${ORDER_LOYALTY_FIELDS}
+  ${STAFF_FIELDS}
 `;
