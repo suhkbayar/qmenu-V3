@@ -16,11 +16,14 @@ import { Translator } from 'react-auto-translate';
 import { emptyOrder } from '../../mock';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
 import { getPartnerType } from '../../utils';
+import { CHECK_TABLE } from '../../graphql/query';
 
 const Index = () => {
   const router = useRouter();
   const { id } = router.query;
   const isValid = isValidToken();
+
+  const [checkTable, { loading: loadCheckTable }] = useLazyQuery(CHECK_TABLE);
 
   const { setParticipant, participant, order, load, config } = useCallStore();
   const { i18n } = useTranslation('language');
@@ -54,12 +57,28 @@ const Index = () => {
   });
 
   useEffect(() => {
+    checkTable({
+      variables: { code: localStorage.getItem('qr') },
+      onError({ graphQLErrors }) {
+        graphQLErrors.forEach((element: any) => {
+          switch (element.errorType) {
+            case 'OR0010': {
+              router.push('/signin');
+            }
+            case 'OR0011': {
+              router.push('/tableordered');
+            }
+          }
+        });
+      },
+    });
+
     if (id) {
       getBranch({ variables: { id: id } });
     }
   }, [id]);
 
-  if (loading) return <Loader />;
+  if (loading || loadCheckTable) return <Loader />;
 
   return (
     <>
