@@ -56,7 +56,7 @@ const Index = ({ setPin }: Props) => {
         pattern={PATTERN_CODE}
         required
         className="w-14 h-14 border-gray-800 border-none rounded-md text-lg text-black p-5 text-center bg-gray-100 outline-gray1"
-        ref={(ref) => (inputRefs.current[index] = ref)}
+        ref={(ref: any) => (inputRefs.current[index] = ref)}
         onChange={(e) => handleChange(e, index)}
         onKeyDown={(e) => handleKeyDown(e, index)}
       />

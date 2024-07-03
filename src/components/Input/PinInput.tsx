@@ -62,7 +62,7 @@ const PinInput = ({ onChange, onSubmit, className = '', length = 4, loading }: P
           value={pinCode[index] || ''}
           inputMode="numeric"
           autoFocus={index === 0}
-          ref={(el) => (inputRefs.current[index] = el)}
+          ref={(el: any) => (inputRefs.current[index] = el)}
           onBlur={() => blurable && focusInput(index)}
           onKeyDown={(e) => handleKeyDown(index, e)}
           onChange={(event) => !loading && handleInputChange(event.target.value)}
