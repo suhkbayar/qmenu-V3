@@ -239,3 +239,9 @@ export const GET_ORDERS = gql`
   ${ORDER_ITEM_FIELDS}
   ${TRANSACTION_FIELDS}
 `;
+
+export const CHECK_TABLE = gql`
+  query checkTable($code: String!) {
+    checkTable(code: $code)
+  }
+`;
