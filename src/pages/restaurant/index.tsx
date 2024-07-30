@@ -17,11 +17,14 @@ import { emptyOrder } from '../../mock';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
 import { getPartnerType } from '../../utils';
 import { CHECK_TABLE } from '../../graphql/query';
+import { NotificationType } from '../../constants/constant';
+import { useNotificationContext } from '../../providers/notification';
 
 const Index = () => {
   const router = useRouter();
   const { id } = router.query;
   const isValid = isValidToken();
+  const { showNotification } = useNotificationContext();
 
   const [checkTable, { loading: loadCheckTable }] = useLazyQuery(CHECK_TABLE);
 
@@ -63,6 +66,7 @@ const Index = () => {
         graphQLErrors.forEach((element: any) => {
           switch (element.errorType) {
             case 'OR0010': {
+              showNotification(NotificationType.INFO, element.message);
               router.push('/signin');
             }
             case 'OR0011': {

@@ -5,9 +5,10 @@ type Props = {
   loading?: boolean;
   text: string;
   onClick?: () => void;
+  className?: string;
 };
 
-const Index = ({ loading, text, onClick }: Props) => {
+const Index = ({ loading, text, onClick, className }: Props) => {
   return (
     <button
       type="submit"
@@ -15,7 +16,7 @@ const Index = ({ loading, text, onClick }: Props) => {
       onClick={onClick}
       className={`w-full  flex items-center  place-content-center rounded-lg px-4 py-2  md: px-5 py-3 bg-current text-blue-100 hover:bg-current duration-300 ${
         loading && 'opacity-75'
-      } `}
+      } ${className ?? ''}`}
     >
       {loading && <CgSpinner className="text-lg mr-1 animate-spin" />}
       {text}
