@@ -72,6 +72,9 @@ const Index = () => {
             case 'OR0011': {
               router.push('/tableordered');
             }
+            case 'OR0012': {
+              router.push('/notyet');
+            }
           }
         });
       },
