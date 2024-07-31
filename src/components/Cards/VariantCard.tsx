@@ -6,6 +6,7 @@ import check from '../../assets/order/Check.png';
 import unCheck from '../../assets/order/UnCheck.png';
 import { CURRENCY } from '../../constants/currency';
 import { Translate } from 'react-auto-translate';
+import { isEmpty } from 'lodash';
 
 type Props = {
   variant: IMenuVariant;
@@ -27,7 +28,7 @@ const Index = ({ variant, selectedItem, onSelect, onRemove }: Props) => {
       >
         <div className="flex justify-between">
           <h2 className="line-clamp-2  font-normal text-misty text-sm ">
-            <Translate>{variant.name}</Translate>
+            {!isEmpty(variant.name) && <Translate>{variant.name}</Translate>}
           </h2>
           <img
             alt="check-variant"

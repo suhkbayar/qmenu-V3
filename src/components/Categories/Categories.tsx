@@ -1,6 +1,7 @@
 import React from 'react';
 import { IMenuCategory } from '../../types';
 import { Translate } from 'react-auto-translate';
+import { isEmpty } from 'lodash';
 
 type Props = {
   selectedCategoryId: string;
@@ -50,7 +51,7 @@ const Index = ({
                 style={{ backgroundColor: category.color }}
               >
                 <div className="whitespace-nowrap pl-3 pr-3 pt-1 pb-1 text-xs md:text-base text-white font-semibold">
-                  <Translate>{category.name}</Translate>
+                  {!isEmpty(category.name) && <Translate>{category.name}</Translate>}
                 </div>
               </li>
             </div>
@@ -84,7 +85,7 @@ const Index = ({
                     className="flex rounded-md h-6 m-1 md:h-8 m-1 md:m-2 items-center space-y-1"
                   >
                     <div className="whitespace-nowrap pl-3 pr-3 pt-1 pb-1 text-xs md:text-base text-white font-semibold">
-                      <Translate>{subCategory.name}</Translate>
+                      {!isEmpty(subCategory.name) && <Translate>{subCategory.name}</Translate>}
                     </div>
                   </li>
                 </div>
