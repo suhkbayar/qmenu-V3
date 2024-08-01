@@ -26,7 +26,7 @@ const Qr = () => {
     },
     onError(err) {
       showNotification(NotificationType.WARNING, err.message);
-      // router.push('/notfound');
+      router.push('/notfound');
     },
   });
 

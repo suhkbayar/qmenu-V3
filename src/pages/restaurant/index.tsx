@@ -6,13 +6,11 @@ import { useCallStore } from '../../contexts/call.store';
 import { GET_BRANCH } from '../../graphql/query/branch';
 import Loader from '../../components/Loader/Loader';
 import { Banner, BlockContent, BottomNavigation, Header, ListContent, PreOrderModal } from '../../components';
-import { cacheProvider } from '../../contexts/translate.context';
 import { Languages } from '../../constants/constantLang';
 import { useTranslation } from 'react-i18next';
 import { GOOGLE_CLOUD_KEY } from '../../constants/constanApi';
 import Footer from '../../layouts/footer';
 import { isEmpty } from 'lodash';
-import { Translator } from 'react-auto-translate';
 import { emptyOrder } from '../../mock';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
 import { getClosestTime, getDateByTime, getPartnerType } from '../../utils';
@@ -21,6 +19,7 @@ import { NotificationType, SEAT_DURATION } from '../../constants/constant';
 import { useNotificationContext } from '../../providers/notification';
 import { IOrder } from '../../types';
 import { usePreOrderStore } from '../../contexts/preorder.store';
+import { TranslateProvider } from '../../providers/TranslateProvider';
 
 const Index = () => {
   const router = useRouter();
@@ -107,18 +106,19 @@ const Index = () => {
   return (
     <>
       {data && participant && (
-        <Translator
-          cacheProvider={cacheProvider}
-          from="mn"
-          to={Languages.find((item) => i18n.language.includes(item.name.toLowerCase())).name.toLowerCase()}
+        <TranslateProvider
           googleApiKey={GOOGLE_CLOUD_KEY}
+          defaultLanguage="mn"
+          language={
+            Languages.find((item) => i18n.language.includes(item.name.toLowerCase()))?.name.toLowerCase() || 'en'
+          }
         >
           <Header />
           <Banner branch={data.getParticipant.branch} />
           {config ? config.menuTheme === 'list' ? <ListContent /> : <BlockContent /> : <BlockContent />}
           <Footer branch={data.getParticipant.branch} />
           <BottomNavigation />
-        </Translator>
+        </TranslateProvider>
       )}
       <PreOrderModal visible={visible} onClose={() => setVisible(false)} />
     </>

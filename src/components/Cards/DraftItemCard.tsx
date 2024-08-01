@@ -36,7 +36,7 @@ const Index = ({ item, image }: Props) => {
           </div>
           <div className="w-38 ml-2 grid p-1 place-content-between">
             <span className="text-base  font-medium line-clamp-2 ">
-              <Translate>{item.name}</Translate>
+              {!isEmpty(item.name) && <Translate>{item.name}</Translate>}
             </span>
 
             <div className="flex items-center cursor-pointer" onClick={() => showAddComment()}>

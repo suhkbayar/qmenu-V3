@@ -89,15 +89,13 @@ const Index = ({ product, orderItem }: Props) => {
           } w-full h-full grid py-2 content-between`}
         >
           <span className="text-sm flex font-medium  w-full  justify-between ">
-            <p className="line-clamp-2 ">
-              <Translate>{product.name}</Translate>
-            </p>
+            <p className="line-clamp-2 ">{!isEmpty(product.name) && <Translate>{product.name}</Translate>}</p>
 
             {product.bonus && <span className="text-xs text-green-500 w-16 "></span>}
           </span>
 
           <span className="line-clamp-2 grid text-misty mb-1 content-evenly dark:text-gray-400  leading-3 h-7  text-xs  ">
-            <Translate>{product.description}</Translate>
+            {!isEmpty(product.description) && <Translate>{product.description}</Translate>}
           </span>
           <div className="content-center	">
             <span className="text-sm font-medium text-current gap flex place-items-center">
