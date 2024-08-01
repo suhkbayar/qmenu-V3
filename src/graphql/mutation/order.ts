@@ -1,6 +1,13 @@
 import { gql } from '@apollo/client';
 import { TABLE_FIELDS, TRANSACTION_FIELDS } from '../fragment';
-import { CHARGES_FIELDS, DISCOUNTS_FIELDS, ORDER_FIELDS, ORDER_ITEM_FIELDS, ORDER_LOYALTY_FIELDS } from '../query';
+import {
+  CHARGES_FIELDS,
+  DISCOUNTS_FIELDS,
+  ORDER_FIELDS,
+  ORDER_ITEM_FIELDS,
+  ORDER_LOYALTY_FIELDS,
+  ORDER_TABLE_FIELDS,
+} from '../query';
 
 export const CREATE_ORDER = gql`
   mutation createOrder($id: ID, $input: OrderInput!, $participant: ID!) {
@@ -154,4 +161,41 @@ export const CORRECTION_TRANSACTION = gql`
   ${ORDER_ITEM_FIELDS}
   ${TRANSACTION_FIELDS}
   ${ORDER_LOYALTY_FIELDS}
+`;
+
+export const START_ORDER = gql`
+  mutation startOrder($id: ID!) {
+    startOrder(id: $id) {
+      ...OrderFields
+      table {
+        ...TableFields
+      }
+      items {
+        ...OrderItemFields
+      }
+      transactions {
+        ...TransactionFields
+      }
+      discounts {
+        ...DiscountsFields
+      }
+      charges {
+        ...ChargesFields
+      }
+      loyalties {
+        ...OrderLoyaltyFields
+      }
+      tables {
+        ...OrderTableFields
+      }
+    }
+  }
+  ${TABLE_FIELDS}
+  ${ORDER_FIELDS}
+  ${DISCOUNTS_FIELDS}
+  ${CHARGES_FIELDS}
+  ${ORDER_ITEM_FIELDS}
+  ${TRANSACTION_FIELDS}
+  ${ORDER_LOYALTY_FIELDS}
+  ${ORDER_TABLE_FIELDS}
 `;

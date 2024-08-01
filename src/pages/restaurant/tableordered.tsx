@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import { Button, Notfound } from '../components';
+import { Button, Notfound } from '../../components';
 // import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../providers/auth';
+import { AuthContext } from '../../providers/auth';
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/client';
-import { CURRENT_TOKEN } from '../graphql/mutation/token';
-import { NotificationType } from '../constants/constant';
-import { useNotificationContext } from '../providers/notification';
-import { getPartnerType } from '../utils';
+import { CURRENT_TOKEN } from '../../graphql/mutation/token';
+import { NotificationType } from '../../constants/constant';
+import { useNotificationContext } from '../../providers/notification';
+import { getPartnerType } from '../../utils';
 
 const NotFoundPage: React.FC = () => {
   // const { t } = useTranslation();

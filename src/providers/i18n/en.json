@@ -301,6 +301,8 @@
     "EnterPinCode": "Please enter your pin code.",
     "Point": "Point",
     "SpendPoint": "Point to spend",
-    "JobApplication": "Job application"
+    "JobApplication": "Job application",
+    "StartPreOrder": "Your pre-order has been confirmed",
+    "Close": "Close"
   }
 }

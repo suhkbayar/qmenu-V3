@@ -300,7 +300,8 @@
     "EnterPinCode": "Vänligen ange din pinkod.",
     "Point": "Punkt",
     "SpendPoint": "Poäng att spendera",
-    "JobApplication":"JobApplication"
-
+    "JobApplication":"JobApplication",
+    "StartPreOrder": "Din förbeställning har bekräftats",
+    "Close": "Stänga"
   }
 }

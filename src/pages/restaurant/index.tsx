@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { isValidToken, setAccessToken } from '../../providers/auth';
 import { useCallStore } from '../../contexts/call.store';
 import { GET_BRANCH } from '../../graphql/query/branch';
 import Loader from '../../components/Loader/Loader';
-import { Banner, BlockContent, BottomNavigation, Header, ListContent } from '../../components';
+import { Banner, BlockContent, BottomNavigation, Header, ListContent, PreOrderModal } from '../../components';
 import { cacheProvider } from '../../contexts/translate.context';
 import { Languages } from '../../constants/constantLang';
 import { useTranslation } from 'react-i18next';
@@ -15,16 +15,20 @@ import { isEmpty } from 'lodash';
 import { Translator } from 'react-auto-translate';
 import { emptyOrder } from '../../mock';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
-import { getPartnerType } from '../../utils';
+import { getClosestTime, getDateByTime, getPartnerType } from '../../utils';
 import { CHECK_TABLE } from '../../graphql/query';
-import { NotificationType } from '../../constants/constant';
+import { NotificationType, SEAT_DURATION } from '../../constants/constant';
 import { useNotificationContext } from '../../providers/notification';
+import { IOrder } from '../../types';
+import { usePreOrderStore } from '../../contexts/preorder.store';
 
 const Index = () => {
   const router = useRouter();
   const { id } = router.query;
   const isValid = isValidToken();
   const { showNotification } = useNotificationContext();
+  const [visible, setVisible] = useState<boolean>(false);
+  const { load: loadPreOrders } = usePreOrderStore();
 
   const [checkTable, { loading: loadCheckTable }] = useLazyQuery(CHECK_TABLE);
 
@@ -62,18 +66,31 @@ const Index = () => {
   useEffect(() => {
     checkTable({
       variables: { code: localStorage.getItem('qr') },
+      onCompleted({ checkTable }: { checkTable: IOrder[] }) {
+        if (checkTable.length > 0) {
+          const order = checkTable[0];
+          const timesArray = Array.from({ length: 60 / SEAT_DURATION }, (_, i) => i * SEAT_DURATION);
+          const checkDate = getDateByTime(getClosestTime(timesArray, new Date()));
+          const orderDate = new Date(order.startAt);
+
+          if (+orderDate >= +checkDate) setVisible(true);
+          else {
+            loadPreOrders(checkTable);
+            router.push('/restaurant/notyet');
+          }
+        } else loadPreOrders([]);
+      },
       onError({ graphQLErrors }) {
         graphQLErrors.forEach((element: any) => {
           switch (element.errorType) {
             case 'OR0010': {
               showNotification(NotificationType.INFO, element.message);
               router.push('/signin');
+              break;
             }
             case 'OR0011': {
-              router.push('/tableordered');
-            }
-            case 'OR0012': {
-              router.push('/notyet');
+              router.push('/restaurant/tableordered');
+              break;
             }
           }
         });
@@ -103,6 +120,7 @@ const Index = () => {
           <BottomNavigation />
         </Translator>
       )}
+      <PreOrderModal visible={visible} onClose={() => setVisible(false)} />
     </>
   );
 };

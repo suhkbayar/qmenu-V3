@@ -277,7 +277,8 @@
     "EnterPinCode": "Пожалуйста, введите свой пин-код.",
     "Point": "Точка",
     "SpendPoint": "Баллы, которые можно потратить",
-    "JobApplication":"JobApplication"
-
+    "JobApplication":"JobApplication",
+    "StartPreOrder": "Ваш предварительный заказ подтвержден",
+    "Close": "Закрыть"
   }
 }
