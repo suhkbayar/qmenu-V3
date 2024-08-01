@@ -46,6 +46,7 @@ export interface IOrder {
   vatIncludeAmount: number;
   vatExcludeAmount: number;
   startAt: string;
+  duration?: number;
   vats?: IVats[];
 }
 

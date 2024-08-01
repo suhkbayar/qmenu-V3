@@ -54,6 +54,7 @@ export const ORDER_FIELDS = gql`
     printable
     deliveryCode
     startAt
+    duration
   }
 `;
 export const ORDER_ITEM_FIELDS = gql`

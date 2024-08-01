@@ -65,31 +65,3 @@ export const removePartnerType = (): void => {
   localStorage.removeItem('systemType');
   localStorage.removeItem('partnerToken');
 };
-
-export const getDateByTime = (time: string, date: Date = new Date()) => {
-  const [h, m] = time.split(':');
-  return setDateTime(+h, +m, 0, date);
-};
-
-const setDateTime = (hours: number, minute: number, second: number, date?: Date) => {
-  const futureDate = date ? new Date(date) : new Date();
-  futureDate.setHours(hours);
-  futureDate.setMinutes(minute);
-  futureDate.setSeconds(second);
-  return futureDate;
-};
-
-export function getClosestTime(timesArray: number[], date: Date): string {
-  let result = 0;
-
-  const hours = date.getHours();
-  const minute = date.getMinutes();
-
-  for (let i = 0; i < timesArray.length; i++) {
-    const currentTime = timesArray[i];
-    const nextTime = timesArray[i + 1];
-    if (minute >= currentTime && (!nextTime || nextTime > minute)) result = currentTime;
-  }
-
-  return `${hours.toString().padStart(2, '0')}:${result.toString().padStart(2, '0')}`;
-}

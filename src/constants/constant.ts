@@ -192,5 +192,3 @@ export const PartnerObjType: {
 } = {
   [SystemType.MA]: { type: SystemType.MA, channel: ChannelType.MB, payment: PaymentType.MBK, name: 'Mbank', menu: 'B' },
 };
-
-export const SEAT_DURATION = 30;

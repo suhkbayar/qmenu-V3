@@ -13,9 +13,9 @@ import Footer from '../../layouts/footer';
 import { isEmpty } from 'lodash';
 import { emptyOrder } from '../../mock';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
-import { getClosestTime, getDateByTime, getPartnerType } from '../../utils';
+import { getPartnerType } from '../../utils';
 import { CHECK_TABLE } from '../../graphql/query';
-import { NotificationType, SEAT_DURATION } from '../../constants/constant';
+import { NotificationType } from '../../constants/constant';
 import { useNotificationContext } from '../../providers/notification';
 import { IOrder } from '../../types';
 import { usePreOrderStore } from '../../contexts/preorder.store';
@@ -68,11 +68,13 @@ const Index = () => {
       onCompleted({ checkTable }: { checkTable: IOrder[] }) {
         if (checkTable.length > 0) {
           const order = checkTable[0];
-          const timesArray = Array.from({ length: 60 / SEAT_DURATION }, (_, i) => i * SEAT_DURATION);
-          const checkDate = getDateByTime(getClosestTime(timesArray, new Date()));
-          const orderDate = new Date(order.startAt);
 
-          if (+orderDate >= +checkDate) setVisible(true);
+          const currentDate = new Date();
+          const orderStartDate = new Date(order.startAt);
+          const orderEndDate = new Date(order.startAt);
+          orderEndDate.setMinutes(orderEndDate.getMinutes() + order.duration);
+
+          if (orderStartDate <= currentDate && orderEndDate >= currentDate) setVisible(true);
           else {
             loadPreOrders(checkTable);
             router.push('/restaurant/notyet');
