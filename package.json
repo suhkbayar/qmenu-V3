@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "sst deploy --stage prod"
+    "deploy": "sst deploy --stage dev --profile qmenu"
   },
   "dependencies": {
     "@apollo/client": "^3.5.8",

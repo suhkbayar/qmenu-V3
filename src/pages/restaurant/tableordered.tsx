@@ -27,7 +27,7 @@ const NotFoundPage: React.FC = () => {
 
   return (
     <div className="relative w-full h-screen">
-      <Notfound title="Ширээг урьдчилан захиалсан байна." />
+      <Notfound title="Ширээг урьдчилан захиалсан байна." text="" />
       <Button
         loading={loading}
         className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 h-10 w-max"
