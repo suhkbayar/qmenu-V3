@@ -89,6 +89,8 @@ export const ConvertBankImg = (type: any) => {
       return unp.src;
     case PAYMENT_TYPE.VCR:
       return voucher.src;
+    case PAYMENT_TYPE.MBK:
+      return mbank.src;
     default:
       return type;
   }

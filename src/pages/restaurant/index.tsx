@@ -9,7 +9,6 @@ import { Banner, BlockContent, BottomNavigation, Header, ListContent } from '../
 import { Languages } from '../../constants/constantLang';
 import { useTranslation } from 'react-i18next';
 import { GOOGLE_CLOUD_KEY } from '../../constants/constanApi';
-import Footer from '../../layouts/footer';
 import { isEmpty } from 'lodash';
 import { emptyOrder } from '../../mock';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
@@ -70,7 +69,6 @@ const Index = () => {
           <Header />
           <Banner branch={data.getParticipant.branch} />
           {config ? config.menuTheme === 'list' ? <ListContent /> : <BlockContent /> : <BlockContent />}
-          <Footer branch={data.getParticipant.branch} />
           <BottomNavigation />
         </TranslateProvider>
       )}

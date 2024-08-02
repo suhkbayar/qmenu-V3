@@ -11,6 +11,7 @@ import { GET_LOYALTIES_RECORDS } from '../../graphql/query/loyalty';
 import { RankingCard, SmartBannerModal } from '../../components';
 import { IMenuCategory } from '../../types/menu';
 import { BannerType } from '../../types';
+import Footer from '../footer';
 
 const SideBarCategories = dynamic(() => import('../../components/Categories/SideBarCategories'));
 const Products = dynamic(() => import('../../components/Products/Products'), {
@@ -21,7 +22,7 @@ const Categories = dynamic(() => import('../../components/Categories/Categories'
 const DraftOrder = dynamic(() => import('../../components/Order/DraftOrder'));
 
 const Index = () => {
-  const { participant } = useCallStore();
+  const { participant, config } = useCallStore();
 
   const { role } = getPayload();
   const [searchField, setSearchField] = useState<string>();
@@ -242,6 +243,7 @@ const Index = () => {
         <Products products={getSelectedProducts(participant, selectedCategoryId, selectedSubCategoryId)} />
         <SmartBannerModal types={[BannerType.PQ]} />
       </div>
+      <Footer branch={participant.branch} />
     </div>
   );
 };
