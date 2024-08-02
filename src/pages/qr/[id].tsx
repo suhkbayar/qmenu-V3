@@ -34,15 +34,19 @@ const Qr = () => {
     if (id) {
       // partner
       console.log('Partner: ', token, systemType);
-      if (token && systemType) setPartnerType(SystemTypeByPartner[systemType], token);
-      else removePartnerType();
+      let systemTypeValue = undefined;
+
+      if (token && systemType) {
+        systemTypeValue = SystemTypeByPartner[systemType];
+        setPartnerType(systemTypeValue, token);
+      } else removePartnerType();
 
       // banner
       localStorage.setItem('banner', JSON.stringify(true));
 
       // qr & partner
       changeQr(id.toString());
-      getCurrentToken({ variables: { code: id, type: 'Q', token, systemType } });
+      getCurrentToken({ variables: { code: id, type: 'Q', token, systemType: systemTypeValue } });
     }
   }, [id]);
 
