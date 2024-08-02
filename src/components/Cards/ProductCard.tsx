@@ -63,7 +63,10 @@ const Index = ({ product, orderItem }: Props) => {
   return (
     <>
       <div key={product.id} className=" w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/4 p-2 ">
-        <div className=" relative hover:shadow-xl  shadow-lg bg-white  dark:bg-gray-700 rounded-md ">
+        <div
+          className={` relative hover:shadow-xl  shadow-lg bg-white  dark:bg-gray-700 rounded-md rounded-t-xl `}
+          style={{ background: config.cardBackgroundColor, border: ` 1px solid  ${config?.textColor}` }}
+        >
           {product.bonus && <div className="ribbon-2">{product.bonus}</div>}
           {!config || !config.hideImage ? (
             <div className="relative object-cover rounded-md " onClick={() => setVisible(true)}>
@@ -83,14 +86,20 @@ const Index = ({ product, orderItem }: Props) => {
           )}
 
           <div className="m-4  mb-0">
-            <h2 className="line-clamp-2 h-9 leading-4 font-bold  dark:text-gray-400 text-sm text-misty">
+            <h2
+              className="line-clamp-2 h-9 leading-4 font-bold  dark:text-gray-400 text-sm text-misty"
+              style={{ color: config?.textColor }}
+            >
               {!isEmpty(product.name) && <Translate>{product.name}</Translate>}
             </h2>
-            <span className="line-clamp-2 text-misty mb-1 dark:text-gray-400  leading-3 h-7 text-gray-500 text-sm  ">
+            <span
+              className="line-clamp-2 text-misty mb-1 dark:text-gray-400  leading-3 h-7 text-gray-500 text-sm  "
+              style={{ color: config?.textColor }}
+            >
               {!isEmpty(product.description) && <Translate>{product.description}</Translate>}
             </span>
-            <span className="block text-gray-500 text-sm h-7 leading-3 ">
-              {CalculateProductPrice(product.variants)}
+            <span className="block text-gray-500 text-sm h-7 leading-3 " style={{ color: config?.textColor }}>
+              {!config.hidePrice && CalculateProductPrice(product.variants, config)}
             </span>
           </div>
           {participant?.channel !== 'W' && (
@@ -102,9 +111,10 @@ const Index = ({ product, orderItem }: Props) => {
                       <div className="border-b my-2"></div>
                       <button
                         onClick={() => setVisible(true)}
+                        style={{ color: config?.textColor, borderColor: config?.textColor }}
                         className="flex font-semibold cursor-pointer place-content-center items-center rounded border border-current w-full text-current  text-sm p-1"
                       >
-                        <FiShoppingCart className="text-current mr-2" />
+                        <FiShoppingCart className="text-current mr-2" style={{ color: config?.textColor }} />
                         {t('mainPage.Enter')}
                       </button>
                     </div>
@@ -117,12 +127,17 @@ const Index = ({ product, orderItem }: Props) => {
                             <CiSquareMinus
                               onClick={() => onRemove(product)}
                               className="cursor-pointer text-current w-10 h-10"
+                              style={{ color: config?.textColor }}
                             />
-                            <p className={`mx-2 text-current ${showAnimation ? 'animate-quantity-change' : ''} `}>
+                            <p
+                              className={`mx-2 text-current ${showAnimation ? 'animate-quantity-change' : ''} `}
+                              style={{ color: config?.textColor }}
+                            >
                               {orderItem.quantity}
                             </p>
                             <CiSquarePlus
                               onClick={() => onSelect(product.productId)}
+                              style={{ color: config?.textColor }}
                               className="cursor-pointer text-current w-10 h-10"
                             />
                           </div>
@@ -134,9 +149,10 @@ const Index = ({ product, orderItem }: Props) => {
                             <button
                               onClick={() => onSelect(product.productId)}
                               className="flex font-semibold cursor-pointer place-content-center items-center rounded border border-current w-full text-current  text-sm p-1"
+                              style={{ color: config?.textColor, borderColor: config?.textColor }}
                             >
-                              <FiShoppingCart className="text-current mr-2" />
-                              {t('mainPage.Order')}
+                              <FiShoppingCart className="text-current mr-2" style={{ color: config?.textColor }} />
+                              {config.buttonText ? config.buttonText : t('mainPage.Order')}
                             </button>
                           </div>
                         </>

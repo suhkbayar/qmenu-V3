@@ -4,6 +4,7 @@ import { GroupedVirtuoso } from 'react-virtuoso';
 import { useCallStore } from '../../contexts/call.store';
 import { IMenuCategory } from '../../types';
 import { ListProduct } from '../../components';
+import Footer from '../footer';
 
 const Index = () => {
   const { participant } = useCallStore();
@@ -163,6 +164,7 @@ const Index = () => {
           )}
         />
       </div>
+      <Footer branch={participant.branch} />
     </div>
   );
 };

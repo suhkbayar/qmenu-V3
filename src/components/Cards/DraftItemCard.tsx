@@ -17,7 +17,7 @@ const Index = ({ item, image }: Props) => {
   const { t } = useTranslation('language');
   const [visible, setVisible] = useState(false);
 
-  const { addOrderItem, remove, addOrderItemComment } = useCallStore();
+  const { addOrderItem, remove, addOrderItemComment, config } = useCallStore();
 
   const addComment = (comment: string) => {
     addOrderItemComment(item, comment);
@@ -29,7 +29,10 @@ const Index = ({ item, image }: Props) => {
 
   return (
     <>
-      <div className="bg-white flex mb-4 rounded-xl w-full place-content-between drop-shadow-lg  dark:bg-gray-700 ">
+      <div
+        className="bg-white flex mb-4 rounded-xl w-full place-content-between drop-shadow-lg  dark:bg-gray-700 "
+        style={{ background: config.backgroundColor, border: `1px solid ${config?.textColor}` }}
+      >
         <div className="flex">
           <div className="w-40 place-self-center ">
             <img alt="A scenic landscape" className="w-40 rounded-lg h-full" src={image} />
@@ -45,7 +48,12 @@ const Index = ({ item, image }: Props) => {
                 {isEmpty(item.comment) ? <>{t('mainPage.additionalRequests')}</> : item.comment}
               </span>
             </div>
-            <span className="text-base font-medium text-current ">
+            <span
+              className="text-base font-medium text-current "
+              style={{
+                color: config?.textColor,
+              }}
+            >
               {item.price.toLocaleString()} {CURRENCY}
             </span>
           </div>
@@ -53,9 +61,28 @@ const Index = ({ item, image }: Props) => {
 
         <div className="w-12 place-self-center">
           <div className="grid  items-center place-content-center py-1">
-            <CiSquarePlus onClick={() => addOrderItem(item)} className="cursor-pointer text-current w-9 h-9" />
-            <p className="mx-2 text-current animate-quantity-change  text-center">{item.quantity}</p>
-            <CiSquareMinus onClick={() => remove(item)} className="cursor-pointer text-current w-9 h-9" />
+            <CiSquarePlus
+              onClick={() => addOrderItem(item)}
+              className="cursor-pointer text-current w-9 h-9"
+              style={{
+                color: config?.textColor,
+              }}
+            />
+            <p
+              className="mx-2 text-current animate-quantity-change  text-center"
+              style={{
+                color: config?.textColor,
+              }}
+            >
+              {item.quantity}
+            </p>
+            <CiSquareMinus
+              onClick={() => remove(item)}
+              style={{
+                color: config?.textColor,
+              }}
+              className="cursor-pointer text-current w-9 h-9"
+            />
           </div>
         </div>
       </div>
