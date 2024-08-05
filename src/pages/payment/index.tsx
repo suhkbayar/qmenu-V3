@@ -199,7 +199,7 @@ const Index = () => {
 
     if (partner) {
       setPartner(partner.type);
-      setValue('paymentType', partner.payment);
+      // setValue('paymentType', partner.payment);
     }
 
     clearUpointState();
