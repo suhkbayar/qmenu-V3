@@ -4,15 +4,17 @@ import { CURRENCY } from '../../constants/currency';
 import { useCallStore } from '../../contexts/call.store';
 import { Modal } from 'flowbite-react';
 import { customThemeDraftModal } from '../../../styles/themes';
-import { AdultsOnlyModal, DraftItemCard } from '..';
+import { AdultsOnlyModal, DraftItemCard, SuccesOrderModal } from '..';
 import { isEmpty } from 'lodash';
-import { TYPE } from '../../constants/constant';
+import { NotificationType, TYPE } from '../../constants/constant';
 import { useMutation } from '@apollo/client';
-import { CREATE_ORDER } from '../../graphql/mutation/order';
+import { CREATE_ORDER, GET_PAY_ORDER } from '../../graphql/mutation/order';
 import { GET_ORDERS } from '../../graphql/query';
 import { IOrder } from '../../types';
 import { useRouter } from 'next/router';
 import { CgSpinner } from 'react-icons/cg';
+import { useNotificationContext } from '../../providers/notification';
+import { emptyOrder } from '../../mock';
 
 type Props = {
   visible: any;
@@ -23,12 +25,39 @@ const Index = ({ visible, onClose }: Props) => {
   const { t } = useTranslation('language');
   const router = useRouter();
 
-  const { order, participant } = useCallStore();
+  const [visibleSucces, setVisibleSucces] = useState(false);
+
+  const { order, participant, config, load } = useCallStore();
+  const { showNotification } = useNotificationContext();
   const [isAdultsOnly, setIsAdultOnly] = useState(false);
 
   const products = participant.menu.categories.flatMap((category) => {
     return [...category.products, ...category.children.flatMap((child) => child.products)];
   });
+
+  const [payCashier, { data, loading: cashierPaying }] = useMutation(GET_PAY_ORDER, {
+    onCompleted: (data) => {
+      setVisibleSucces(true);
+    },
+    onError(err) {
+      showNotification(NotificationType.ERROR, err.message);
+    },
+  });
+
+  const onCashier = async (order: IOrder) => {
+    let input = {
+      confirm: true,
+      order: order.id,
+      payment: '',
+      vatType: '1',
+    };
+
+    await payCashier({
+      variables: {
+        input: { ...input },
+      },
+    });
+  };
 
   const isDiningService = participant.services.includes(TYPE.DINIG) && participant.services.length === 1;
 
@@ -42,8 +71,12 @@ const Index = ({ visible, onClose }: Props) => {
         });
       }
     },
-    onCompleted: (data) => {
-      router.push(`/payment?id=${data.createOrder.id}`);
+    onCompleted: async (data) => {
+      if (config.noCheckout) {
+        await onCashier(data.createOrder);
+      } else {
+        router.push(`/payment?id=${data.createOrder.id}`);
+      }
     },
     onError(err) {},
   });
@@ -80,6 +113,12 @@ const Index = ({ visible, onClose }: Props) => {
     } else {
       router.push(`/payment/order-process`);
     }
+  };
+
+  const successOnClose = () => {
+    load(emptyOrder);
+    setVisibleSucces(false);
+    onClose();
   };
 
   const Continue = () => {
@@ -122,35 +161,80 @@ const Index = ({ visible, onClose }: Props) => {
 
   return (
     <>
-      <Modal theme={customThemeDraftModal} position="center" dismissible show={visible} onClose={() => onClose()}>
-        <div>
-          <Modal.Header>
-            <span className="text-lg">{t('mainPage.MyOrder')}</span>
-          </Modal.Header>
-          <Modal.Body className="p-4">
-            {order?.items?.map((item) => (
-              <DraftItemCard
-                item={item}
-                key={item.id}
-                image={products.find((product) => product.productId === item.productId)?.image}
-              />
-            ))}
-          </Modal.Body>
-        </div>
-        <Modal.Footer>
+      <Modal
+        theme={customThemeDraftModal}
+        style={{
+          background: config.backgroundColor,
+        }}
+        position="center"
+        dismissible
+        show={visible}
+        onClose={() => onClose()}
+      >
+        <Modal.Header
+          style={{
+            color: config?.textColor,
+            background: config.backgroundColor,
+          }}
+        >
+          <span
+            className="text-lg"
+            style={{
+              color: config?.textColor,
+            }}
+          >
+            {t('mainPage.MyOrder')}
+          </span>
+        </Modal.Header>
+        <Modal.Body
+          className="p-4"
+          style={{
+            background: config.backgroundColor,
+            color: config?.textColor,
+          }}
+        >
+          {order?.items?.map((item) => (
+            <DraftItemCard
+              item={item}
+              key={item.id}
+              image={products.find((product) => product.productId === item.productId)?.image}
+            />
+          ))}
+        </Modal.Body>
+        <Modal.Footer
+          style={{
+            background: config.backgroundColor,
+          }}
+        >
           <button
-            disabled={loading}
+            style={{
+              background: config.backgroundColor,
+              border: `1px solid ${config?.textColor}`,
+            }}
+            disabled={loading || cashierPaying}
             className={`w-full flex  justify-between  p-3 rounded-lg  ${
               isEmpty(order.items) ? 'bg-misty cursor-none ' : 'bg-current  cursor-pointer'
             } `}
             onClick={() => Continue()}
           >
             <div className="flex place-items-center">
-              {loading && <CgSpinner className="text-lg text-white mr-1 animate-spin" />}
-              <span className="block  text-white font-semibold ">{t('mainPage.ToBeContinued')}</span>
+              {(loading || cashierPaying) && <CgSpinner className="text-lg text-white mr-1 animate-spin" />}
+              <span
+                style={{
+                  color: config?.textColor,
+                }}
+                className="block   text-white font-semibold "
+              >
+                {config.noCheckout ? 'Баталгаажуулах' : t('mainPage.ToBeContinued')}
+              </span>
             </div>
 
-            <span className="block text-white font-semibold ">
+            <span
+              className="block text-white font-semibold "
+              style={{
+                color: config?.textColor,
+              }}
+            >
               {order.totalAmount.toLocaleString()} {CURRENCY}
             </span>
           </button>
@@ -163,6 +247,9 @@ const Index = ({ visible, onClose }: Props) => {
           onClose={() => setIsAdultOnly(false)}
           onConfirm={onComfirmAdultsOnly}
         />
+      )}
+      {visibleSucces && (
+        <SuccesOrderModal visible={visibleSucces} orderNumber={data.payOrder?.order?.number} onClose={successOnClose} />
       )}
     </>
   );

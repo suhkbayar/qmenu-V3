@@ -1,9 +1,9 @@
 import { CURRENCY } from '../constants/currency';
-import { IOrderItem } from '../types';
+import { IConfig, IOrderItem } from '../types';
 import { IMenuProduct, IMenuVariant } from '../types/menu';
 import { isEmpty } from 'lodash';
 
-export const CalculateProductPrice = (variants: IMenuVariant[]) => {
+export const CalculateProductPrice = (variants: IMenuVariant[], config?: IConfig) => {
   if (!variants || variants.length === 0) {
     return null; // or return a default component if needed
   }
@@ -14,13 +14,13 @@ export const CalculateProductPrice = (variants: IMenuVariant[]) => {
 
   if (min === max) {
     return (
-      <p className="text-current font-semibold">
+      <p className="text-current font-semibold" style={{ color: config?.textColor }}>
         {max.toLocaleString()} {CURRENCY}
       </p>
     );
   } else {
     return (
-      <p className="text-current font-semibold">
+      <p className="text-current font-semibold" style={{ color: config?.textColor }}>
         {min.toLocaleString()} {CURRENCY} - {max.toLocaleString()} {CURRENCY}
       </p>
     );
