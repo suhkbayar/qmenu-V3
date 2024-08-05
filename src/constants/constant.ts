@@ -23,6 +23,7 @@ export const PAYMENT_TYPE = {
   MNQ: 'MNQ',
   UNP: 'UNP',
   VCR: 'VCR',
+  MBK: 'MBK',
 };
 
 export const QPAY_BANK_TYPE = {
@@ -125,6 +126,34 @@ export const qmenuConfigs = [
   {
     name: 'loginRequired',
     value: 'LOGIN_REQUIRED',
+  },
+  {
+    name: 'backgroundColor',
+    value: 'BACKGROUND_COLOR',
+  },
+  {
+    name: 'textColor',
+    value: 'TEXT_COLOR',
+  },
+  {
+    name: 'buttonText',
+    value: 'BUTTON_TEXT',
+  },
+  {
+    name: 'cardBackgroundColor',
+    value: 'CARD_BACKGROUND_COLOR',
+  },
+  {
+    name: 'navbarBackgroundColor',
+    value: 'NAVBAR_BACKGROUND_COLOR',
+  },
+  {
+    name: 'noCheckout',
+    value: 'NO_CHECKOUT',
+  },
+  {
+    name: 'hidePrice',
+    value: 'HIDE_PRICE',
   },
 ];
 

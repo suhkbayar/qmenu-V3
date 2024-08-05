@@ -18,7 +18,7 @@ import { ACTIVE_STATES } from '../../constants/constant';
 const BottomNavigation = () => {
   const router = useRouter();
   const { t } = useTranslation('language');
-  const { participant, setUser } = useCallStore();
+  const { participant, setUser, config } = useCallStore();
 
   const { role, features } = getPayload();
 
@@ -67,12 +67,14 @@ const BottomNavigation = () => {
               <div
                 id="tabs"
                 className="flex justify-between rounded-t-lg z-8 bg-white dark:bg-gray-700 shadow"
+                style={{ background: config.navbarBackgroundColor }}
               >
                 <div
                   className={`w-full ${
                     router.pathname === '/restaurant' ? 'text-current ' : 'text-gray-500 dark:text-white'
                   }   focus:text-current  hover:text-current justify-center grid content-between place-items-center inline-block text-center pt-2 pb-1`}
                   onClick={() => goHome()}
+                  style={{ color: config?.textColor }}
                 >
                   <IoHomeOutline className="inline-block mb-1 w-6 h-6 " />
                   <span className="tab tab-home  block text-xs">{t('mainPage.homeLinkShort')}</span>

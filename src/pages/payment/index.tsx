@@ -316,7 +316,7 @@ const Index = () => {
                 <InfoAlert text={'Та төлбөрөө төлөөд энэхүү дэлгэцрүү буцан орж захиалгаа баталгаажуулаарай.'} />
               </div>
               <div className="px-4 mb-5 gap-y-4">
-                {participant.vat && <VatForm register={register} errors={errors} setValue={setValue} reset={reset} />}
+                {participant?.vat && <VatForm register={register} errors={errors} setValue={setValue} reset={reset} />}
 
                 <BankFrom
                   banks={participant.payments.filter((payment) =>
