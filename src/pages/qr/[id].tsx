@@ -33,7 +33,7 @@ const Qr = () => {
   React.useEffect(() => {
     if (id) {
       // partner
-      console.log('Partner: ', token, systemType);
+      console.log('Partner: ', !!token, systemType);
       let systemTypeValue = undefined;
 
       if (token && systemType) {
