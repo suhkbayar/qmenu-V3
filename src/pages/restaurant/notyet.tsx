@@ -25,7 +25,7 @@ const NotFoundPage: React.FC = () => {
       />
       {qr && (
         <Button
-          className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 h-10 w-max"
+          className="absolute bottom-[15%] left-1/2 transform -translate-x-1/2 h-10 w-max"
           onClick={() => router.replace('/qr/' + qr)}
           // text={t('mainPage.Signout')}
           text="Дахин оролдох"
