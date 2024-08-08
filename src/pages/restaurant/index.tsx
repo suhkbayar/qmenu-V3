@@ -28,7 +28,7 @@ const Index = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const { load: loadPreOrders } = usePreOrderStore();
 
-  const [checkTable, { loading: loadCheckTable }] = useLazyQuery(CHECK_TABLE);
+  const [checkTable, { loading: loadCheckTable }] = useLazyQuery(CHECK_TABLE, { fetchPolicy: 'network-only' });
 
   const { setParticipant, participant, order, load, config } = useCallStore();
   const { i18n } = useTranslation('language');
