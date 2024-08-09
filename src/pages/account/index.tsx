@@ -16,11 +16,13 @@ import Basket from '../../assets/user/Basket.svg';
 import Camera from '../../assets/user/Camera.svg';
 import logout from '../../assets/user/logout.png';
 import { CURRENT_TOKEN } from '../../graphql/mutation/token';
-import { AuthContext } from '../../providers/auth';
+import { AuthContext, getPayload } from '../../providers/auth';
 import Loader from '../../components/Loader/Loader';
 import ToggleButton from '../../components/Button/ToggleButton';
 import bonus from '../../assets/user/bonus.svg';
 import { GET_LOYALTIES_RECORDS, GET_ORDERS } from '../../graphql/query';
+import { getPartnerType } from '../../utils';
+import { PartnerObjType } from '../../constants/constant';
 
 const Index = () => {
   const { participant, setUser } = useCallStore();
@@ -59,9 +61,13 @@ const Index = () => {
 
   const onLogout = () => {
     const qr = localStorage.getItem('qr');
-    if (qr) {
+
+    const partner = getPartnerType();
+    const payloadPartner = PartnerObjType[getPayload()?.type ?? ''];
+
+    if (!partner?.systemType && !partner?.token && !payloadPartner && qr) {
       localStorage.removeItem('token');
-      getCurrentToken({ variables: { code: qr, type: 'Q' } });
+      getCurrentToken({ variables: { code: qr, type: 'Q', ...(partner ?? {}) } });
     }
   };
 

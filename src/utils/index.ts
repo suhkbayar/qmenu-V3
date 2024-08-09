@@ -1,3 +1,5 @@
+import { SystemType } from '../constants/constant';
+
 export const numberFormat = new Intl.NumberFormat();
 
 export const shuffleArray = (array: any[]) => {
@@ -32,4 +34,34 @@ export const getTimeDiff = (sk: string): string => {
   } else {
     return `${timeDiffInDays} өдрийн${timeDiffInDays !== 1 ? '' : ''} өмнө`;
   }
+};
+
+export const SystemTypeByPartner = {
+  mbank: SystemType.MA,
+};
+
+export type PartnerSystemType = typeof SystemTypeByPartner;
+
+export const getPartnerType = () => {
+  let item: { token: string; systemType: SystemType } | undefined;
+
+  try {
+    const systemType = JSON.parse(localStorage.getItem('systemType'));
+    const token = JSON.parse(localStorage.getItem('partnerToken'));
+    if (systemType && token) item = { token, systemType };
+  } catch (error) {}
+
+  return item;
+};
+
+export const setPartnerType = (type: SystemType, token: string): void => {
+  try {
+    localStorage.setItem('systemType', JSON.stringify(type));
+    localStorage.setItem('partnerToken', JSON.stringify(token));
+  } catch (error) {}
+};
+
+export const removePartnerType = (): void => {
+  localStorage.removeItem('systemType');
+  localStorage.removeItem('partnerToken');
 };

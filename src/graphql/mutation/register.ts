@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_SESSION = gql`
-  mutation getSession($phone: String!, $type: SessionType!) {
-    getSession(phone: $phone, type: $type)
+  mutation getSession($phone: String!, $type: SessionType!, $password: String) {
+    getSession(phone: $phone, type: $type, password: $password)
   }
 `;
 

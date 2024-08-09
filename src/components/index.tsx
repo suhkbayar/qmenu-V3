@@ -104,6 +104,7 @@ export const WaitPaymentModal = dynamic(() => import('./Modal/WaitPayment'));
 export const PayCashierModal = dynamic(() => import('./Modal/PayCashier'));
 export const SuccesOrderModal = dynamic(() => import('./Modal/SuccessOrder'));
 export const UpointModal = dynamic(() => import('./Modal/UpointModal'));
+export const PreOrderModal = dynamic(() => import('./Modal/PreOrderModal'));
 
 export const Dining = dynamic(() => import('./OrderServices/Dining'), {
   loading: () => <ServiceSkelton />,

@@ -53,6 +53,8 @@ export const ORDER_FIELDS = gql`
     printed
     printable
     deliveryCode
+    startAt
+    duration
   }
 `;
 export const ORDER_ITEM_FIELDS = gql`
@@ -238,4 +240,43 @@ export const GET_ORDERS = gql`
   ${CHARGES_FIELDS}
   ${ORDER_ITEM_FIELDS}
   ${TRANSACTION_FIELDS}
+`;
+
+export const CHECK_TABLE = gql`
+  query checkTable($code: String!) {
+    checkTable(code: $code) {
+      ...OrderFields
+      table {
+        ...TableFields
+      }
+      items {
+        ...OrderItemFields
+      }
+      transactions {
+        ...TransactionFields
+      }
+      discounts {
+        ...DiscountsFields
+      }
+      charges {
+        ...ChargesFields
+      }
+    }
+  }
+  ${TABLE_FIELDS}
+  ${ORDER_FIELDS}
+  ${DISCOUNTS_FIELDS}
+  ${CHARGES_FIELDS}
+  ${ORDER_ITEM_FIELDS}
+  ${TRANSACTION_FIELDS}
+`;
+
+export const ORDER_TABLE_FIELDS = gql`
+  fragment OrderTableFields on OrderTable {
+    id
+    tableId
+    orderId
+    name
+    guests
+  }
 `;

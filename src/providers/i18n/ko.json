@@ -300,7 +300,8 @@
     "EnterPinCode": "핀 코드를 입력하세요.",
     "Point": "가리키다",
     "SpendPoint": "사용 포인트",
-    "JobApplication":"JobApplication"
-
+    "JobApplication":"JobApplication",
+    "StartPreOrder": "사전 주문이 확인되었습니다",
+    "Close": "닫기"
   }
 }

@@ -300,7 +300,8 @@
     "EnterPinCode": "请输入您的密码。",
     "Point": "观点",
     "SpendPoint": "消费积分",
-    "JobApplication":"JobApplication"
-
+    "JobApplication":"JobApplication",
+    "StartPreOrder": "您的预订已确认",
+    "Close": "关闭"
   }
 }

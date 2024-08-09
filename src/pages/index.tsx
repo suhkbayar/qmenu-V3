@@ -9,9 +9,12 @@ import { isValidToken, setAccessToken } from '../providers/auth';
 import Footer from '../layouts/footer';
 import Features from '../layouts/feutures';
 import Loader from '../components/Loader/Loader';
+import { getPartnerType } from '../utils';
+import { SystemType } from '../constants/constant';
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const { token, type: systemType } = router.query as { id?: string; token?: string; type?: SystemType };
   const isValid = isValidToken();
 
   const [currentToken, { loading }] = useMutation(CURRENT_TOKEN, {
@@ -24,7 +27,12 @@ const Home: NextPage = () => {
   });
 
   const fetchToken = useCallback(async () => {
-    await currentToken({ variables: { code: '', type: 'W' } });
+    let partner = { token: undefined, systemType: undefined };
+
+    partner.token = token ?? getPartnerType()?.token;
+    partner.systemType = systemType ?? getPartnerType()?.systemType;
+
+    await currentToken({ variables: { code: '', type: 'W', ...partner } });
   }, []);
 
   useEffect(() => {

@@ -299,7 +299,8 @@
     "EnterPinCode": "PIN kodingizni kiriting.",
     "Point": "Nuqta",
     "SpendPoint": "Sarflash uchun ballar",
-    "JobApplication":"JobApplication"
-
+    "JobApplication":"JobApplication",
+    "StartPreOrder": "Oldindan buyurtmangiz tasdiqlandi",
+    "Close": "Yopish"
   }
 }

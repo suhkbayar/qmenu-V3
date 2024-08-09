@@ -300,7 +300,8 @@
     "EnterPinCode": "Bitte geben Sie Ihren PIN-Code ein.",
     "Point": "Punkt",
     "SpendPoint": "Punkte zum Ausgeben",
-    "JobApplication": "Job application"
-
+    "JobApplication": "Job application",
+    "StartPreOrder": "Ihre Vorbestellung wurde bestätigt",
+    "Close": "Schließen"
   }
 }

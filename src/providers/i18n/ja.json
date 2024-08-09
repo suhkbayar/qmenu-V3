@@ -300,7 +300,8 @@
     "EnterPinCode": "PIN コードを入力してください。",
     "Point": "ポイント",
     "SpendPoint": "使えるポイント",
-    "JobApplication":"JobApplication"
-
+    "JobApplication":"JobApplication",
+    "StartPreOrder": "予約注文が確認されました",
+    "Close": "閉じる"
   }
 }
