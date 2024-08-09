@@ -56,8 +56,8 @@ export const getPartnerType = () => {
 
 export const setPartnerType = (type: SystemType, token: string): void => {
   try {
-    localStorage.setItem('systemType', JSON.parse(type));
-    localStorage.setItem('partnerToken', JSON.parse(token));
+    localStorage.setItem('systemType', JSON.stringify(type));
+    localStorage.setItem('partnerToken', JSON.stringify(token));
   } catch (error) {}
 };
 

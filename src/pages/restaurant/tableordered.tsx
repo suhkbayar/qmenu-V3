@@ -27,20 +27,21 @@ const NotFoundPage: React.FC = () => {
 
   return (
     <div className="relative w-full h-screen">
-      <Notfound title="Ширээг урьдчилан захиалсан байна." />
-      <Button
-        loading={loading}
-        className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 h-10 w-max"
-        onClick={() => {
-          const code = localStorage.getItem('qr');
-          const partner = getPartnerType();
-          signOut();
+      <Notfound title="Ширээг урьдчилан захиалсан байна." text="" />
+      {!getPartnerType() && (
+        <Button
+          loading={loading}
+          className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 h-10 w-max"
+          onClick={() => {
+            const code = localStorage.getItem('qr');
+            signOut();
 
-          getCurrentToken({ variables: { code, type: 'Q', ...(partner ?? {}) } });
-        }}
-        // text={t('mainPage.Signout')}
-        text="Гарах"
-      />
+            getCurrentToken({ variables: { code, type: 'Q' } });
+          }}
+          // text={t('mainPage.Signout')}
+          text="Гарах"
+        />
+      )}
     </div>
   );
 };
